@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget_MyScrollView">
+        <item name="android:scrollbars">vertical|horizontal</item>
+        <item name="android:fadingEdge">vertical|horizontal</item>
+    </style>
+    <style name="Widget_BothScrollView">
+        <item name="android:scrollbars">vertical|horizontal</item>
+        <item name="android:fadingEdge">vertical|horizontal</item>
+    </style>
+</resources>

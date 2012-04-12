@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme_MyScrollView">
+        <item name="myScrollViewStyle">@style/Widget_MyScrollView</item>
+    </style>
+    <style name="Theme_BothScrollView">
+        <item name="bothScrollViewStyle">@style/Widget_BothScrollView</item>
+    </style>
+</resources>

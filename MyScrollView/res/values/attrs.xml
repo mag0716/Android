@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme">
+        <!-- Default ScrollView style. -->
+        <attr name="scrollViewStyle" format="reference" />
+	</declare-styleable>
+	
+    <declare-styleable name="ScrollView">
+        <!-- Defines whether the scrollview should stretch its content to fill the viewport. -->
+        <attr name="fillViewport" format="boolean" />
+        <attr name="myScrollViewStyle" format="reference" />
+    </declare-styleable>
+    
+    <declare-styleable name="Theme_BothScrollView">
+        <attr name="bothScrollViewStyle" format="reference" />
+    </declare-styleable>
+</resources>
