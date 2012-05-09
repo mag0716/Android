@@ -1,5 +1,6 @@
 package m.k.android.sample.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -33,18 +34,20 @@ public class CryptUtils {
 	 * @throws InvalidKeyException 
 	 * @throws BadPaddingException 
 	 * @throws IllegalBlockSizeException 
+	 * @throws UnsupportedEncodingException 
 	 */
 	public static String execEncrypted(String str, Key key) throws NoSuchAlgorithmException, 
 																	NoSuchPaddingException, 
 																	InvalidKeyException, 
 																	IllegalBlockSizeException, 
-																	BadPaddingException {
+																	BadPaddingException, 
+																	UnsupportedEncodingException {
 		String encryptedStr = null;
 		
 		if(!TextUtils.isEmpty(str) && key != null) {
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
-			byte[] encrypted = cipher.doFinal(str.getBytes());
+			byte[] encrypted = cipher.doFinal(str.getBytes("UTF-8"));
 			
 			encryptedStr = Base64.encodeToString(encrypted, Base64.DEFAULT);
 		}
@@ -62,12 +65,14 @@ public class CryptUtils {
 	 * @throws InvalidKeyException 
 	 * @throws BadPaddingException 
 	 * @throws IllegalBlockSizeException 
+	 * @throws UnsupportedEncodingException 
 	 */
 	public static String execDecrypted(String str, Key key) throws NoSuchAlgorithmException, 
 																	NoSuchPaddingException, 
 																	InvalidKeyException, 
 																	IllegalBlockSizeException, 
-																	BadPaddingException {
+																	BadPaddingException, 
+																	UnsupportedEncodingException {
 		String decryptedStr = null;
 		
 		if(!TextUtils.isEmpty(str) && key != null) {
@@ -76,7 +81,7 @@ public class CryptUtils {
 			cipher.init(Cipher.DECRYPT_MODE, key);
 			byte[] decrypted =  cipher.doFinal(encByte);
 			
-			decryptedStr = Base64.encodeToString(decrypted, Base64.DEFAULT);
+			decryptedStr = new String(decrypted, "UTF-8");
 		}
 		
 		return decryptedStr;
