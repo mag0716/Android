@@ -1,5 +1,12 @@
+*.apk
+*.ap_
+*.dex
 *.class
-*/res/*
-*/.settings/*
-*/bin/*
-*/gen/*
+bin/
+gen/
+local.properties
+.project
+.metadata
+.classpath
+.settings/
+.DS_Store

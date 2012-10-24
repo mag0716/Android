@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <Button
+        android:id="@+id/btn1"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="output widget info" />
+    
+    <Button
+        android:id="@+id/btn2"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="get widget options" />
+    
+    <Button
+        android:id="@+id/btn3"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="update widget options" />
+    
+    <Button
+        android:id="@+id/btn4"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="bind widget" />
+</LinearLayout>

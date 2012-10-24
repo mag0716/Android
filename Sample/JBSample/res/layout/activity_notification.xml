@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <Button
+        android:id="@+id/btn1"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification" />
+    
+    <Button
+        android:id="@+id/btn2"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(old)" />
+    
+    <Button
+        android:id="@+id/btn3"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(Android Support Library)" />
+    
+    <Button
+        android:id="@+id/btn4"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(BigPictureStyle)" />
+    
+    <Button
+        android:id="@+id/btn5"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(BigTextStyle)" />
+    
+    <Button
+        android:id="@+id/btn6"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(InboxStyle)" />
+    
+    <Button
+        android:id="@+id/btn7"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(Style)" />
+    
+    <Button
+        android:id="@+id/btn8"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="Notification(Action)" />
+</LinearLayout>
