@@ -53,6 +53,9 @@ public class NotificationActivity extends Activity {
     		case R.id.btn8:
     			addActionNotification();
     			break;
+    		case R.id.btn9:
+    			allPriorityNotification();
+    			break;
     	}
     }
     
@@ -91,8 +94,8 @@ public class NotificationActivity extends Activity {
     
     private void bigPictureStyleNotification() {
     	// content textは表示されない
-    	Notification notification = new Notification.BigPictureStyle(
-    			new Notification.Builder(this)
+    	Notification notification = new NotificationCompat.BigPictureStyle(
+    			new NotificationCompat.Builder(this)
     			.setTicker("Notification Ticker(BigPictureStyle)")
 				.setContentTitle("Notification Title(BigPictureStyle)")
 				.setContentText("Notification Text(BigPictureStyle)")
@@ -171,10 +174,61 @@ public class NotificationActivity extends Activity {
     	notify(notification);
     }
     
+    private void allPriorityNotification() {
+    	notify(1, new NotificationCompat.Builder(this)
+    	.setContentTitle("Notification Title(PRIORITY_MIN)")
+    	.setContentText("Notification Text(PRIORITY_MIN)")
+    	.setPriority(NotificationCompat.PRIORITY_MIN)
+    	.setSmallIcon(R.drawable.jellybean)
+    	.setAutoCancel(true)
+    	.build()
+    	);
+    	notify(2, new NotificationCompat.Builder(this)
+    	.setTicker("Notification Ticker(PRIORITY_HIGH)")
+    	.setContentTitle("Notification Title(PRIORITY_HIGH)")
+    	.setContentText("Notification Text(PRIORITY_HIGH)")
+    	.setPriority(NotificationCompat.PRIORITY_HIGH)
+    	.setSmallIcon(R.drawable.jellybean)
+    	.setAutoCancel(true)
+    	.build()
+    	);
+    	notify(3, new NotificationCompat.Builder(this)
+    	.setTicker("Notification Ticker(PRIORITY_LOW)")
+    	.setContentTitle("Notification Title(PRIORITY_LOW)")
+    	.setContentText("Notification Text(PRIORITY_LOW)")
+    	.setPriority(NotificationCompat.PRIORITY_LOW)
+    	.setSmallIcon(R.drawable.jellybean)
+    	.setAutoCancel(true)
+    	.build()
+    	);
+    	notify(4, new NotificationCompat.Builder(this)
+    	.setTicker("Notification Ticker(PRIORITY_MAX)")
+    	.setContentTitle("Notification Title(PRIORITY_MAX)")
+    	.setContentText("Notification Text(PRIORITY_MAX)")
+    	.setPriority(NotificationCompat.PRIORITY_MAX)
+    	.setSmallIcon(R.drawable.jellybean)
+    	.setAutoCancel(true)
+    	.build()
+    	);
+    	notify(5, new NotificationCompat.Builder(this)
+    	.setTicker("Notification Ticker(PRIORITY_DEFAULT)")
+    	.setContentTitle("Notification Title(PRIORITY_DEFAULT)")
+    	.setContentText("Notification Text(PRIORITY_DEFAULT)")
+    	.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+    	.setSmallIcon(R.drawable.jellybean)
+    	.setAutoCancel(true)
+    	.build()
+    	);
+    }
+    
     private void notify(Notification notification) {
+    	notify(0, notification);
+    }
+    
+    private void notify(int id, Notification notification) {
     	if(notification != null) {
     		NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-    		manager.notify(0, notification);
+    		manager.notify(id, notification);
     	}
     }
     
