@@ -1,6 +1,7 @@
 package m.k.android.sample.jbsample.notification;
 
 import m.k.android.sample.jbsample.R;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -59,8 +60,8 @@ public class NotificationActivity extends Activity {
     	}
     }
     
-    private void notification() {
-    	Notification notification = new Notification.Builder(this)
+	private void notification() {
+    	Notification notification = new NotificationCompat.Builder(this)
     		.setTicker("Notification Ticker")
     		.setContentTitle("Notification Title")
     		.setContentText("Notification Text")
@@ -110,8 +111,8 @@ public class NotificationActivity extends Activity {
     }
     
     private void bigTextStyleNotification() {
-    	Notification notification = new Notification.BigTextStyle(
-    			new Notification.Builder(this)
+    	Notification notification = new NotificationCompat.BigTextStyle(
+    			new NotificationCompat.Builder(this)
     			.setTicker("Notification Ticker(BigTextStyle)")
 				.setContentTitle("Notification Title(BigTextStyle)")
 				.setContentText("Notification Text(BigTextStyle)")
@@ -126,8 +127,8 @@ public class NotificationActivity extends Activity {
     }
     
     private void inboxStyleNotification() {
-    	Notification notification = new Notification.InboxStyle(
-    			new Notification.Builder(this)
+    	Notification notification = new NotificationCompat.InboxStyle(
+    			new NotificationCompat.Builder(this)
     			.setTicker("Notification Ticker(InboxStyle)")
 				.setContentTitle("Notification Title(InboxStyle)")
 				.setContentText("Notification Text(InboxStyle)")
@@ -136,13 +137,23 @@ public class NotificationActivity extends Activity {
 	    		.setContentIntent(getPendingIntent()))
     		.addLine("addLine 1")
     		.addLine("addLine 2")
+    		.addLine("addLine 3")
+    		.addLine("addLine 4")
+    		.addLine("addLine 5")
+    		.addLine("addLine 6")
+    		.addLine("addLine 7")
+    		// 8行目以降は表示されず、...で表示される
+    		.addLine("addLine 8")
+    		.addLine("addLine 9")
+    		.addLine("addLine 10")
     		.setBigContentTitle("Notification Big Title(InboxStyle)")
     		.setSummaryText("Notification Summary Text(InboxStyle)")
     		.build();
     	notify(notification);
     }
     
-    private void styleNotification() {
+    @TargetApi(11)
+	private void styleNotification() {
     	Notification notification = new CustomNotificationStyle(
     			new Notification.Builder(this)
     			.setTicker("Notification Ticker(CustomNotificationStyle)")
@@ -158,7 +169,7 @@ public class NotificationActivity extends Activity {
     }
     
     private void addActionNotification() {
-    	Notification notification = new Notification.Builder(this)
+    	Notification notification = new NotificationCompat.Builder(this)
     		.setTicker("Notification Ticker")
     		.setContentTitle("Notification Title")
     		.setContentText("Notification Text")
