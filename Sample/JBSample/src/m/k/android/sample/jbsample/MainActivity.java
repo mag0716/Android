@@ -2,6 +2,7 @@ package m.k.android.sample.jbsample;
 
 import m.k.android.sample.jbsample.activityoptions.ActivityOptionsActivity;
 import m.k.android.sample.jbsample.notification.NotificationActivity;
+import m.k.android.sample.jbsample.wallpaper.WallPaperActivity;
 import m.k.android.sample.jbsample.webview.WebViewActivity;
 import m.k.android.sample.jbsample.widget.WidgetManagerActivity;
 import android.os.Bundle;
@@ -38,26 +39,33 @@ public class MainActivity extends Activity {
     		case R.id.btn4:
     			moveActivityOptionsActivity();
     			break;
+    		case R.id.btn5:
+    			moveWallPaperActivity();
     	}
     }
     
     private void moveNotificationActivity() {
-    	Intent intent = new Intent(this, NotificationActivity.class);
-    	startActivity(intent);
+    	moveActivity(NotificationActivity.class);
     }
     
     private void moveWidgetManagerActivity() {
-    	Intent intent = new Intent(this, WidgetManagerActivity.class);
-    	startActivity(intent);
+    	moveActivity(WidgetManagerActivity.class);
     }
     
     private void moveWebViewActivity() {
-    	Intent intent = new Intent(this, WebViewActivity.class);
-    	startActivity(intent);
+    	moveActivity(WebViewActivity.class);
     }
 
     private void moveActivityOptionsActivity() {
-    	Intent intent = new Intent(this, ActivityOptionsActivity.class);
+    	moveActivity(ActivityOptionsActivity.class);
+    }
+    
+    private void moveWallPaperActivity() {
+    	moveActivity(WallPaperActivity.class);
+    }
+    
+    private void moveActivity(Class<?> actClass) {
+    	Intent intent = new Intent(this, actClass);
     	startActivity(intent);
     }
 }

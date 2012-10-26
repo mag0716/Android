@@ -66,6 +66,9 @@
             android:name=".activityoptions.ActivityOptionsActivity" />
         <activity
             android:name=".activityoptions.SampleActivity" />
+        
+        <activity
+            android:name=".wallpaper.WallPaperActivity" />
     </application>
 
 </manifest>

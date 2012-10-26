@@ -32,4 +32,11 @@
     	android:layout_height="wrap_content"
     	android:onClick="onClick"
     	android:text="ActivityOptions" />
+    
+    <Button
+        android:id="@+id/btn5"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:onClick="onClick"
+    	android:text="WallPaper" />
 </LinearLayout>
