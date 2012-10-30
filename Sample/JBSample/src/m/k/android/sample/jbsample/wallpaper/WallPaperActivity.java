@@ -30,7 +30,8 @@ public class WallPaperActivity extends Activity {
 		
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			intent.setAction(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-			intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(this, ""));
+			ComponentName wallPaperComponent = new ComponentName("m.k.android.sample.wallpaper", "m.k.android.sample.wallpaper.MyWallpaperService");
+			intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, wallPaperComponent);
 		} else {
 			intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
 		}
