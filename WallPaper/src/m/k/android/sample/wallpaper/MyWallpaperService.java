@@ -59,7 +59,7 @@ public class MyWallpaperService extends WallpaperService {
 		public void onSurfaceCreated(SurfaceHolder holder) {
 			super.onSurfaceCreated(holder);
 			LogUtils.outputLog("onSurfaceCreated", getClass());
-			doDraw(0, 0);
+			doDraw("TEXT", 100, 100);
 		}
 		
 		@Override
@@ -82,19 +82,62 @@ public class MyWallpaperService extends WallpaperService {
 		
 		/**
 		 * 描画処理
+		 * @param text
 		 * @param x
 		 * @param y
 		 */
-		public void doDraw(int x, int y) {
+		public void doDraw(String text, int x, int y) {
 	        Canvas canvas = getSurfaceHolder().lockCanvas();
-	 
-	        Paint paint = new Paint();
+	        
+	        // 背景の描画
 	        canvas.drawColor(Color.BLACK);
-	        paint.setTextSize(24);
-	        paint.setColor(Color.WHITE);
-	        canvas.drawText(String.format("doDraw(%d, %d)", x, y), x, y, paint);
+	        
+	        // 枠線の描画
+	        drawGrid(canvas);
+	        // テキストの描画
+	        drawText(canvas, text, x, y);
+	        
 	 
 	        getSurfaceHolder().unlockCanvasAndPost(canvas);
+		}
+		
+		/**
+		 * 指定した座標にテキストを描画する
+		 * テキストの左下が(x,y)となる
+		 * @param canvas
+		 * @param text
+		 * @param x
+		 * @param y
+		 */
+		private void drawText(Canvas canvas, String text, int x, int y) {
+	        Paint paint = new Paint();
+	        paint.setTextSize(24);
+	        paint.setColor(Color.WHITE);	        
+	        canvas.drawText(text, x, y, paint);
+		}
+		
+		private void drawGrid(Canvas canvas) {
+			int width = canvas.getWidth();
+			int height = canvas.getHeight();
+			
+			LogUtils.outputLog(String.format("canvas : width = %d, height = %d", width, height), getClass());
+			
+			Paint paint = new Paint();
+			paint.setColor(Color.WHITE);
+			
+			// 縦に線を描画する
+			int vCnt = width/100;
+			LogUtils.outputLog(String.format("draw vertical lines. count = %d", vCnt), getClass());
+			for(int i=0; i<vCnt; i++) {
+				canvas.drawLine(100*i, 0, 100*i, height, paint);
+			}
+			
+			// 横に線を描画する
+			int hCnt = height/100;
+			LogUtils.outputLog(String.format("draw horizontal lines. count = %d", hCnt), getClass());
+			for(int i=0; i<hCnt; i++) {
+				canvas.drawLine(0, 100*i, width, 100*i, paint);
+			}
 		}
 	}
 }
