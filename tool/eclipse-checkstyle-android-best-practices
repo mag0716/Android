@@ -17,113 +17,181 @@
     <module name="JavadocMethod">
       <!-- protected, publicなメソッドには記述が必要 -->
       <property name="scope" value="protected"></property>
-      <!--  -->
       <property name="logLoadErrors" value="true"></property> 
       <property name="suppressLoadErrors" value="true"></property>
     </module>
       
+    <!-- Javadocの種別をチェック。author, versionはチェックしない。 -->
     <module name="JavadocType"></module> 
+    <!-- Javadocが記述されているかをチェック。scopeはprivate -->
     <module name="JavadocVariable"></module> 
-    <module name="JavadocStyle"></module> 
+    <!-- Javadocの記述フォーマットをチェック -->
+    <module name="JavadocStyle"></module>
+    <!-- 定数名のチェック -->
     <module name="ConstantName"></module> 
+    <!-- ローカル定数名のチェック -->
     <module name="LocalFinalVariableName"></module> 
-    <module name="LocalVariableName"></module> 
+    <!-- ローカル変数名のチェック -->
+    <module name="LocalVariableName">
+    </module> 
+    <!-- 変数名のチェック -->
     <module name="MemberName"> 
       <metadata name="net.sf.eclipsecs.core.comment" value="only public starts without m"></metadata> 
       <property name="applyToProtected" value="false"></property> 
       <property name="applyToPrivate" value="false"></property> 
     </module> 
+    <!-- メソッド名のチェック -->
     <module name="MethodName"></module> 
+    <!-- パッケージ名のチェック -->
     <module name="PackageName"></module> 
+    <!--　引数名のチェック -->
     <module name="ParameterName"></module> 
+    <!-- static変数のチェック -->
     <module name="StaticVariableName"> 
       <metadata name="net.sf.eclipsecs.core.comment" value="starts with 's'"></metadata> 
       <property name="format" value="^[s][a-zA-Z0-9]*$"></property> 
     </module> 
-    <module name="TypeName"></module> 
+    <!-- クラス、インタフェース名のチェック -->
+    <module name="TypeName"></module>
+    <!-- ワイルドカード形式のimport文をチェック -->
     <module name="AvoidStarImport"></module> 
+    <!-- import文に含まれると不正とみなすパッケージをチェック。sun.*は不正 -->
     <module name="IllegalImport"></module> 
+    <!-- 重複したimport文のチェック -->
     <module name="RedundantImport"></module> 
+    <!-- 未使用なimport文のチェック -->
     <module name="UnusedImports"></module> 
+    <!-- 1行の長さをチェック -->
     <module name="LineLength"> 
       <property name="severity" value="ignore"></property> 
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
     </module> 
+    <!-- メソッド名、コンストラクタの長さをチェック。150文字までOK -->
     <module name="MethodLength"></module> 
+    <!-- 引数の数をチェック。7つまでOK -->
     <module name="ParameterNumber"></module> 
+    <!-- for文の第3部分が空のときの空白の有無をチェック。空白なしがOK -->
     <module name="EmptyForIteratorPad"></module> 
+    <!-- メソッド定義部の空白(メソッド名と"("の間)をチェック。空白なしがOK -->
     <module name="MethodParamPad"></module> 
+    <!-- トークンの後ろの空白をチェック。空白を許可する -->
     <module name="NoWhitespaceAfter"> 
       <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS"></property> 
     </module> 
+    <!-- トークンの前の空白をチェック。 空白を許可しない -->
     <module name="NoWhitespaceBefore"></module> 
+    <!-- 演算子直後の改行をチェック。演算子が改行の後に出現するがOK -->
     <module name="OperatorWrap"></module> 
+    <!-- 括弧内の空白をチェック。空白を許可しない -->
     <module name="ParenPad"></module> 
+    <!-- キャストに使用する括弧内の空白をチェック。空白を許可しない -->
     <module name="TypecastParenPad"></module> 
+    <!-- トークンの後ろの空白をチェック。空白を許可する -->
     <module name="WhitespaceAfter"></module> 
+    <!-- トークンの前の空白をチェック。空白を許可しない -->
     <module name="WhitespaceAround"></module> 
+    <!-- 修飾子の出現順をチェック -->
     <module name="ModifierOrder"></module> 
+    <!-- 冗長な修飾子のチェック -->
     <module name="RedundantModifier"></module> 
+    <!-- ブロックのネストをチェック。ブロックのネストを許可しない -->
     <module name="AvoidNestedBlocks"></module> 
-    <module name="EmptyBlock"></module> 
+    <!-- 空のブロックをチェック。空のブロックを許可しない -->
+    <module name="EmptyBlock"></module>
+    <!-- "{"の出現位置をチェック。行末を許可する --> 
     <module name="LeftCurly"></module> 
+    <!-- 中括弧の必須チェック。中括弧の省略を許可しない -->
     <module name="NeedBraces"></module> 
+    <!-- "}"の出現位置をチェック。他のテキストと同じ行である事を許可する -->
     <module name="RightCurly"></module> 
+    <!-- 三項演算子のチェック -->
     <module name="AvoidInlineConditionals"></module> 
+    <!-- double-checked lockingのチェック -->
     <module name="DoubleCheckedLocking"></module> 
+    <!-- 空行のチェック -->
     <module name="EmptyStatement"></module> 
+    <!-- equalsメソッドが定義されていてクラスのhashCodeメソッドの定義をチェック -->
     <module name="EqualsHashCode"></module> 
+    <!-- クラス変数と同名のローカル変数、引数をチェック -->
     <module name="HiddenField"></module> 
+    <!-- 不正なインスタンス化をチェック -->
     <module name="IllegalInstantiation"></module> 
+    <!-- 文内部での演算子をチェック。=, &=, |=, >>>=, ^=, /=, -=, %=, +=, <<=, >>=, *=を許可しない  -->
     <module name="InnerAssignment"></module> 
+    <!-- マジックナンバーをチェック。-1, 0, 1, 2は許可する -->
     <module name="MagicNumber"></module> 
+    <!-- switch文でdefaultが定義されているかをチェック。 -->
     <module name="MissingSwitchDefault"></module> 
+    <!-- 冗長なthrowsをチェック。@throwsもチェックするが、レポートには出力しない。 -->
     <module name="RedundantThrows"> 
       <property name="logLoadErrors" value="true"></property> 
       <property name="suppressLoadErrors" value="true"></property> 
     </module> 
+    <!-- 冗長なboolean演算をチェック -->
     <module name="SimplifyBooleanExpression"></module> 
+    <!-- 冗長なbooleanのreturnをチェック -->
     <module name="SimplifyBooleanReturn"></module> 
+    <!-- オーバライドが許可されていないメソッドをチェック -->
     <module name="DesignForExtension"> 
       <property name="severity" value="ignore"></property> 
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
     </module> 
+    <!-- privateのコンストラクタを持たないクラスがfinalとして定義されているかをチェック -->
     <module name="FinalClass"></module> 
+    <!-- Utilityクラスのコンストラクタがprivateとして宣言されているかをチェック -->
     <module name="HideUtilityClassConstructor"></module> 
+    <!-- メソッドが定義されていないインターフェースをチェック -->
     <module name="InterfaceIsType"></module> 
-    <module name="VisibilityModifier"></module> 
+    <!-- private以外の識別子を持つフィールドをチェック。package, protectedも許可する -->
+    <module name="VisibilityModifier">
+	  <property name="packageAllowed" value="true" /> 
+	  <property name="protectedAllowed" value="true" /> 
+    </module> 
+    <!-- 配列の記述形式をチェック。String[] argsを許可する。 -->
     <module name="ArrayTypeStyle"></module> 
+    <!-- 引数がfinalで定義されているかをチェック -->
     <module name="FinalParameters"> 
       <property name="severity" value="ignore"></property> 
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
     </module> 
+    <!-- TODOコメントをチェック -->
     <module name="TodoComment"> 
       <property name="severity" value="ignore"></property> 
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
     </module> 
+    <!-- long型の数値の表現にLを使用しているかをチェック -->
     <module name="UpperEll"></module> 
+    <!-- メソッド名の文字数をチェック -->
     <module name="MethodLength"> 
       <property name="max" value="40"></property> 
     </module> 
+    <!-- 変数名をチェック。mからはじまる変数名を許可する。 -->
     <module name="MemberName"> 
       <metadata name="net.sf.eclipsecs.core.comment" value="non public members should start with m"></metadata> 
       <property name="applyToPublic" value="false"></property> 
       <property name="format" value="^[m][a-zA-Z0-9]*$"></property> 
     </module> 
+    <!-- 1行の文字数をチェック。 -->
     <module name="LineLength"> 
       <property name="max" value="100"></property> 
     </module> 
   </module> 
+  
+  <!-- package.htmlをチェック -->
   <module name="JavadocPackage"></module> 
+  <!-- ファイルのサイズが改行で終わっているかをチェック -->
   <module name="NewlineAtEndOfFile"> 
     <property name="severity" value="ignore"></property> 
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
   </module> 
+  <!-- 国際化ファイルのキーが同一化をチェック -->
   <module name="Translation"></module> 
+  <!-- タブコード(\t)をチェック -->
   <module name="FileTabCharacter"> 
     <property name="severity" value="ignore"></property> 
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
   </module> 
+  <!-- 1行のコードの特定コードをチェック。行末のスペースを許可しない。 -->
   <module name="RegexpSingleline"> 
     <property name="severity" value="ignore"></property> 
     <property name="format" value="\s+$"></property> 
