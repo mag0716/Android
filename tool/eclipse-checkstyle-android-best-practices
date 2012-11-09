@@ -23,10 +23,16 @@
       
     <!-- Javadocの種別をチェック。author, versionはチェックしない。 -->
     <module name="JavadocType"></module> 
-    <!-- Javadocが記述されているかをチェック。scopeはprivate -->
-    <module name="JavadocVariable"></module> 
+    <!-- Javadocが記述されているかをチェック。scopeはprotected -->
+    <module name="JavadocVariable">
+      <property name="scope" value="protected"/>
+    </module> 
     <!-- Javadocの記述フォーマットをチェック -->
-    <module name="JavadocStyle"></module>
+    <module name="JavadocStyle">
+      <property name="checkEmptyJavadoc" value="true"/>
+      <property name="checkFirstSentence" value="false"/>
+      <property name="endOfSentenceFormat" value="([.。?!][ \t\n\r\f&lt;])|([.。?!]$)"/>
+    </module>
     <!-- 定数名のチェック -->
     <module name="ConstantName"></module> 
     <!-- ローカル定数名のチェック -->
@@ -89,7 +95,10 @@
     <!-- トークンの後ろの空白をチェック。空白を許可する -->
     <module name="WhitespaceAfter"></module> 
     <!-- トークンの前の空白をチェック。空白を許可しない -->
-    <module name="WhitespaceAround"></module> 
+    <module name="WhitespaceAround">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module> 
     <!-- 修飾子の出現順をチェック -->
     <module name="ModifierOrder"></module> 
     <!-- 冗長な修飾子のチェック -->
@@ -107,7 +116,10 @@
     <!-- 三項演算子のチェック -->
     <module name="AvoidInlineConditionals"></module> 
     <!-- double-checked lockingのチェック -->
-    <module name="DoubleCheckedLocking"></module> 
+    <module name="DoubleCheckedLocking">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module>
     <!-- 空行のチェック -->
     <module name="EmptyStatement"></module> 
     <!-- equalsメソッドが定義されていてクラスのhashCodeメソッドの定義をチェック -->
@@ -155,10 +167,7 @@
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
     </module> 
     <!-- TODOコメントをチェック -->
-    <module name="TodoComment"> 
-      <property name="severity" value="ignore"></property> 
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
-    </module> 
+    <module name="TodoComment"></module>
     <!-- long型の数値の表現にLを使用しているかをチェック -->
     <module name="UpperEll"></module> 
     <!-- メソッド名の文字数をチェック -->
@@ -173,12 +182,15 @@
     </module> 
     <!-- 1行の文字数をチェック。 -->
     <module name="LineLength"> 
-      <property name="max" value="100"></property> 
+      <property name="max" value="200"></property> 
     </module> 
   </module> 
   
-  <!-- package.htmlをチェック -->
-  <module name="JavadocPackage"></module> 
+  <!-- package.htmlをチェック。package.htmlは不要 -->
+  <module name="JavadocPackage">
+    <property name="severity" value="ignore"/>
+    <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+  </module> 
   <!-- ファイルのサイズが改行で終わっているかをチェック -->
   <module name="NewlineAtEndOfFile"> 
     <property name="severity" value="ignore"></property> 
@@ -198,4 +210,7 @@
     <property name="message" value="Line has trailing spaces."></property> 
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"></metadata> 
   </module> 
+  <module name="SuppressionFilter">
+    <property name="file" value="/Users/Kishimoto/Desktop/Android Sample/Samples/tool/android_checkstyle_suppressions.xml"/>
+  </module>
 </module>
