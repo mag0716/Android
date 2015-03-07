@@ -9,4 +9,13 @@ local.properties
 .metadata
 .classpath
 .settings/
+proguard/
 .DS_Store
+
+# Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+gradle.properties
+*/build/
