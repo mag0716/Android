@@ -23,7 +23,7 @@ public class ToStringSampleTest {
     }
 
     @Test
-    public void test_DefaultConfigData_指定した値がtoStringで取得できることを確認() {
+    public void test_DefaultConfigData_toString_指定した値がtoStringで取得できることを確認() {
         ToStringSample.DefaultConfigData data = new ToStringSample.DefaultConfigData();
         data.setNumber(1);
         data.setName("name");
@@ -35,7 +35,7 @@ public class ToStringSampleTest {
     }
 
     @Test
-    public void test_DefaultConfigData_nullを指定しtoStringで取得できることを確認() {
+    public void test_DefaultConfigData_toString_nullを指定しtoStringで取得できることを確認() {
         ToStringSample.DefaultConfigData data = new ToStringSample.DefaultConfigData();
         data.setNumber(1);
         data.setName(null);
@@ -47,7 +47,7 @@ public class ToStringSampleTest {
     }
 
     @Test
-    public void test_ExcludePasswordData_mPasswordがtoStringで取得できないことを確認() {
+    public void test_ExcludePasswordData_toString_mPasswordがtoStringで取得できないことを確認() {
         ToStringSample.ExcludePasswordData data = new ToStringSample.ExcludePasswordData();
         data.setNumber(1);
         data.setName("name");
@@ -59,7 +59,7 @@ public class ToStringSampleTest {
     }
 
     @Test
-    public void test_CallSuperAndNotIncludeFiledNamesData_親クラスの情報がtoStringで取得できることを確認() {
+    public void test_CallSuperAndNotIncludeFiledNamesData_toString_親クラスの情報がtoStringで取得できることを確認() {
         ToStringSample.CallSuperAndNotIncludeFiledNamesData data = new ToStringSample.CallSuperAndNotIncludeFiledNamesData();
         data.setNumber(1);
         data.setName("name");
@@ -71,7 +71,7 @@ public class ToStringSampleTest {
     }
 
     @Test
-    public void test_CallSuperAndNotIncludeFiledNamesData_変数名がtoStringで取得できないことを確認() {
+    public void test_CallSuperAndNotIncludeFiledNamesData_toString_変数名がtoStringで取得できないことを確認() {
 
         ToStringSample.CallSuperAndNotIncludeFiledNamesData data = new ToStringSample.CallSuperAndNotIncludeFiledNamesData();
         data.setNumber(1);

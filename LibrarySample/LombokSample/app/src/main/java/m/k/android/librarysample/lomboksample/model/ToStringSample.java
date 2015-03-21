@@ -17,6 +17,7 @@ public class ToStringSample {
 
     @lombok.Data
     @Accessors(prefix = "m")
+    @ToString
     public static class DefaultConfigData extends Data {
         private String mName;
         private String mPassword;
