@@ -21,6 +21,7 @@ public class NonNullSample {
 
     @NonNull
     public String getData() {
+        // null を return するメソッドに @NonNull を指定しても何も変わらない
         return null;
     }
 }
