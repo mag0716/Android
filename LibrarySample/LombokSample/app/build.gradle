@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.robolectric'
 
 android {
     compileSdkVersion 21
@@ -17,12 +18,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        androidTest {
+            setRoot('src/test')
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
-
     // Lombok
-    provided "org.projectlombok:lombok:1.16.+"
+    provided 'org.projectlombok:lombok:1.16.+'
+    // for Test
+    // Robolectric
+    testCompile 'org.robolectric:robolectric:2.4'
+    testCompile 'junit:junit:4.12'
+}
+
+robolectric {
+    // configure the set of classes for JUnit tests
+    include '**/*Test.class'
+    exclude '**/espresso/**/*.class'
+
+    // configure max heap size of the test JVM
+    maxHeapSize = "2048m"
 }
