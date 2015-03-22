@@ -20,9 +20,16 @@ public class RequiredArgsConstructorSample {
     @Accessors(prefix = "m")
     private final String mName;
 
+    // 下記の様に宣言すると、コンストラクタ内で mPassword に対して、null チェックが行われる。
+    // setter は正常に引数に対して、null チェックが行われている。
+//    @Getter
+//    @Setter
+//    @NonNull
+//    @Accessors(prefix = "m")
+//    private String mPassword;
+
     @Getter
     @Setter
     @NonNull
-    @Accessors(prefix = "m")
-    private String mPassword;
+    private String password;
 }

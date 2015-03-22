@@ -25,11 +25,10 @@ public class AllArgsConstructorSampleTest {
 
     @Test
     public void test_AllArgsConstructorSample_全ての変数を引数に持ったコンストラクタが生成されることを確認() {
-        // TODO: NullPointerException が throw される
         AllArgsConstructorSample sample = new AllArgsConstructorSample(1, "name", "password");
 
         Assert.assertEquals("全ての変数を引数に持ったコンストラクタが生成されること",
-                0, sample.getNumber());
+                1, sample.getNumber());
         Assert.assertEquals("全ての変数を引数に持ったコンストラクタが生成されること",
                 "name", sample.getName());
         Assert.assertSame("全ての変数を引数に持ったコンストラクタが生成されること",

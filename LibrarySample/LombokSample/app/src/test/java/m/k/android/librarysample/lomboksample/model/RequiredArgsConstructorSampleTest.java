@@ -25,14 +25,13 @@ public class RequiredArgsConstructorSampleTest {
 
     @Test
     public void test_RequiredArgsConstructorSample_finalやNonNullを指定した変数のコンストラクタが生成されることを確認() {
-        // TODO: NullPointerException が throw される
         RequiredArgsConstructorSample sample = new RequiredArgsConstructorSample("name", "password");
 
         Assert.assertEquals("finalや@NonNullが指定されていない変数はコンストラクタで値を指定しないこと",
                 0, sample.getNumber());
-        Assert.assertEquals("finalを指定した変数はコンストラクタで値をしていすること",
+        Assert.assertEquals("finalを指定した変数はコンストラクタで値を指定すること",
                 "name", sample.getName());
-        Assert.assertSame("@NonNullを指定した変数はコンストラクタで値をしていすること",
+        Assert.assertSame("@NonNullを指定した変数はコンストラクタで値を指定すること",
                 "password", sample.getPassword());
     }
 
