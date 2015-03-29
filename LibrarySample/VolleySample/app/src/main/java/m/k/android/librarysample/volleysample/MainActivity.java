@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import m.k.android.librarysample.volleysample.api.WeatherApi;
 import m.k.android.librarysample.volleysample.model.WeatherApiResponse;
 
 
@@ -37,23 +38,23 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void executeSingleApi() {
-        final String url = "http://api.openweathermap.org/data/2.5/weather?q=Tokyo,Japan";
         MyApplication application = (MyApplication)getApplication();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, "",
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Gson gson = new Gson();
-                        WeatherApiResponse weather = gson.fromJson(response.toString(), WeatherApiResponse.class);
-                        mResultText.setText(weather.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        mResultText.setText("Error : error = " + error.toString());
-                    }
-                });
-        application.addToRequestQueue(request, "stations");
+        Response.Listener<JSONObject> listener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Gson gson = new Gson();
+                WeatherApiResponse weather = gson.fromJson(response.toString(), WeatherApiResponse.class);
+                mResultText.setText(weather.toString());
+            }
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mResultText.setText("Error : error = " + error.toString());
+            }
+        };
+        application.addToRequestQueue(
+                WeatherApi.requestWeather("Japan", "Tokyo", listener, errorListener),
+                "weather");
     }
 }
