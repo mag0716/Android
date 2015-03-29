@@ -7,6 +7,6 @@ import lombok.Value;
  */
 @Value
 public class WindJson {
-    private int deg;
+    private double deg;
     private double speed;
 }

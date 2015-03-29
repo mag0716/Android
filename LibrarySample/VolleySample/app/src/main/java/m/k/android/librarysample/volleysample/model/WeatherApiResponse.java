@@ -21,4 +21,11 @@ public class WeatherApiResponse {
     private SysJson sys;
     private List<WeatherJson> weather;
     private WindJson wind;
+
+    // for error
+    private String message;
+
+    public boolean isError() {
+        return cod != 200;
+    }
 }

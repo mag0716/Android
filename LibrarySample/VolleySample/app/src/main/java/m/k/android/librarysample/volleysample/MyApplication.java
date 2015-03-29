@@ -23,7 +23,7 @@ public class MyApplication extends Application {
 
     public <T> void addToRequestQueue(@NonNull Request<T> request, @NonNull Object tag) {
         request.setTag(tag);
-        getRequestQueue().add(request);
+        getRequestQueue().add(request);;
     }
 
     public void cancelRequest(@NonNull Object tag) {
