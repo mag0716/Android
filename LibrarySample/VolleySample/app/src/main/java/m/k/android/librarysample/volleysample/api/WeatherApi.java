@@ -26,6 +26,9 @@ public class WeatherApi {
                                                    @NonNull Response.ErrorListener errorListener) {
         return new JsonObjectRequest(Request.Method.GET, String.format(WEATHER_API_URL, country, city),
                 "", listener, errorListener);
+
+        // POST の場合は、第3引数にパラメータを渡す。もしくは、Request の getParams を override する
+        // Header を追加するには、Request の getHeaders を override する
     }
 
     public static void fetchWeatherIcon(@NonNull RequestQueue requestQueue,
