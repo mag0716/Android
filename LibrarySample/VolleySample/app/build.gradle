@@ -28,6 +28,6 @@ dependencies {
 
     // Volley
     compile 'com.mcxiaoke.volley:library:1.0.+'
-    // Gradle
+    // Gson
     compile 'com.google.code.gson:gson:2.3.1'
 }
