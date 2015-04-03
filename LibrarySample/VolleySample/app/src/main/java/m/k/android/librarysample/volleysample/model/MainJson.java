@@ -8,7 +8,7 @@ import lombok.Value;
 @Value
 public class MainJson {
     private int humidity;
-    private int pressure;
+    private double pressure;
     private double temp;
     private double temp_max;
     private double temp_min;
