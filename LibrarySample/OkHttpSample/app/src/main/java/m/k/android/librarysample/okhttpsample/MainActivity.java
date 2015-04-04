@@ -49,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
      * API を実行する
      */
     private void executeSingleApi() {
-        final OkHttpClient client = new OkHttpClient();
         Callback callback = new Callback() {
             @Override
             public void onFailure(final Request request, final IOException e) {
@@ -74,15 +73,14 @@ public class MainActivity extends ActionBarActivity {
                 });
             }
         };
-        WeatherApi.requestWeather(client, "Japan", "Tokyo", callback);
+        WeatherApi.requestWeather(((MyApplication)getApplication()).getOkHttpClient(),
+                "Japan", "Tokyo", callback);
     }
 
     /**
      * 複数 API を実行する
      */
     private void executeMultiApi() {
-        final OkHttpClient client = new OkHttpClient();
-
         // TODO: この Callback 地獄をなんとかする。
         final Callback secondApiCallback = new Callback() {
             @Override
@@ -136,11 +134,13 @@ public class MainActivity extends ActionBarActivity {
 
                 if(response.isSuccessful() && !weather.isError()) {
                     // 1回目の API に成功したら、続けて 2回目の API を実行する
-                    WeatherApi.requestWeather(client, "Japan", "Osaka", secondApiCallback);
+                    WeatherApi.requestWeather(((MyApplication)getApplication()).getOkHttpClient(),
+                            "Japan", "Osaka", secondApiCallback);
                 }
             }
         };
-        WeatherApi.requestWeather(client, "Japan", "Tokyo", callback);
+        WeatherApi.requestWeather(((MyApplication)getApplication()).getOkHttpClient(),
+                "Japan", "Tokyo", callback);
     }
 
     /**
@@ -148,9 +148,6 @@ public class MainActivity extends ActionBarActivity {
      * ただし、1個目の API で失敗する
      */
     private void executeFailApi() {
-
-        final OkHttpClient client = new OkHttpClient();
-
         // TODO: この Callback 地獄をなんとかする。
         final Callback secondApiCallback = new Callback() {
             @Override
@@ -204,10 +201,12 @@ public class MainActivity extends ActionBarActivity {
 
                 if(response.isSuccessful() && !weather.isError()) {
                     // 1回目の API に成功したら、続けて 2回目の API を実行する
-                    WeatherApi.requestWeather(client, "Japan", "Osaka", secondApiCallback);
+                    WeatherApi.requestWeather(((MyApplication)getApplication()).getOkHttpClient(),
+                            "Japan", "Osaka", secondApiCallback);
                 }
             }
         };
-        WeatherApi.requestWeather(client, "Japan", "Fail", callback);
+        WeatherApi.requestWeather(((MyApplication)getApplication()).getOkHttpClient(),
+                "Japan", "Fail", callback);
     }
 }
