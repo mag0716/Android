@@ -2,10 +2,14 @@ package m.k.android.librarysample.retrofitsample;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import m.k.android.librarysample.retrofitsample.api.WeatherApi;
+import m.k.android.librarysample.retrofitsample.model.WeatherApiResponse;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,7 +39,18 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void executeSingleApi() {
+        WeatherApi api = new WeatherApi();
+        api.weather("Tokyo,Japan", new Callback<WeatherApiResponse>() {
+            @Override
+            public void success(WeatherApiResponse weatherApiResponse, Response response) {
+                mText.setText(weatherApiResponse.toString());
+            }
 
+            @Override
+            public void failure(RetrofitError error) {
+                mText.setText("failure : error = " + error.toString());
+            }
+        });
     }
 
     private void executeMultiApi() {
