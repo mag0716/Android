@@ -54,10 +54,64 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void executeMultiApi() {
+        final WeatherApi api = new WeatherApi();
+        api.weather("Tokyo,Japan", new Callback<WeatherApiResponse>() {
+            @Override
+            public void success(WeatherApiResponse weatherApiResponse, Response response) {
+                mText.setText(weatherApiResponse.toString());
 
+                if(!weatherApiResponse.isError()) {
+                    api.weather("Osaka,Japan", new Callback<WeatherApiResponse>() {
+                        @Override
+                        public void success(WeatherApiResponse weatherApiResponse, Response response) {
+                            StringBuilder sb = new StringBuilder(mText.getText());
+                            sb.append("\n").append(weatherApiResponse.toString());
+                            mText.setText(sb.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            mText.setText("failure : error = " + error.toString());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                mText.setText("failure : error = " + error.toString());
+            }
+        });
     }
 
     private void executeFailApi() {
+        final WeatherApi api = new WeatherApi();
+        api.weather("Dummy,Japan", new Callback<WeatherApiResponse>() {
+            @Override
+            public void success(WeatherApiResponse weatherApiResponse, Response response) {
+                mText.setText(weatherApiResponse.toString());
 
+                if(!weatherApiResponse.isError()) {
+                    api.weather("Osaka,Japan", new Callback<WeatherApiResponse>() {
+                        @Override
+                        public void success(WeatherApiResponse weatherApiResponse, Response response) {
+                            StringBuilder sb = new StringBuilder(mText.getText());
+                            sb.append("\n").append(weatherApiResponse.toString());
+                            mText.setText(sb.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            mText.setText("failure : error = " + error.toString());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                mText.setText("failure : error = " + error.toString());
+            }
+        });
     }
 }
