@@ -1,38 +1,57 @@
 package m.k.android.librarysample.butterknifesample;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MainActivity extends ActionBarActivity {
+
+    private static final String TAG = "ButterKnifeSample";
+
+    @InjectView(R.id.fragment_sample_btn)
+    Button mFragmentSampleBtn;
+    @InjectView(R.id.listview_sample_btn)
+    Button mListViewSampleBtn;
+    @InjectView(R.id.include_sample_btn)
+    Button mIncludeSampleBtn;
+    @InjectView(R.id.merge_sample_btn)
+    Button mMergeSampleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    @OnClick(R.id.fragment_sample_btn)
+    public void startFragmentSample(View view) {
+        Log.d(TAG, "startFragmentSample");
+        startActivity(new Intent(this, FragmentSampleActivity.class));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    @OnClick(R.id.listview_sample_btn)
+    public void startListViewSample(View view) {
+        Log.d(TAG, "startListViewSample");
+        startActivity(new Intent(this, ListViewSampleActivity.class));
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    @OnClick(R.id.include_sample_btn)
+    public void startIncludeSample(View view) {
+        Log.d(TAG, "startIncludeSample");
+        startActivity(new Intent(this, IncludeActivity.class));
+    }
 
-        return super.onOptionsItemSelected(item);
+    @OnClick(R.id.merge_sample_btn)
+    public void startMergeSample(View view) {
+        Log.d(TAG, "startMergeSample");
+        startActivity(new Intent(this, MergeActivity.class));
     }
 }

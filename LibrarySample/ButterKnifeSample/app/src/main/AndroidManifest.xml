@@ -16,6 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FragmentSampleActivity"
+            android:label="@string/title_activity_fragment_sample" >
+        </activity>
+        <activity
+            android:name=".IncludeActivity"
+            android:label="@string/title_activity_include" >
+        </activity>
+        <activity
+            android:name=".MergeActivity"
+            android:label="@string/title_activity_merge" >
+        </activity>
+        <activity
+            android:name=".ListViewSampleActivity"
+            android:label="@string/title_activity_list_view_sample" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_fragment_sample">FragmentSampleActivity</string>
+    <string name="title_activity_include">IncludeActivity</string>
+    <string name="title_activity_merge">MergeActivity</string>
+    <string name="title_activity_list_view_sample">ListViewSampleActivity</string>
 </resources>
