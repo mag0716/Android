@@ -49,7 +49,7 @@ public class FragmentSampleActivityFragment extends Fragment {
     @OnClick(R.id.btn)
     public void showToast2() {
         // もし、同じ ID の View に複数のメソッドがセットされていたら？
-        // -> 最初にセットした showToast() が呼び出される
+        // -> showToast() -> showToast2() の順で呼び出される
         Toast.makeText(getActivity(), "Toast2", Toast.LENGTH_SHORT).show();
     }
 
