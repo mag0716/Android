@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // for ButterKnife
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -28,4 +33,7 @@ dependencies {
 
     // Lombok
     provided 'org.projectlombok:lombok:1.16.4'
+
+    // ButterKnife
+    compile 'com.jakewharton:butterknife:6.1.0'
 }
