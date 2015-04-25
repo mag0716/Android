@@ -1,5 +1,7 @@
 package m.k.android.sample.homeapplication;
 
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -19,11 +21,13 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final PackageManager manager = getPackageManager();
+        final PackageManager packageManager = getPackageManager();
+        List<ResolveInfo> applicationInfoList = getApplicationList(packageManager);
+        outputApplicationInfoLog(applicationInfoList, packageManager);
 
-        List<ResolveInfo> applicationInfoList = getApplicationList(manager);
-
-        outputDebugLog(applicationInfoList, manager);
+        final AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
+        List<AppWidgetProviderInfo> widgetInfoList = getWidgetList(widgetManager);
+        outputWidgetInfoLog(widgetInfoList, packageManager);
     }
 
     @Override
@@ -32,17 +36,33 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private List<ResolveInfo> getApplicationList(@NonNull PackageManager manager) {
-        final Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         // see PackageManager.MATCH_DEFAULT_ONLY
         return manager.queryIntentActivities(intent, 0);
     }
 
-    private void outputDebugLog(List<ResolveInfo> applicationInfoList, @NonNull PackageManager manager) {
+    private List<AppWidgetProviderInfo> getWidgetList(@NonNull AppWidgetManager manager) {
+        return manager.getInstalledProviders();
+    }
+
+    private void outputApplicationInfoLog(List<ResolveInfo> applicationInfoList, @NonNull PackageManager manager) {
         if(applicationInfoList != null) {
             for(ResolveInfo info : applicationInfoList) {
-                Log.d(TAG, (String)info.loadLabel(manager));
+                outputDebugLog("Application : " + info.loadLabel(manager));
             }
         }
+    }
+
+    private void outputWidgetInfoLog(List<AppWidgetProviderInfo> widgetInfoList, @NonNull PackageManager manager) {
+        if(widgetInfoList != null) {
+            for(AppWidgetProviderInfo info : widgetInfoList) {
+                outputDebugLog("Widget : " + info.label);
+            }
+        }
+    }
+
+    private void outputDebugLog(String msg) {
+        Log.d(TAG, msg);
     }
 }
