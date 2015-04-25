@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -22,12 +21,16 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 import m.k.android.sample.homeapplication.R;
 
 public class ApplicationListFragment extends Fragment {
 
     @InjectView(R.id.grid)
     GridView mGrid;
+    Adapter mAdapter;
+
+    private PackageManager mPackageManager;
 
     private List<ResolveInfo> mApplicationInfoList;
 
@@ -52,22 +55,31 @@ public class ApplicationListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        final PackageManager packageManager = activity.getPackageManager();
-        mApplicationInfoList = getApplicationList(packageManager);
+        mPackageManager = activity.getPackageManager();
+        mApplicationInfoList = getApplicationList(mPackageManager);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Adapter adapter = new Adapter(getActivity(), R.layout.application_list_item);
-        adapter.addAll(mApplicationInfoList);
-        mGrid.setAdapter(adapter);
+        mAdapter = new Adapter(getActivity(), mPackageManager, R.layout.application_list_item);
+        mAdapter.addAll(mApplicationInfoList);
+        mGrid.setAdapter(mAdapter);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @OnItemClick(R.id.grid)
+    void launchApplication(int position) {
+        final ResolveInfo info = mAdapter.getItem(position);
+        final Intent intent = mPackageManager.getLaunchIntentForPackage(info.activityInfo.packageName);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        startActivity(intent);
     }
 
     private List<ResolveInfo> getApplicationList(@NonNull PackageManager manager) {
@@ -90,13 +102,13 @@ public class ApplicationListFragment extends Fragment {
             }
         }
 
-        private int mLayoutResourceId;
-        private final PackageManager mManager;
+        private final int mLayoutResourceId;
+        private final PackageManager mPackageManager;
 
-        public Adapter(Context context, @LayoutRes int resource) {
+        public Adapter(Context context, @NonNull PackageManager packageManager, @LayoutRes int resource) {
             super(context, resource);
+            mPackageManager = packageManager;
             mLayoutResourceId = resource;
-            mManager = context.getPackageManager();
         }
 
         @Override
@@ -112,8 +124,8 @@ public class ApplicationListFragment extends Fragment {
             }
 
             final ResolveInfo info = getItem(position);
-            holder.mIcon.setImageDrawable(info.loadIcon(mManager));
-            holder.mLabel.setText(info.loadLabel(mManager));
+            holder.mIcon.setImageDrawable(info.loadIcon(mPackageManager));
+            holder.mLabel.setText(info.loadLabel(mPackageManager));
 
             return convertView;
         }
