@@ -28,9 +28,16 @@ public class CreateSample {
                 .subscribe(subscriber);
     }
 
-    public void repeat(int repeat, Integer value, Subscriber<Integer> subscriber) {
+    public void repeat(Integer value, int repeatCount, Subscriber<Integer> subscriber) {
         Observable.just(value)
-                .repeat(repeat)
+                .repeat(repeatCount)
+                .subscribe(subscriber);
+    }
+
+    public void repeatWhen(Integer value, Func1<Observable, Observable<Integer>> notificationHandler, int takeCount, Subscriber<Integer> subscriber) {
+        Observable.just(value)
+                .repeatWhen(notificationHandler)
+                .take(takeCount)
                 .subscribe(subscriber);
     }
 }

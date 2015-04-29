@@ -11,6 +11,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
 
@@ -209,7 +210,7 @@ public class CreateSampleTest {
     @Test
     public void test_repeat_repeatの引数に3を指定() {
         final List<String> result = new ArrayList<>();
-        mSample.repeat(3, 1, new Subscriber<Integer>() {
+        mSample.repeat(1, 3, new Subscriber<Integer>() {
             @Override
             public void onCompleted() {
                 result.add("onCompleted");
@@ -236,7 +237,7 @@ public class CreateSampleTest {
     @Test
     public void test_repeat_repeatの引数に0を指定() {
         final List<String> result = new ArrayList<>();
-        mSample.repeat(0, 1, new Subscriber<Integer>() {
+        mSample.repeat(1, 0, new Subscriber<Integer>() {
             @Override
             public void onCompleted() {
                 result.add("onCompleted");
@@ -255,5 +256,42 @@ public class CreateSampleTest {
 
         Assert.assertThat(result.size(), is(1));
         Assert.assertThat(result.get(0), is("onCompleted"));
+    }
+
+    @Test
+    public void test_repeatWhen() {
+        final List<String> result = new ArrayList<>();
+        mSample.repeatWhen(1,
+                new Func1<Observable, Observable<Integer>>() {
+                    @Override
+                    public Observable<Integer> call(Observable observable) {
+                        result.add("call");
+                        return observable;
+                    }
+                },
+                3,
+                new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        result.add("onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        result.add("onError");
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        result.add("onNext : " + integer);
+                    }
+                });
+
+        Assert.assertThat(result.size(), is(5));
+        Assert.assertThat(result.get(0), is("call"));
+        Assert.assertThat(result.get(1), is("onNext : 1"));
+        Assert.assertThat(result.get(2), is("onNext : 1"));
+        Assert.assertThat(result.get(3), is("onNext : 1"));
+        Assert.assertThat(result.get(4), is("onCompleted"));
     }
 }
