@@ -13,6 +13,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func0;
 import rx.functions.Func1;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -292,6 +293,81 @@ public class CreateSampleTest {
         Assert.assertThat(result.get(1), is("onNext : 1"));
         Assert.assertThat(result.get(2), is("onNext : 1"));
         Assert.assertThat(result.get(3), is("onNext : 1"));
+        Assert.assertThat(result.get(4), is("onCompleted"));
+    }
+
+    @Test
+    public void test_create() {
+        final List<String> result = new ArrayList<>();
+        mSample.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                try {
+                    if (!subscriber.isUnsubscribed()) {
+                        for (int i = 0; i < 3; i++) {
+                            subscriber.onNext(i);
+                        }
+                        subscriber.onCompleted();
+                    }
+                } catch (Exception e) {
+                    subscriber.onError(e);
+                }
+            }
+        }, new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+                result.add("onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                result.add("onError");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                result.add("onNext : " + integer);
+            }
+        });
+        Assert.assertThat(result.size(), is(4));
+        Assert.assertThat(result.get(0), is("onNext : 0"));
+        Assert.assertThat(result.get(1), is("onNext : 1"));
+        Assert.assertThat(result.get(2), is("onNext : 2"));
+        Assert.assertThat(result.get(3), is("onCompleted"));
+    }
+
+    @Test
+    public void test_defer() {
+        final List<String> result = new ArrayList<>();
+        mSample.defer(
+                new Func0<Observable<Integer>>() {
+                    @Override
+                    public Observable<Integer> call() {
+                        result.add("call");
+                        return Observable.from(new Integer[]{1, 2, 3});
+                    }
+                },
+                new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        result.add("onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        result.add("onError");
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        result.add("onNext : " + integer);
+                    }
+                });
+        Assert.assertThat(result.size(), is(5));
+        Assert.assertThat(result.get(0), is("call"));
+        Assert.assertThat(result.get(1), is("onNext : 1"));
+        Assert.assertThat(result.get(2), is("onNext : 2"));
+        Assert.assertThat(result.get(3), is("onNext : 3"));
         Assert.assertThat(result.get(4), is("onCompleted"));
     }
 }
