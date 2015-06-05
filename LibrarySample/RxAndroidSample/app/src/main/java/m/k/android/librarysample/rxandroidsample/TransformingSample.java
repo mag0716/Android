@@ -15,4 +15,10 @@ public class TransformingSample {
                 .map(func)
                 .subscribe(subscriber);
     }
+
+    public void flatMap(Integer[] values, Func1<Integer, Observable<Object>> func, Subscriber<Object> subscriber) {
+        Observable.from(values)
+                .flatMap(func)
+                .subscribe(subscriber);
+    }
 }
