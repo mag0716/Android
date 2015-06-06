@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import m.k.android.sample.androiddesignsupportlibrarysample.fragments.FloatingActionButtonFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TextInputLayoutFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Fragments
     private TextInputLayoutFragment mTextInputLayoutFragment;
+    private FloatingActionButtonFragment mFloatingActionButtonFragmentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ((NavigationView)findViewById(R.id.navigation)).setNavigationItemSelectedListener(this);
 
         mTextInputLayoutFragment = TextInputLayoutFragment.newInstance();
+        mFloatingActionButtonFragmentFragment = FloatingActionButtonFragment.newInstance();
 
         mFragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = mFragmentManager.beginTransaction();
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transaction.replace(R.id.container, mTextInputLayoutFragment);
                 break;
             case R.id.navigation_item_2:
+                transaction.replace(R.id.container, mFloatingActionButtonFragmentFragment);
                 break;
             case R.id.navigation_item_3:
                 break;
