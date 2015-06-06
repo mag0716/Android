@@ -1,5 +1,6 @@
 package m.k.android.sample.androiddesignsupportlibrarysample;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.FloatingActionButtonFragment;
+import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TabLayoutFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TextInputLayoutFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Fragments
     private TextInputLayoutFragment mTextInputLayoutFragment;
     private FloatingActionButtonFragment mFloatingActionButtonFragmentFragment;
+    private TabLayoutFragment mTabLayoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mTextInputLayoutFragment = TextInputLayoutFragment.newInstance();
         mFloatingActionButtonFragmentFragment = FloatingActionButtonFragment.newInstance();
+        mTabLayoutFragment = TabLayoutFragment.newInstance();
 
         mFragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = mFragmentManager.beginTransaction();
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transaction.replace(R.id.container, mFloatingActionButtonFragmentFragment);
                 break;
             case R.id.navigation_item_3:
+                transaction.replace(R.id.container, mTabLayoutFragment);
                 break;
             case R.id.navigation_item_4:
                 break;
