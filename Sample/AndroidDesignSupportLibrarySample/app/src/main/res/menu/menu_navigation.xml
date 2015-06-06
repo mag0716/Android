@@ -3,31 +3,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navigation_item_1"
-            android:checked="true"
             android:icon="@mipmap/ic_launcher"
-            android:title="NavigationView"/>
+            android:title="TextInputLayout"
+            android:checked="true"/>
         <item
             android:id="@+id/navigation_item_2"
             android:icon="@mipmap/ic_launcher"
-            android:title="TextInputLayout"/>
+            android:title="FloatingActionButton"/>
         <item
             android:id="@+id/navigation_item_3"
             android:icon="@mipmap/ic_launcher"
-            android:title="FloatingActionButton"/>
+            android:title="TabLayout"/>
         <item
             android:id="@+id/navigation_item_4"
             android:icon="@mipmap/ic_launcher"
-            android:title="TabLayout"/>
+            android:title="CoordinatorLayout"/>
         <item
             android:id="@+id/navigation_item_5"
             android:icon="@mipmap/ic_launcher"
-            android:title="CoordinatorLayout"/>
-        <item
-            android:id="@+id/navigation_item_6"
-            android:icon="@mipmap/ic_launcher"
             android:title="AppBarLayout"/>
         <item
-            android:id="@+id/navigation_item_7"
+            android:id="@+id/navigation_item_6"
             android:icon="@mipmap/ic_launcher"
             android:title="CollapsingToolbarLayout"/>
     </group>

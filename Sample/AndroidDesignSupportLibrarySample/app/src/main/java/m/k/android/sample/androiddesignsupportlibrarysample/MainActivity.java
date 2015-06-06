@@ -1,13 +1,22 @@
 package m.k.android.sample.androiddesignsupportlibrarysample;
 
-import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TextInputLayoutFragment;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FragmentManager mFragmentManager;
+
+    // Fragments
+    private TextInputLayoutFragment mTextInputLayoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +24,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         ((NavigationView)findViewById(R.id.navigation)).setNavigationItemSelectedListener(this);
+
+        mTextInputLayoutFragment = TextInputLayoutFragment.newInstance();
+
+        mFragmentManager = getSupportFragmentManager();
+        final FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        transaction.add(R.id.container, mTextInputLayoutFragment).commit();
     }
 
     @Override
@@ -23,7 +38,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toast.makeText(this, "onNavigationItemSelected : " + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
 
+        final FragmentTransaction transaction = mFragmentManager.beginTransaction();
+
         switch(menuItem.getItemId()) {
+            case R.id.navigation_item_1:
+                transaction.replace(R.id.container, mTextInputLayoutFragment);
+                break;
             case R.id.navigation_item_2:
                 break;
             case R.id.navigation_item_3:
@@ -34,12 +54,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.navigation_item_6:
                 break;
-            case R.id.navigation_item_7:
-                break;
             default:
                 ret = false;
                 break;
         }
+
+        transaction.commit();
 
         return ret;
     }
