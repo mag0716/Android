@@ -26,5 +26,9 @@
             android:id="@+id/navigation_item_6"
             android:icon="@mipmap/ic_launcher"
             android:title="CollapsingToolbarLayout"/>
+        <item
+            android:id="@+id/navigation_item_7"
+            android:icon="@mipmap/ic_launcher"
+            android:title="SnackBar"/>
     </group>
 </menu>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import m.k.android.sample.androiddesignsupportlibrarysample.fragments.CoordinatorLayoutFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.FloatingActionButtonFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TabLayoutFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TextInputLayoutFragment;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextInputLayoutFragment mTextInputLayoutFragment;
     private FloatingActionButtonFragment mFloatingActionButtonFragmentFragment;
     private TabLayoutFragment mTabLayoutFragment;
+    private CoordinatorLayoutFragment mCoordinatorLayoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mTextInputLayoutFragment = TextInputLayoutFragment.newInstance();
         mFloatingActionButtonFragmentFragment = FloatingActionButtonFragment.newInstance();
         mTabLayoutFragment = TabLayoutFragment.newInstance();
+        mCoordinatorLayoutFragment = CoordinatorLayoutFragment.newInstance();
 
         mFragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = mFragmentManager.beginTransaction();
@@ -58,10 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transaction.replace(R.id.container, mTabLayoutFragment);
                 break;
             case R.id.navigation_item_4:
+                transaction.replace(R.id.container, mCoordinatorLayoutFragment);
                 break;
             case R.id.navigation_item_5:
                 break;
             case R.id.navigation_item_6:
+                break;
+            case R.id.navigation_item_7:
                 break;
             default:
                 ret = false;
