@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import m.k.android.sample.androiddesignsupportlibrarysample.fragments.AppBarLayoutFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.CoordinatorLayoutFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.FloatingActionButtonFragment;
 import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TabLayoutFragment;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FloatingActionButtonFragment mFloatingActionButtonFragmentFragment;
     private TabLayoutFragment mTabLayoutFragment;
     private CoordinatorLayoutFragment mCoordinatorLayoutFragment;
+    private AppBarLayoutFragment mAppBarLayoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mFloatingActionButtonFragmentFragment = FloatingActionButtonFragment.newInstance();
         mTabLayoutFragment = TabLayoutFragment.newInstance();
         mCoordinatorLayoutFragment = CoordinatorLayoutFragment.newInstance();
+        mAppBarLayoutFragment = AppBarLayoutFragment.newInstance();
 
         mFragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = mFragmentManager.beginTransaction();
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transaction.replace(R.id.container, mCoordinatorLayoutFragment);
                 break;
             case R.id.navigation_item_5:
+                transaction.replace(R.id.container, mAppBarLayoutFragment);
                 break;
             case R.id.navigation_item_6:
                 break;
