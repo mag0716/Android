@@ -2,6 +2,7 @@ package m.k.android.sample.androiddesignsupportlibrarysample;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,8 @@ import m.k.android.sample.androiddesignsupportlibrarysample.fragments.TextInputL
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager mFragmentManager;
+    private DrawerLayout mDrawer;
+    private NavigationView mNavigationView;
 
     // Fragments
     private TextInputLayoutFragment mTextInputLayoutFragment;
@@ -36,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((NavigationView)findViewById(R.id.navigation)).setNavigationItemSelectedListener(this);
+        mDrawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mNavigationView = ((NavigationView)findViewById(R.id.navigation));
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         mTextInputLayoutFragment = TextInputLayoutFragment.newInstance();
         mFloatingActionButtonFragmentFragment = FloatingActionButtonFragment.newInstance();
@@ -55,9 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         boolean ret = true;
 
-        Toast.makeText(this, "onNavigationItemSelected : " + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-
         final FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        menuItem.setChecked(true);
 
         switch(menuItem.getItemId()) {
             case R.id.navigation_item_1:
@@ -87,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         transaction.commit();
+
+        mDrawer.closeDrawers();
 
         return ret;
     }
