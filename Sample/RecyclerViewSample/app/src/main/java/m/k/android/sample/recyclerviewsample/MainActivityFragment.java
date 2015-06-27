@@ -58,6 +58,7 @@ public class MainActivityFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         mRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), DATA));
 
         return view;
