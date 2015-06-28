@@ -59,7 +59,17 @@ public class MainActivityFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(), DATA));
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity(),
+                new RecyclerViewAdapter.ViewHolder.IViewClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Toast.makeText(getActivity(),
+                                "RecyclerView#selected : " + ((RecyclerViewAdapter)mRecyclerView.getAdapter()).getItem(position),
+                                Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                },
+                DATA));
 
         return view;
     }

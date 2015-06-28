@@ -22,14 +22,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private LayoutInflater mLayoutInflater;
     private List<String> mDataList;
 
-    public RecyclerViewAdapter(@Nullable Context context, List<String> dataList) {
+    private ViewHolder.IViewClickListener mListener;
+
+    public RecyclerViewAdapter(@Nullable Context context, ViewHolder.IViewClickListener listener, List<String> dataList) {
         super();
         mLayoutInflater = LayoutInflater.from(context);
+        mListener = listener;
         mDataList = dataList != null ? dataList : new ArrayList<String>();
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mLayoutInflater.inflate(R.layout.view_listview_item, parent, false));
+        return new ViewHolder(mLayoutInflater.inflate(R.layout.view_recyclerview_item, parent, false), mListener);
     }
 
     @Override
@@ -42,13 +45,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mDataList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public String getItem(int position) {
+        return mDataList.get(position);
+    }
+
+    /**
+     * http://stackoverflow.com/questions/24885223/why-doesnt-recyclerview-have-onitemclicklistener-and-how-recyclerview-is-dif/24933117#24933117
+     */
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.text)
         TextView mText;
 
-        public ViewHolder(View view) {
+        public IViewClickListener mListener;
+
+        public ViewHolder(View view, IViewClickListener listener) {
             super(view);
             ButterKnife.inject(this, view);
+
+            mListener = listener;
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(mListener != null) {
+                mListener.onClick(v, getAdapterPosition());
+            }
+        }
+
+        public interface IViewClickListener {
+            void onClick(View view, int position);
         }
     }
 }
