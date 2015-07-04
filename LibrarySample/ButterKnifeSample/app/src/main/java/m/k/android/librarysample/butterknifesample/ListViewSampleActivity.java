@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnItemClick;
 import butterknife.OnItemSelected;
 
@@ -34,14 +34,14 @@ public class ListViewSampleActivity extends ActionBarActivity {
         }
     }
 
-    @InjectView(R.id.list)
+    @Bind(R.id.list)
     ListView mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_sample);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         Adapter adapter = new Adapter(this, R.layout.list_item);
         adapter.addAll(mDataList);
@@ -56,13 +56,13 @@ public class ListViewSampleActivity extends ActionBarActivity {
     public static class Adapter extends ArrayAdapter<String> {
 
         static class ViewHolder {
-            @InjectView(R.id.text1)
+            @Bind(R.id.text1)
             TextView mText1;
-            @InjectView(R.id.text2)
+            @Bind(R.id.text2)
             TextView mText2;
 
             public ViewHolder(View view) {
-                ButterKnife.inject(this, view);
+                ButterKnife.bind(this, view);
             }
         }
 

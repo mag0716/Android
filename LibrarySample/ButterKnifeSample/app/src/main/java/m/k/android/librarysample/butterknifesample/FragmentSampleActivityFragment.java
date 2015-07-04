@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 
@@ -19,9 +19,9 @@ import butterknife.OnClick;
  */
 public class FragmentSampleActivityFragment extends Fragment {
 
-    @InjectView(R.id.text)
+    @Bind(R.id.text)
     TextView mText;
-    @InjectView(R.id.btn)
+    @Bind(R.id.btn)
     Button mBtn;
 
     public FragmentSampleActivityFragment() {
@@ -31,7 +31,7 @@ public class FragmentSampleActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_sample, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 

@@ -7,28 +7,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class MainActivity extends ActionBarActivity {
 
     private static final String TAG = "ButterKnifeSample";
 
-    @InjectView(R.id.fragment_sample_btn)
+    @Bind(R.id.fragment_sample_btn)
     Button mFragmentSampleBtn;
-    @InjectView(R.id.listview_sample_btn)
+    @Bind(R.id.listview_sample_btn)
     Button mListViewSampleBtn;
-    @InjectView(R.id.include_sample_btn)
+    @Bind(R.id.include_sample_btn)
     Button mIncludeSampleBtn;
-    @InjectView(R.id.merge_sample_btn)
+    @Bind(R.id.merge_sample_btn)
     Button mMergeSampleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.fragment_sample_btn)

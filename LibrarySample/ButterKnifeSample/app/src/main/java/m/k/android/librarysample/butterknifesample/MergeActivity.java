@@ -6,21 +6,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 
 public class MergeActivity extends ActionBarActivity {
 
-    @InjectView(R.id.image)
+    @Bind(R.id.image)
     ImageView mImage;
-    @InjectView(R.id.text)
+    @Bind(R.id.text)
     TextView mText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merge);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mImage.setImageResource(R.mipmap.ic_launcher);
         mText.setText(mText.getText() + "inject success");
