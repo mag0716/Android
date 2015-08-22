@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
+import android.util.Log;
 
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class CustomContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        mPref = getContext().getSharedPreferences(MainActivity.BROADCAST_TYPE, Context.MODE_PRIVATE);
+        mPref = getContext().getSharedPreferences(MainActivity.BROADCAST_TYPE, Context.MODE_WORLD_READABLE);
         return true;
     }
 
@@ -27,25 +28,26 @@ public class CustomContentProvider extends ContentProvider {
     public String getType(Uri uri) {
         // TODO: Implement this to handle requests for the MIME type of the data
         // at the given URI.
+        Log.d("xxx", "CustomContentProvider#getType : uri = " + uri.toString());
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
+        Log.d("xxx", "CustomContentProvider#query : uri = " + uri.toString());
         MatrixCursor cursor = new MatrixCursor(new String[] {
                 "key", "value"
         });
 
+        // プリファレンスに保存されている全データを返却する
         Map all = mPref.getAll();
         Object value;
-        for (String key : selectionArgs) {
-            if (all.containsKey(key)) {
-                value = all.get(key);
-                cursor.addRow(new Object[] {
-                        key, value
-                });
-            }
+        for(Object key : all.keySet()) {
+            value = all.get(key);
+            Log.d("xxx", "add " + key + "(" + value + ")");
+            cursor.addRow(new Object[]{
+                    key, value});
         }
 
         return cursor;
