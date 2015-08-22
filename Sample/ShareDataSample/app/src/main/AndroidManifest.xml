@@ -29,7 +29,7 @@
 
         <provider
             android:name=".CustomContentProvider"
-            android:authorities="m.k.android.samle.sharedatasample.preferenceprovider"
+            android:authorities="m.k.android.sample.sharedatasample.preferenceprovider"
             android:enabled="true"
             android:exported="true" >
         </provider>
