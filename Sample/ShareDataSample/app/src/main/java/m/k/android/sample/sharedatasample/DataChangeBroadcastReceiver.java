@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+/**
+ * 通知を受け取って、プリファレンスを書き換える
+ */
 public class DataChangeBroadcastReceiver extends BroadcastReceiver {
     public DataChangeBroadcastReceiver() {
     }
