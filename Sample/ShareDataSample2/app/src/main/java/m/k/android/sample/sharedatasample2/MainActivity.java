@@ -1,11 +1,15 @@
 package m.k.android.sample.sharedatasample2;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -51,9 +55,31 @@ public class MainActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
+    @OnClick(R.id.load_contentprovider_btn)
+    public void loadByContentProvider() {
+        Cursor cursor = getContentResolver().query(
+                Uri.parse("content://m.k.android.sample.sharedatasample.preferenceprovider/preference"),
+                    null, null, null, null);
+
+        String[] columns = cursor.getColumnNames();
+        int keyIndex = cursor.getColumnIndex("key");
+        int valueIndex = cursor.getColumnIndex("value");
+
+        while(cursor.moveToNext()) {
+            if("sample".equals(cursor.getString(keyIndex))) {
+                mEdit.setText(cursor.getString(valueIndex));
+            }
+        }
+    }
+
+    @OnClick(R.id.save_contentprovider_btn)
+    public void saveByContentnProvider() {
+
+    }
+
     private SharedPreferences pref(String name) throws PackageManager.NameNotFoundException {
         // ShareDataSample のプリファレンスを取得する
         Context context = createPackageContext("m.k.android.sample.sharedatasample", Context.CONTEXT_RESTRICTED);
-        return context.getSharedPreferences(name, Context.MODE_PRIVATE|Context.MODE_MULTI_PROCESS);
+        return context.getSharedPreferences(name, Context.MODE_WORLD_READABLE|Context.MODE_MULTI_PROCESS);
     }
 }
