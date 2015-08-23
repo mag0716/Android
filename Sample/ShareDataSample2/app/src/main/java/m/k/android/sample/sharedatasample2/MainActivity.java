@@ -1,6 +1,7 @@
 package m.k.android.sample.sharedatasample2;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.save_contentprovider_btn)
     public void saveByContentnProvider() {
-
+        ContentValues values = new ContentValues();
+        values.put("sample", mEdit.getText().toString());
+        getContentResolver().update(Uri.parse("content://m.k.android.sample.sharedatasample.preferenceprovider/preference"),
+                values, null, null);
     }
 
     private SharedPreferences pref(String name) throws PackageManager.NameNotFoundException {

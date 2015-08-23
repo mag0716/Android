@@ -62,8 +62,20 @@ public class CustomContentProvider extends ContentProvider {
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
-        // TODO: Implement this to handle requests to update one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
+        Log.d("xxx", "CustomContentProvider#update : uri = " + uri.toString());
+
+        int count = 0;
+
+        if(values != null) {
+            SharedPreferences.Editor editor = mPref.edit();
+            for(String key : values.keySet()) {
+                // TODO: ひとまず String 型のみ対応
+                editor.putString(key, values.getAsString(key));
+            }
+            editor.commit();
+        }
+
+        return count;
     }
 
     @Override
