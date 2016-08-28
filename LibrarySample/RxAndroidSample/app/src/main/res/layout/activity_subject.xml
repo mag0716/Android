@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="m.k.android.librarysample.rxandroidsample.SubjectActivity">
+
+    <Spinner
+        android:id="@+id/subject_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/create_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="create Subject"/>
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="onNext"/>
+
+    <Button
+        android:id="@+id/complete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="onComplete"/>
+
+    <Button
+        android:id="@+id/error_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="onError"/>
+
+    <Button
+        android:id="@+id/subscribe1_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subscribe 1"/>
+
+    <Button
+        android:id="@+id/unsubscribe1_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unsubscribe 1"/>
+
+    <Button
+        android:id="@+id/subscribe2_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subscribe 2"/>
+
+    <Button
+        android:id="@+id/unsubscribe2_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unsubscribe 2"/>
+</LinearLayout>
