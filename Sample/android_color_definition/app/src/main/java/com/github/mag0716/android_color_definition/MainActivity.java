@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return SampleFragment.newInstance();
+            return SampleFragment.newInstance(position == 0);
         }
 
         @Override
