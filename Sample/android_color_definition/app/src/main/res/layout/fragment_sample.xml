@@ -34,18 +34,21 @@
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="CheckBox" />
 
         <RadioButton
             android:id="@+id/radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="RadioButton" />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/switchcompat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Switch" />
 
     </LinearLayout>
