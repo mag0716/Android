@@ -35,13 +35,27 @@
                 android:enabled="@{viewModel.enabled}"
                 android:hint="EditText" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="@{viewModel.enabled}"
-                android:onClick="onClick"
-                android:text="Button" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{viewModel.enabled}"
+                    android:onClick="onClick"
+                    android:text="Button" />
+
+                <Button
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{viewModel.enabled}"
+                    android:onClick="onClick"
+                    android:text="Button" />
+
+            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/checkbox"
@@ -51,13 +65,27 @@
                 android:enabled="@{viewModel.enabled}"
                 android:text="CheckBox" />
 
-            <RadioButton
-                android:id="@+id/radiobutton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:enabled="@{viewModel.enabled}"
-                android:text="RadioButton" />
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radiobutton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:enabled="@{viewModel.enabled}"
+                    android:text="RadioButton" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{viewModel.enabled}"
+                    android:text="RadioButton" />
+
+            </RadioGroup>
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/switchcompat"
