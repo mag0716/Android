@@ -35,6 +35,14 @@
                 android:enabled="@{viewModel.enabled}"
                 android:hint="EditText" />
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.enabled}"
+                android:entries="@array/spinner_items"
+                android:selectedItemPosition="@{viewModel.spinnerIndex}" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

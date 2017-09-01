@@ -1,5 +1,6 @@
 package com.github.mag0716.android_color_definition;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String KEY_THEME = "Theme";
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -33,9 +36,17 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tab;
 
+    private int currentThemeIndex = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getIntent().hasExtra(KEY_THEME)) {
+            currentThemeIndex = getIntent().getIntExtra(KEY_THEME, 0);
+        }
+        setTheme(getResources().getIdentifier(getResources().getStringArray(R.array.spinner_items)[currentThemeIndex], "style", getPackageName()));
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -88,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), SampleDialog.class.getSimpleName());
     }
 
+    public void changeTheme(int themeIndex) {
+        final Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(KEY_THEME, themeIndex);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -100,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return SampleFragment.newInstance(position == 0);
+            return SampleFragment.newInstance(position == 0, currentThemeIndex);
         }
 
         @Override
