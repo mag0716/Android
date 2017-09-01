@@ -2,13 +2,6 @@
 <resources>
     <color name="colorPrimary">@color/md_blue_500</color>
     <color name="colorPrimaryDark">@color/md_blue_700</color>
-    <color name="colorAccent">@color/md_pink_A200</color>
-    <color name="colorControlNormal">@color/md_purple_500</color>
-    <color name="colorControlActivated">@color/md_purple_500</color>
-    <color name="colorControlHighlight">@color/md_orange_500</color>
-    <color name="colorButtonNormal">@color/md_green_500</color>
-    <color name="colorSwitchThumbNormal">@color/md_yellow_500</color>
-    <color name="controlBackground">@color/md_brown_500</color>
 
     <color name="textColorPrimary"></color>
     <color name="textColorPrimaryInverse"></color>

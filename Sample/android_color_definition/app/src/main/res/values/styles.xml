@@ -2,21 +2,35 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorControlNormal</item>
-        <item name="colorControlActivated">@color/colorControlActivated</item>
-        <item name="colorControlHighlight">@color/colorControlHighlight</item>
-        <item name="colorButtonNormal">@color/colorButtonNormal</item>
-        <item name="colorSwitchThumbNormal">@color/colorSwitchThumbNormal</item>
-        <item name="controlBackground">@color/controlBackground</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppTheme.CustomAccent">
+        <item name="colorAccent">@color/md_red_500</item>
+    </style>
+
+    <style name="AppTheme.CustomControlNormal">
+        <item name="colorControlNormal">@color/md_red_500</item>
+    </style>
+
+    <style name="AppTheme.CustomControlActivated">
+        <item name="colorControlActivated">@color/md_red_500</item>
+    </style>
+
+    <style name="AppTheme.CustomControlHighlight">
+        <item name="colorControlHighlight">@color/md_red_500</item>
+    </style>
+
+    <style name="AppTheme.CustomButtonNormal">
+        <item name="colorButtonNormal">@color/md_red_500</item>
+    </style>
+
+    <style name="AppTheme.CustomControlBackground">
+        <item name="controlBackground">@color/md_red_500</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
