@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/md_blue_500</color>
+    <color name="colorPrimaryDark">@color/md_blue_700</color>
+
+    <color name="textColorPrimary"></color>
+    <color name="textColorPrimaryInverse"></color>
+    <color name="textColorSecondary"></color>
+    <color name="textColorSecondaryInverse"></color>
+    <color name="textColorTertiary"></color>
+    <color name="textColorTertiaryInverse"></color>
+</resources>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">android_color_definition</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="spinner_items">
+        <item>AppTheme</item>
+        <item>AppTheme.CustomAccent</item>
+        <item>AppTheme.CustomControlNormal</item>
+        <item>AppTheme.CustomControlActivated</item>
+        <item>AppTheme.CustomControlHighlight</item>
+        <item>AppTheme.CustomButtonNormal</item>
+        <item>AppTheme.CustomControlBackground</item>
+    </string-array>
+</resources>
