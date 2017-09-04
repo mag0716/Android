@@ -14,5 +14,8 @@
         <item>AppTheme.CustomControlHighlight</item>
         <item>AppTheme.CustomButtonNormal</item>
         <item>AppTheme.CustomControlBackground</item>
+        <item>AppTheme.TextColorPrimary</item>
+        <item>AppTheme.TextColorSecondary</item>
+        <item>AppTheme.TextColorTertiary</item>
     </string-array>
 </resources>
