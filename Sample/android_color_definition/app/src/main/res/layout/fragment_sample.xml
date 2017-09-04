@@ -21,17 +21,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="@{viewModel.enabled}"
-                android:text="TextView" />
-
             <EditText
                 android:id="@+id/edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
                 android:enabled="@{viewModel.enabled}"
                 android:hint="EditText" />
 
@@ -39,6 +33,7 @@
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
                 android:enabled="@{viewModel.enabled}"
                 android:entries="@array/spinner_items"
                 android:selectedItemPosition="@{viewModel.spinnerIndex}" />
@@ -46,6 +41,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
                 android:orientation="horizontal">
 
                 <Button
@@ -69,6 +65,7 @@
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
                 android:checked="true"
                 android:enabled="@{viewModel.enabled}"
                 android:text="CheckBox" />
@@ -76,6 +73,7 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -99,10 +97,90 @@
                 android:id="@+id/switchcompat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
                 android:checked="true"
                 android:enabled="@{viewModel.enabled}"
                 android:text="Switch" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Display4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Display3"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Display2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Display1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Headline"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Subhead"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Body2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Body1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:enabled="@{viewModel.enabled}"
+                android:text="Caption"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
         </LinearLayout>
 
     </ScrollView>
