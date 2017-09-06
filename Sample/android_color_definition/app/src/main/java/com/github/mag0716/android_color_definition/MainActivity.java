@@ -117,8 +117,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        DialogFragment dialog = new SampleDialog();
-        dialog.show(getSupportFragmentManager(), SampleDialog.class.getSimpleName());
+        DialogFragment dialog = null;
+        switch (view.getId()) {
+            case R.id.button1:
+                dialog = new SampleAlert();
+                break;
+            case R.id.button2:
+                break;
+            case R.id.button3:
+                break;
+            case R.id.button4:
+                break;
+            case R.id.button5:
+                break;
+        }
+        if (dialog != null) {
+            dialog.show(getSupportFragmentManager(), SampleAlert.class.getSimpleName());
+        }
     }
 
     public void changeTheme(int themeIndex) {
