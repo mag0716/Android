@@ -18,6 +18,7 @@ import android.view.View;
 
 import com.github.mag0716.android_color_definition.dialog.SampleAlert;
 import com.github.mag0716.android_color_definition.dialog.SimpleConfirmationDialog;
+import com.github.mag0716.android_color_definition.dialog.SimpleDatePickerDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -131,12 +132,13 @@ public class MainActivity extends AppCompatActivity {
                 dialog = new SimpleConfirmationDialog();
                 break;
             case R.id.button4:
+                dialog = new SimpleDatePickerDialog();
                 break;
             case R.id.button5:
                 break;
         }
         if (dialog != null) {
-            dialog.show(getSupportFragmentManager(), SampleAlert.class.getSimpleName());
+            dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
         }
     }
 
