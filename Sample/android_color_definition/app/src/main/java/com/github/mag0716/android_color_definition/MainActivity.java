@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.mag0716.android_color_definition.dialog.SampleAlert;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String KEY_THEME = "Theme";

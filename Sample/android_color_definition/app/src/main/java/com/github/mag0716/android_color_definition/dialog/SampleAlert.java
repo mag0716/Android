@@ -1,4 +1,4 @@
-package com.github.mag0716.android_color_definition;
+package com.github.mag0716.android_color_definition.dialog;
 
 
 import android.app.Dialog;
