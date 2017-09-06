@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.mag0716.android_color_definition.dialog.SampleAlert;
+import com.github.mag0716.android_color_definition.dialog.SimpleConfirmationDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button2:
                 break;
             case R.id.button3:
+                dialog = new SimpleConfirmationDialog();
                 break;
             case R.id.button4:
                 break;
