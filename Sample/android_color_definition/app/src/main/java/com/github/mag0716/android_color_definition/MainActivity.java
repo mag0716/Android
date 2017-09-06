@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager viewPager;
     private TabLayout tab;
+    private FloatingActionButton fab;
 
     private int currentThemeIndex = 0;
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tab = findViewById(R.id.tab);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,9 +69,25 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                
+
                             }
                         }).show();
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                fab.setEnabled(position == 0);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
         tab.setupWithViewPager(viewPager);
