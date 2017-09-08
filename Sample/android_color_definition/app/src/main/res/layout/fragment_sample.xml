@@ -37,8 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/view_margin"
                 android:enabled="@{viewModel.enabled}"
-                android:entries="@array/spinner_items"
-                android:selectedItemPosition="@{viewModel.spinnerIndex}" />
+                android:entries="@array/items" />
 
             <LinearLayout
                 android:layout_width="match_parent"

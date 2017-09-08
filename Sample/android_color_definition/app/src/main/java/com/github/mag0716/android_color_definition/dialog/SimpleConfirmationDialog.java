@@ -33,14 +33,14 @@ public class SimpleConfirmationDialog extends DialogFragment {
                 .setNegativeButton("Cancel", null);
 
         if (isMultipleSelectable) {
-            builder.setMultiChoiceItems(R.array.dialog_items, null, new DialogInterface.OnMultiChoiceClickListener() {
+            builder.setMultiChoiceItems(R.array.items, null, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i, boolean b) {
 
                 }
             });
         } else {
-            builder.setSingleChoiceItems(R.array.dialog_items, 0, new DialogInterface.OnClickListener() {
+            builder.setSingleChoiceItems(R.array.items, 0, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                 }

@@ -41,17 +41,17 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tab;
     private FloatingActionButton fab;
-
-    private int currentThemeIndex = 0;
+    ;
+    private String currentTheme = "AppTheme";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getIntent().hasExtra(KEY_THEME)) {
-            currentThemeIndex = getIntent().getIntExtra(KEY_THEME, 0);
+            currentTheme = getIntent().getStringExtra(KEY_THEME);
         }
-        setTheme(getResources().getIdentifier(getResources().getStringArray(R.array.spinner_items)[currentThemeIndex], "style", getPackageName()));
+        setTheme(getResources().getIdentifier(currentTheme, "style", getPackageName()));
 
         setContentView(R.layout.activity_main);
 
@@ -108,17 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        changeTheme((String) item.getTitle());
+        return true;
     }
 
     public void onClick(View view) {
@@ -147,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void changeTheme(int themeIndex) {
+    public void changeTheme(String theme) {
         final Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(KEY_THEME, themeIndex);
+        intent.putExtra(KEY_THEME, theme);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -166,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return SampleFragment.newInstance(position == 0, currentThemeIndex);
+            return SampleFragment.newInstance(position == 0);
         }
 
         @Override
