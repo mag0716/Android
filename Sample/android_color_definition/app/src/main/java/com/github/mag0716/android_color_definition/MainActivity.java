@@ -19,6 +19,7 @@ import android.view.View;
 import com.github.mag0716.android_color_definition.dialog.SampleAlert;
 import com.github.mag0716.android_color_definition.dialog.SimpleConfirmationDialog;
 import com.github.mag0716.android_color_definition.dialog.SimpleDatePickerDialog;
+import com.github.mag0716.android_color_definition.dialog.SimpleTimePickerDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -127,14 +128,15 @@ public class MainActivity extends AppCompatActivity {
                 dialog = new SampleAlert();
                 break;
             case R.id.button2:
+                dialog = new SimpleConfirmationDialog();
                 break;
             case R.id.button3:
-                dialog = new SimpleConfirmationDialog();
                 break;
             case R.id.button4:
                 dialog = new SimpleDatePickerDialog();
                 break;
             case R.id.button5:
+                dialog = new SimpleTimePickerDialog();
                 break;
         }
         if (dialog != null) {
