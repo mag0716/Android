@@ -129,8 +129,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.button2:
                 dialog = new SimpleConfirmationDialog();
+                dialog.setArguments(SimpleConfirmationDialog.createArguments(false));
                 break;
             case R.id.button3:
+                dialog = new SimpleConfirmationDialog();
+                dialog.setArguments(SimpleConfirmationDialog.createArguments(true));
                 break;
             case R.id.button4:
                 dialog = new SimpleDatePickerDialog();
