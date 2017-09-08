@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.container);
         viewPager.setAdapter(adapter);
         tab = findViewById(R.id.tab);
+        // デフォルトは MODE_FIXED
+        tab.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         tab.setupWithViewPager(viewPager);
+        tab.getTabAt(4).setIcon(R.drawable.ic_local_phone_24dp);
+        tab.getTabAt(5).setIcon(R.drawable.ic_local_phone_24dp);
+        tab.getTabAt(6).setIcon(R.drawable.ic_person_pin_24dp);
+        tab.getTabAt(7).setIcon(R.drawable.ic_person_pin_24dp);
     }
 
 
@@ -157,21 +163,34 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return SampleFragment.newInstance(position == 0);
+            return SampleFragment.newInstance(position % 2 == 0);
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 8;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if (position == 0) {
-                return "Enabled";
-            } else {
-                return "Disabled";
+            switch (position) {
+                case 0:
+                    return "Enabled";
+                case 1:
+                    return "Disabled";
+                case 2:
+                    return "Enabled\nEnabled";
+                case 3:
+                    return "Disabled\nDisabled";
+                case 4:
+                case 5:
+                    return "";
+                case 6:
+                    return "Enabled";
+                case 7:
+                    return "Disabled";
             }
+            return null;
         }
     }
 }
