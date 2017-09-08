@@ -6,20 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="spinner_items">
-        <item>AppTheme</item>
-        <item>AppTheme.CustomAccent</item>
-        <item>AppTheme.CustomControlNormal</item>
-        <item>AppTheme.CustomControlActivated</item>
-        <item>AppTheme.CustomControlHighlight</item>
-        <item>AppTheme.CustomButtonNormal</item>
-        <item>AppTheme.CustomControlBackground</item>
-        <item>AppTheme.TextColorPrimary</item>
-        <item>AppTheme.TextColorSecondary</item>
-        <item>AppTheme.TextColorTertiary</item>
-    </string-array>
-
-    <string-array name="dialog_items">
+    <string-array name="items">
         <item>Item1</item>
         <item>Item2</item>
         <item>Item3</item>

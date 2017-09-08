@@ -3,8 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.github.mag0716.android_color_definition.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/default_theme"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="AppTheme"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/accent"
+        android:orderInCategory="100"
+        android:title="AppTheme.CustomAccent"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/control_normal"
+        android:orderInCategory="100"
+        android:title="AppTheme.CustomControlNormal"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/control_activated"
+        android:orderInCategory="100"
+        android:title="AppTheme.CustomControlActivated"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/control_highlight"
+        android:orderInCategory="100"
+        android:title="AppTheme.CustomControlHighlight"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/button_normal"
+        android:orderInCategory="100"
+        android:title="AppTheme.CustomButtonNormal"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/control_background"
+        android:orderInCategory="100"
+        android:title="AppTheme.CustomControlBackground"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/text_color_primary"
+        android:orderInCategory="100"
+        android:title="AppTheme.TextColorPrimary"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/text_color_secondary"
+        android:orderInCategory="100"
+        android:title="AppTheme.TextColorSecondary"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/text_color_tertiary"
+        android:orderInCategory="100"
+        android:title="AppTheme.TextColorTertiary"
         app:showAsAction="never" />
 </menu>
