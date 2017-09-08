@@ -1,4 +1,4 @@
-package com.github.mag0716.android_color_definition;
+package com.github.mag0716.android_color_definition.dialog;
 
 
 import android.app.Dialog;
@@ -11,7 +11,7 @@ import android.support.v7.app.AlertDialog;
  * Created by mag0716 on 2017/08/27.
  */
 
-public class SampleDialog extends DialogFragment {
+public class SampleAlert extends DialogFragment {
 
     @NonNull
     @Override

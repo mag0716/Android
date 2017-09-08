@@ -16,6 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.mag0716.android_color_definition.dialog.SampleAlert;
+import com.github.mag0716.android_color_definition.dialog.SimpleConfirmationDialog;
+import com.github.mag0716.android_color_definition.dialog.SimpleDatePickerDialog;
+import com.github.mag0716.android_color_definition.dialog.SimpleTimePickerDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String KEY_THEME = "Theme";
@@ -117,8 +122,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        DialogFragment dialog = new SampleDialog();
-        dialog.show(getSupportFragmentManager(), SampleDialog.class.getSimpleName());
+        DialogFragment dialog = null;
+        switch (view.getId()) {
+            case R.id.button1:
+                dialog = new SampleAlert();
+                break;
+            case R.id.button2:
+                dialog = new SimpleConfirmationDialog();
+                dialog.setArguments(SimpleConfirmationDialog.createArguments(false));
+                break;
+            case R.id.button3:
+                dialog = new SimpleConfirmationDialog();
+                dialog.setArguments(SimpleConfirmationDialog.createArguments(true));
+                break;
+            case R.id.button4:
+                dialog = new SimpleDatePickerDialog();
+                break;
+            case R.id.button5:
+                dialog = new SimpleTimePickerDialog();
+                break;
+        }
+        if (dialog != null) {
+            dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
+        }
     }
 
     public void changeTheme(int themeIndex) {
