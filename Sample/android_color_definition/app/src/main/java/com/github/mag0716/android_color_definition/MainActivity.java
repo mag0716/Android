@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager viewPager;
-    private TabLayout tab;
+    private TabLayout tabLayout;
     private FloatingActionButton fab;
     ;
     private String currentTheme = "AppTheme";
@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         viewPager = findViewById(R.id.container);
         viewPager.setAdapter(adapter);
-        tab = findViewById(R.id.tab);
+        tabLayout = findViewById(R.id.tab);
         // デフォルトは MODE_FIXED
-        tab.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        tab.setupWithViewPager(viewPager);
-        tab.getTabAt(4).setIcon(R.drawable.ic_local_phone_24dp);
-        tab.getTabAt(5).setIcon(R.drawable.ic_local_phone_24dp);
-        tab.getTabAt(6).setIcon(R.drawable.ic_person_pin_24dp);
-        tab.getTabAt(7).setIcon(R.drawable.ic_person_pin_24dp);
+        tabLayout.setupWithViewPager(viewPager);
+        for (int i = 4; i < 8; i++) {
+            final TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+                tab.setIcon(i % 2 == 0 ? R.drawable.ic_local_phone_24dp : R.drawable.ic_person_pin_24dp);
+            }
+
+        }
     }
 
 
