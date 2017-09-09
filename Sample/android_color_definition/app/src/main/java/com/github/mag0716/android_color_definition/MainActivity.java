@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
-    ;
+
     private String currentTheme = "AppTheme";
 
     @Override
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-    }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

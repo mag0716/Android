@@ -18,7 +18,7 @@ public class SampleFragment extends Fragment {
 
     private static final String KEY_ENABLED = "enabled";
 
-    private boolean initialized = false;
+    private FragmentSampleBinding binding;
 
     public static SampleFragment newInstance(boolean isEnabled) {
         SampleFragment fragment = new SampleFragment();
@@ -38,8 +38,17 @@ public class SampleFragment extends Fragment {
                              Bundle savedInstanceState) {
         final Bundle arguments = getArguments();
 
-        FragmentSampleBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sample, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sample, container, false);
         binding.setViewModel(new SampleViewModel(arguments.getBoolean(KEY_ENABLED)));
+        binding.edittext1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean focused) {
+                binding.textInputLayout1.setErrorEnabled(!focused);
+                if (!focused) {
+                    binding.textInputLayout1.setError("Error");
+                }
+            }
+        });
         return binding.getRoot();
     }
 
@@ -54,6 +63,5 @@ public class SampleFragment extends Fragment {
         public boolean isEnabled() {
             return isEnabled;
         }
-
     }
 }
