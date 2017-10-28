@@ -7,6 +7,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
+        // Accidental Octal(0始まりで定義すると8進数として解釈されるのでNG)
+        // versionCode 08
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
