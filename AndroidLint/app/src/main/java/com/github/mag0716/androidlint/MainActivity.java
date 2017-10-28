@@ -1,10 +1,15 @@
 package com.github.mag0716.androidlint;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.github.mag0716.library.Util;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,5 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
         boolean isButton1 = Util.isButton1(findViewById(R.id.text1));
         Log.d(TAG, "Non-constant resource ID in a switch statement : " + isButton1);
+    }
+
+    private void initNotificationChannel() {
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            final List<NotificationChannel> channelList = manager.getNotificationChannels();
+            Log.d(TAG, "Calling new methods on older versions : " + channelList.size());
+        }
     }
 }

@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 /**
+ * Appcompat Custom Widgets
+ * <p>
  * Created by mag0716 on 2017/10/28.
  */
 public class CustomButton extends Button {
