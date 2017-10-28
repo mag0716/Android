@@ -6,10 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.github.mag0716.androidlint.MainActivity">
 
+    <!-- Combining Ellipsize and Maxlines https://issuetracker.google.com/issues/36950033 -->
     <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:maxLines="1"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
