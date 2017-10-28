@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".MainActivity" />
+
         <service
             android:name=".service.TestService"
             android:enabled="true"
