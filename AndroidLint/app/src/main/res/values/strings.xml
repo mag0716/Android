@@ -5,7 +5,10 @@
     <string name="cycle_resource1">@string/cycle_resource2</string>
     <string name="cycle_resource2">@string/cycle_resource1</string>
 
-    <string name="duplication_definition_resouce">Duplicate definitions of Resources</string>
+    <string name="duplication_definition_resource">Duplicate definitions of Resources</string>
+
+    <!-- Incorrect reference type -->
+    <string name="incorrect_reference_type">@layout/activity_main</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
