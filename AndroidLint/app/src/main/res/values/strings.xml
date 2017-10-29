@@ -4,4 +4,6 @@
     <!-- Cycle in resource definitions のサンプルを作成したかったが指摘されない -->
     <string name="cycle_resource1">@string/cycle_resource2</string>
     <string name="cycle_resource2">@string/cycle_resource1</string>
+
+    <string name="duplication_definition_resouce">Duplicate definitions of Resources</string>
 </resources>
