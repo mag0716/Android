@@ -31,4 +31,11 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Calling new methods on older versions : " + channelList.size());
         }
     }
+
+    // Incorrect ObjectAnimator Property のサンプル例だったが、propertyName に x,y 以外を指定しても指摘されない
+//    private void loadNgAnimator() {
+//        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.ng_animator);
+//        animator.setTarget(findViewById(R.id.text1));
+//        animator.start();
+//    }
 }
