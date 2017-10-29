@@ -34,3 +34,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':library')
 }
+
+// Incorrect Interpolation のサンプルの想定だったが、Unused Assignment で指摘される
+//def incorrectInterpolationSample() {
+//    def value = 'value'
+//    'value=${value}'
+//}
