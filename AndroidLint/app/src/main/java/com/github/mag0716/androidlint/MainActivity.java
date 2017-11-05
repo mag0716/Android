@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IntRange;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -30,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
             final List<NotificationChannel> channelList = manager.getNotificationChannels();
             Log.d(TAG, "Calling new methods on older versions : " + channelList.size());
         }
+    }
+
+    // Incorrect support annotation usage
+    private void sampleIncorrectSupportAnnotationUsage(@IntRange(from = 1, to = 0) long ngAnnotation) {
+        Log.d(TAG, "Incorrect support annotation usage : " + ngAnnotation);
     }
 
     // Incorrect ObjectAnimator Property のサンプル例だったが、propertyName に x,y 以外を指定しても指摘されない
