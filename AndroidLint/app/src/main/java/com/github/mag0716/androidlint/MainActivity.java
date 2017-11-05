@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.github.mag0716.library.Util;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
@@ -36,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     // Incorrect support annotation usage
     private void sampleIncorrectSupportAnnotationUsage(@IntRange(from = 1, to = 0) long ngAnnotation) {
         Log.d(TAG, "Incorrect support annotation usage : " + ngAnnotation);
+    }
+
+    // Invalid Analytics Name
+    private void sample() {
+        FirebaseAnalytics.getInstance(this).logEvent("-", new Bundle());
     }
 
     // Incorrect ObjectAnimator Property のサンプル例だったが、propertyName に x,y 以外を指定しても指摘されない
