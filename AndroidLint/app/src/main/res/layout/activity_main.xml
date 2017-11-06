@@ -39,4 +39,10 @@
         android:layout_height="wrap_content"
         android:text="Duplicate ids within a single layout" />
 
+    <!-- Invalid imeActionId declaration -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:imeActionId="@+id/invalid_imeActionId" />
+
 </android.support.constraint.ConstraintLayout>
