@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<restrictions xmlns:android="http://schemas.android.com/apk/res/android">
+    <restriction
+        android:key="key"
+        android:restrictionType="invalid_restrictions_type"
+        android:text="invalid restrictions descriptor"
+        android:title="title" />
+</restrictions>
