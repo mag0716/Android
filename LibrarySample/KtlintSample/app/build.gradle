@@ -30,3 +30,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+ktlint {
+    version = ""
+    debug = true
+    verbose = true
+    android = false
+    outputToConsole = true
+    reporters = ["PLAIN", "CHECKSTYLE"]
+    ignoreFailures = true
+}
