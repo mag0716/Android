@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.ReporterType
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -32,11 +34,10 @@ dependencies {
 }
 
 ktlint {
-    version = ""
+    version = "0.15.0"
     debug = true
     verbose = true
     android = false
-    outputToConsole = true
-    reporters = ["PLAIN", "CHECKSTYLE"]
+    reporter = ReporterType.CHECKSTYLE
     ignoreFailures = true
 }
