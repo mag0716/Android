@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.SpannedString
 import android.text.style.TextAppearanceSpan
+import android.view.View
 import android.widget.TextView
 import androidx.text.*
 
@@ -18,6 +19,14 @@ class MainActivity : AppCompatActivity() {
 
         textView = findViewById<TextView>(R.id.text)
         textView.text = generateSpannableStringBuilder()
+    }
+
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.button -> {
+                textView.visibility = if (textView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            }
+        }
     }
 
     private fun generateSpannableStringBuilder(): SpannedString {
