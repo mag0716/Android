@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     fun onClick(view: View) {
         when (view.id) {
             R.id.button -> {
+                // 0.1 では、isVisible, isInvisible, isGone は利用不可
                 textView.visibility = if (textView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
         }
