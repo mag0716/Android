@@ -44,8 +44,14 @@ class MainActivity : AppCompatActivity() {
         listPopup.setAdapter(ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
-                listOf("Item1", "Item2", "Item3", "Item4", "Item5")
+                resources.getStringArray(R.array.items)
         ))
+        val adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.items,
+                android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
     }
 
     override fun onPause() {

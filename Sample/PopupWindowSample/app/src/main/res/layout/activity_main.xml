@@ -35,8 +35,15 @@
         android:text="ListPopupWindow"
         app:layout_constraintBottom_toBottomOf="@id/popupButton"
         app:layout_constraintLeft_toRightOf="@id/popupButton"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/popupButton"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintRight_toLeftOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@id/popupButton" />
 
+    <Spinner
+        android:id="@id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/listPopupButton"
+        app:layout_constraintLeft_toRightOf="@id/listPopupButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/listPopupButton" />
 </android.support.constraint.ConstraintLayout>
