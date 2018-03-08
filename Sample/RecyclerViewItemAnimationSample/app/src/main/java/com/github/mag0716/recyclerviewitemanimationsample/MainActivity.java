@@ -1,6 +1,7 @@
 package com.github.mag0716.recyclerviewitemanimationsample;
 
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ObjectAnimator animator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +26,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new Adapter(this, 100));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        initAnimator();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (animator != null) {
-            animator.start();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (animator != null) {
-            animator.cancel();
-        }
-    }
-
-    private void initAnimator() {
-//        animator = ObjectAnimator.ofPropertyValuesHolder(icon,
-//                PropertyValuesHolder.ofFloat("scaleX", 3f),
-//                PropertyValuesHolder.ofFloat("scaleY", 3f));
-//        animator.setDuration(5000);
-//        animator.setRepeatCount(ObjectAnimator.INFINITE);
     }
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
@@ -71,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.text.setText("Text" + position);
+
+            holder.initAnimator();
+            holder.startAnimation();
+        }
+
+        @Override
+        public void onViewAttachedToWindow(ViewHolder holder) {
+            super.onViewAttachedToWindow(holder);
+            holder.startAnimation();
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(ViewHolder holder) {
+            super.onViewDetachedFromWindow(holder);
+            holder.stopAnimation();
         }
 
         @Override
@@ -82,12 +72,36 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView icon;
             TextView text;
+            private ObjectAnimator animator;
 
             public ViewHolder(View itemView) {
                 super(itemView);
+
                 icon = itemView.findViewById(R.id.icon);
                 text = itemView.findViewById(R.id.text);
             }
+
+            public void initAnimator() {
+                animator = ObjectAnimator.ofPropertyValuesHolder(icon,
+                        PropertyValuesHolder.ofFloat("scaleX", 2f),
+                        PropertyValuesHolder.ofFloat("scaleY", 2f));
+                animator.setDuration(5000);
+                animator.setRepeatCount(ObjectAnimator.INFINITE);
+            }
+
+            public void startAnimation() {
+                if (animator != null && !animator.isRunning()) {
+                    animator.start();
+                }
+            }
+
+            public void stopAnimation() {
+                if (animator != null && animator.isRunning()) {
+                    animator.cancel();
+                    icon.setAnimation(null);
+                }
+            }
+
         }
     }
 }
