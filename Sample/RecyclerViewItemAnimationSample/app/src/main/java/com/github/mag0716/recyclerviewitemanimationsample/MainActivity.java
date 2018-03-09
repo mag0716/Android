@@ -24,8 +24,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new Adapter(this, 100));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new PreCacheLayoutManager(this));
 
+    }
+
+    private class PreCacheLayoutManager extends LinearLayoutManager {
+
+        public PreCacheLayoutManager(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected int getExtraLayoutSpace(RecyclerView.State state) {
+            return 1000;
+        }
     }
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
