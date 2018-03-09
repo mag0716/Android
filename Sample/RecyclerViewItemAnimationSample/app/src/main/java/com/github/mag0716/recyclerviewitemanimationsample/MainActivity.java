@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void startAnimation() {
+                stopAnimation();
                 if (animator != null && !animator.isRunning()) {
                     animator.start();
                 }
@@ -100,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
                     animator.cancel();
                     icon.setAnimation(null);
                 }
+                // reset size
+                icon.setScaleX(1);
+                icon.setScaleY(1);
             }
 
         }
