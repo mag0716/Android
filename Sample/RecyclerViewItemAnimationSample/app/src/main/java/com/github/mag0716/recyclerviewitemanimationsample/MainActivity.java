@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+            Log.d("xxx", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
+            holder.icon.setTag(position);
 
             holder.initAnimator();
             holder.startAnimation();
@@ -66,12 +69,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onViewAttachedToWindow(ViewHolder holder) {
             super.onViewAttachedToWindow(holder);
+            Log.d("xxx", "onViewAttachedToWindow : " + holder.icon.getTag());
             holder.startAnimation();
         }
 
         @Override
         public void onViewDetachedFromWindow(ViewHolder holder) {
             super.onViewDetachedFromWindow(holder);
+            Log.d("xxx", "onViewDetachedFromWindow : " + holder.icon.getTag());
             holder.stopAnimation();
         }
 
