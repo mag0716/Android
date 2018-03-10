@@ -1,7 +1,6 @@
 package com.github.mag0716.recyclerviewitemanimationsample;
 
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             inflater = LayoutInflater.from(context);
             this.size = size;
 
-            disposable = Observable.interval(0, 5, TimeUnit.SECONDS)
+            disposable = Observable.interval(0, AnimationHelper.DURATION, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aLong -> animationTimer.onNext(aLong));
         }
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             holder.icon.setTag(position);
             holder.animationIcon.setAnimationTimer(animationTimer);
 
-            holder.initAnimator();
             holder.startAnimation();
         }
 
@@ -120,14 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 icon = itemView.findViewById(R.id.icon);
                 animationIcon = itemView.findViewById(R.id.icon2);
                 text = itemView.findViewById(R.id.text);
-            }
-
-            public void initAnimator() {
-                animator = ObjectAnimator.ofPropertyValuesHolder(icon,
-                        PropertyValuesHolder.ofFloat("scaleX", 2f),
-                        PropertyValuesHolder.ofFloat("scaleY", 2f));
-                animator.setDuration(5000);
-                animator.setRepeatCount(ObjectAnimator.INFINITE);
+                animator = AnimationHelper.createAnimator(icon);
             }
 
             public void startAnimation() {
@@ -142,9 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     animator.cancel();
                     icon.setAnimation(null);
                 }
-                // reset size
-                icon.setScaleX(1);
-                icon.setScaleY(1);
+                AnimationHelper.clearAnimation(icon);
             }
 
         }

@@ -1,7 +1,6 @@
 package com.github.mag0716.recyclerviewitemanimationsample;
 
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -62,10 +61,7 @@ public class AnimationImageView extends AppCompatImageView {
 
 
     private void initAnimator() {
-        animator = ObjectAnimator.ofPropertyValuesHolder(this,
-                PropertyValuesHolder.ofFloat("scaleX", 2f),
-                PropertyValuesHolder.ofFloat("scaleY", 2f));
-        animator.setDuration(5000);
+        animator = AnimationHelper.createAnimator(this);
     }
 
     private void startAnimation() {
@@ -79,8 +75,6 @@ public class AnimationImageView extends AppCompatImageView {
         if (animator != null && animator.isRunning()) {
             animator.cancel();
         }
-        // reset size
-        setScaleX(1);
-        setScaleY(1);
+        AnimationHelper.clearAnimation(this);
     }
 }
