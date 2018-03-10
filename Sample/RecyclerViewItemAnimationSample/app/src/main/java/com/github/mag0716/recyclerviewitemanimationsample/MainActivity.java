@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 icon = itemView.findViewById(R.id.icon);
                 animationIcon = itemView.findViewById(R.id.icon2);
                 text = itemView.findViewById(R.id.text);
-                animator = AnimationHelper.createAnimator(icon);
+                animator = AnimationHelper.createAnimator(icon, true);
             }
 
             public void startAnimation() {

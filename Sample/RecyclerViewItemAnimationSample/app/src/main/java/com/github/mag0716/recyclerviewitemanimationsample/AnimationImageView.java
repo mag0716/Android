@@ -61,7 +61,7 @@ public class AnimationImageView extends AppCompatImageView {
 
 
     private void initAnimator() {
-        animator = AnimationHelper.createAnimator(this);
+        animator = AnimationHelper.createAnimator(this, false);
     }
 
     private void startAnimation() {
