@@ -15,6 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -45,10 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
         private final LayoutInflater inflater;
         private final int size;
+        private PublishSubject<Long> animationTimer = PublishSubject.create();
+        private Disposable disposable;
 
         public Adapter(@NonNull Context context, int size) {
             inflater = LayoutInflater.from(context);
             this.size = size;
+
+            disposable = Observable.interval(0, 5, TimeUnit.SECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aLong -> animationTimer.onNext(aLong));
         }
 
         @Override
@@ -57,10 +70,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
+        public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+            super.onDetachedFromRecyclerView(recyclerView);
+            if (disposable != null) {
+                disposable.dispose();
+            }
+        }
+
+        @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Log.d("xxx", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
             holder.icon.setTag(position);
+            holder.animationIcon.setAnimationTimer(animationTimer);
 
             holder.initAnimator();
             holder.startAnimation();
@@ -88,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
 
             ImageView icon;
+            AnimationImageView animationIcon;
             TextView text;
             private ObjectAnimator animator;
 
@@ -95,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 super(itemView);
 
                 icon = itemView.findViewById(R.id.icon);
+                animationIcon = itemView.findViewById(R.id.icon2);
                 text = itemView.findViewById(R.id.text);
             }
 

@@ -3,9 +3,14 @@ package com.github.mag0716.recyclerviewitemanimationsample;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by mag0716 on 2018/03/10.
@@ -14,6 +19,8 @@ import android.util.AttributeSet;
 public class AnimationImageView extends AppCompatImageView {
 
     private ObjectAnimator animator;
+    private Disposable disposable;
+    private PublishSubject<Long> animationTimer;
 
     public AnimationImageView(Context context) {
         super(context);
@@ -30,16 +37,27 @@ public class AnimationImageView extends AppCompatImageView {
         initAnimator();
     }
 
+    public void setAnimationTimer(@NonNull PublishSubject<Long> animationTimer) {
+        this.animationTimer = animationTimer;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        startAnimation();
+        if (animationTimer != null) {
+            disposable = animationTimer
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnDispose(this::stopAnimation)
+                    .subscribe(aLong -> startAnimation());
+        }
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        stopAnimation();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 
 
@@ -48,7 +66,6 @@ public class AnimationImageView extends AppCompatImageView {
                 PropertyValuesHolder.ofFloat("scaleX", 2f),
                 PropertyValuesHolder.ofFloat("scaleY", 2f));
         animator.setDuration(5000);
-        animator.setRepeatCount(ObjectAnimator.INFINITE);
     }
 
     private void startAnimation() {
