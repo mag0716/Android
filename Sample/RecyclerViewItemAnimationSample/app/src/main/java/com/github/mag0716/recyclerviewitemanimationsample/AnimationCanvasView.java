@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 /**
@@ -18,6 +19,7 @@ public class AnimationCanvasView extends View {
 
     private Paint paint = new Paint();
     private Bitmap bitmap;
+    private float offset;
 
     public AnimationCanvasView(Context context) {
         super(context);
@@ -38,10 +40,12 @@ public class AnimationCanvasView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawBitmap(bitmap, 0, 0, paint);
+        canvas.drawBitmap(bitmap, offset, offset, paint);
     }
 
     private void init(@NonNull Context context) {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        offset = 24 * metrics.density;
     }
 }
