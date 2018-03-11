@@ -24,6 +24,7 @@ import io.reactivex.subjects.PublishSubject;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private long startTime = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new Adapter(this, 100));
         recyclerView.setLayoutManager(new PreCacheLayoutManager(this));
-
     }
 
     private class PreCacheLayoutManager extends LinearLayoutManager {
@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d("xxx", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
             holder.icon.setTag(position);
+            holder.canvasIcon.setTag(position);
             holder.animationIcon.setAnimationTimer(animationTimer);
+            holder.canvasIcon.setStartTime(startTime);
 
             holder.startAnimation();
         }
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView icon;
             AnimationImageView animationIcon;
+            AnimationCanvasView canvasIcon;
             TextView text;
             private ObjectAnimator animator;
 
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
                 icon = itemView.findViewById(R.id.icon);
                 animationIcon = itemView.findViewById(R.id.icon2);
+                canvasIcon = itemView.findViewById(R.id.icon3);
                 text = itemView.findViewById(R.id.text);
                 animator = AnimationHelper.createAnimator(icon, true);
             }
