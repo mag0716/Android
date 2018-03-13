@@ -13,11 +13,13 @@ import android.view.View;
 public class AnimationHelper {
 
     public static final long DURATION = 5000;
+    public static final float MAX_WIDTH = 2f;
+    public static final float MAX_HEIGHT = 2f;
 
     public static ObjectAnimator createAnimator(@NonNull View view, boolean isLoopAnimation) {
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view,
-                PropertyValuesHolder.ofFloat("scaleX", 2f),
-                PropertyValuesHolder.ofFloat("scaleY", 2f));
+                PropertyValuesHolder.ofFloat("scaleX", MAX_WIDTH),
+                PropertyValuesHolder.ofFloat("scaleY", MAX_HEIGHT));
         animator.setDuration(DURATION);
         if (isLoopAnimation) {
             animator.setRepeatCount(ValueAnimator.INFINITE);

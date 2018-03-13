@@ -23,8 +23,6 @@ public class AnimationCanvasView extends View {
     private RectF rect = new RectF();
     private Bitmap bitmap;
     private int bitmapSize;
-    private float density;
-    private float offset;
 
     private long startTime;
     private long duration;
@@ -64,14 +62,15 @@ public class AnimationCanvasView extends View {
     private void init(@NonNull Context context) {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
         bitmapSize = bitmap.getWidth();
-        density = context.getResources().getDisplayMetrics().density;
 
         duration = AnimationHelper.DURATION;
     }
 
     private void calculateRect(float scale) {
-        // TODO: apply position
-        rect.right = bitmapSize * scale;
-        rect.bottom = bitmapSize * scale;
+        float size = bitmapSize * scale;
+        rect.left = (2 * bitmapSize - size) / 2;
+        rect.top = (2 * bitmapSize - size) / 2;
+        rect.right = rect.left + size;
+        rect.bottom = rect.top + size;
     }
 }
