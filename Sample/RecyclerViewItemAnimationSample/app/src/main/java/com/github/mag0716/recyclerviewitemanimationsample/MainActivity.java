@@ -43,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected int getExtraLayoutSpace(RecyclerView.State state) {
-            return 1000;
+            return super.getExtraLayoutSpace(state);
+            //return 1000;
         }
     }
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+
+        private final long baseTime = System.currentTimeMillis();
 
         private final LayoutInflater inflater;
         private final int size;
@@ -128,7 +131,10 @@ public class MainActivity extends AppCompatActivity {
             public void startAnimation() {
                 stopAnimation();
                 if (animator != null && !animator.isRunning()) {
+                    long diff = System.currentTimeMillis() - baseTime;
+                    long startTime = diff % animator.getDuration();
                     animator.start();
+                    animator.setCurrentPlayTime(startTime);
                 }
             }
 
@@ -139,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 AnimationHelper.clearAnimation(icon);
             }
-
         }
     }
 }
