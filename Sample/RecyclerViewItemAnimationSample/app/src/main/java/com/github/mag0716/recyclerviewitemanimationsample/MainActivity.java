@@ -1,22 +1,30 @@
 package com.github.mag0716.recyclerviewitemanimationsample;
 
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private long startTime = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +32,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new Adapter(this, 100));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new PreCacheLayoutManager(this));
+    }
 
+    private class PreCacheLayoutManager extends LinearLayoutManager {
+
+        public PreCacheLayoutManager(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected int getExtraLayoutSpace(RecyclerView.State state) {
+            return super.getExtraLayoutSpace(state);
+            //return 1000;
+        }
     }
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
+        private final long baseTime = System.currentTimeMillis();
+
         private final LayoutInflater inflater;
         private final int size;
+        private PublishSubject<Long> animationTimer = PublishSubject.create();
+        private Disposable disposable;
 
         public Adapter(@NonNull Context context, int size) {
             inflater = LayoutInflater.from(context);
             this.size = size;
+
+            disposable = Observable.interval(0, AnimationHelper.DURATION, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aLong -> animationTimer.onNext(aLong));
         }
 
         @Override
@@ -44,22 +72,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.text.setText("Text" + position);
+        public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+            super.onDetachedFromRecyclerView(recyclerView);
+            if (disposable != null) {
+                disposable.dispose();
+            }
+        }
 
-            holder.initAnimator();
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            Log.d("xxx", "onBindViewHolder : " + position);
+            holder.text.setText("Text" + position);
+            holder.icon.setTag(position);
+            holder.canvasIcon.setTag(position);
+            holder.animationIcon.setAnimationTimer(animationTimer);
+            holder.canvasIcon.setStartTime(startTime);
+
             holder.startAnimation();
         }
 
         @Override
         public void onViewAttachedToWindow(ViewHolder holder) {
             super.onViewAttachedToWindow(holder);
+            Log.d("xxx", "onViewAttachedToWindow : " + holder.icon.getTag());
             holder.startAnimation();
         }
 
         @Override
         public void onViewDetachedFromWindow(ViewHolder holder) {
             super.onViewDetachedFromWindow(holder);
+            Log.d("xxx", "onViewDetachedFromWindow : " + holder.icon.getTag());
             holder.stopAnimation();
         }
 
@@ -71,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
 
             ImageView icon;
+            AnimationImageView animationIcon;
+            AnimationCanvasView canvasIcon;
             TextView text;
             private ObjectAnimator animator;
 
@@ -78,20 +122,19 @@ public class MainActivity extends AppCompatActivity {
                 super(itemView);
 
                 icon = itemView.findViewById(R.id.icon);
+                animationIcon = itemView.findViewById(R.id.icon2);
+                canvasIcon = itemView.findViewById(R.id.icon3);
                 text = itemView.findViewById(R.id.text);
-            }
-
-            public void initAnimator() {
-                animator = ObjectAnimator.ofPropertyValuesHolder(icon,
-                        PropertyValuesHolder.ofFloat("scaleX", 2f),
-                        PropertyValuesHolder.ofFloat("scaleY", 2f));
-                animator.setDuration(5000);
-                animator.setRepeatCount(ObjectAnimator.INFINITE);
+                animator = AnimationHelper.createAnimator(icon, true);
             }
 
             public void startAnimation() {
+                stopAnimation();
                 if (animator != null && !animator.isRunning()) {
+                    long diff = System.currentTimeMillis() - baseTime;
+                    long startTime = diff % animator.getDuration();
                     animator.start();
+                    animator.setCurrentPlayTime(startTime);
                 }
             }
 
@@ -100,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
                     animator.cancel();
                     icon.setAnimation(null);
                 }
+                AnimationHelper.clearAnimation(icon);
             }
-
         }
     }
 }
