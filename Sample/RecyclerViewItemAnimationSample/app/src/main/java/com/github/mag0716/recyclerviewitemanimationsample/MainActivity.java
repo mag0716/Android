@@ -1,6 +1,7 @@
 package com.github.mag0716.recyclerviewitemanimationsample;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new Adapter(this, 100));
         recyclerView.setLayoutManager(new PreCacheLayoutManager(this));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        recyclerView.setAdapter(null);
     }
 
     private class PreCacheLayoutManager extends LinearLayoutManager {
@@ -81,12 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Log.d("xxx", "onBindViewHolder : " + position);
+            Log.d("Sample", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
             holder.icon.setTag(position);
             holder.canvasIcon.setTag(position);
-            holder.animationIcon.setAnimationTimer(animationTimer);
             holder.canvasIcon.setStartTime(startTime);
+            holder.animationIcon.setTag(position);
+            holder.animationIcon.setAnimationTimer(animationTimer);
 
             holder.startAnimation();
         }
@@ -94,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onViewAttachedToWindow(ViewHolder holder) {
             super.onViewAttachedToWindow(holder);
-            Log.d("xxx", "onViewAttachedToWindow : " + holder.icon.getTag());
+            Log.d("Sample", "onViewAttachedToWindow : " + holder.text.getText());
             holder.startAnimation();
         }
 
         @Override
         public void onViewDetachedFromWindow(ViewHolder holder) {
             super.onViewDetachedFromWindow(holder);
-            Log.d("xxx", "onViewDetachedFromWindow : " + holder.icon.getTag());
+            Log.d("Sample", "onViewDetachedFromWindow : " + holder.text.getText());
             holder.stopAnimation();
         }
 
@@ -110,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             return size;
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder {
+        class ViewHolder extends RecyclerView.ViewHolder implements ValueAnimator.AnimatorUpdateListener {
 
             ImageView icon;
             AnimationImageView animationIcon;
@@ -129,21 +137,32 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void startAnimation() {
+                Log.d("Sample-ValueAnimator#" + icon.getTag(), "startAnimation");
                 stopAnimation();
                 if (animator != null && !animator.isRunning()) {
                     long diff = System.currentTimeMillis() - baseTime;
                     long startTime = diff % animator.getDuration();
+                    animator.addUpdateListener(this);
                     animator.start();
                     animator.setCurrentPlayTime(startTime);
                 }
             }
 
             public void stopAnimation() {
+                Log.d("Sample-ValueAnimator#" + icon.getTag(), "stopAnimation");
                 if (animator != null && animator.isRunning()) {
+                    animator.removeUpdateListener(this);
                     animator.cancel();
                     icon.setAnimation(null);
                 }
                 AnimationHelper.clearAnimation(icon);
+            }
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // 調査用のログ
+                // 画面を終了しても、removeUpdateListener がされてない
+                Log.d("Sample-ValueAnimator#" + icon.getTag(), "value = " + (float) animation.getAnimatedValue());
             }
         }
     }

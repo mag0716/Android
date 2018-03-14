@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -49,6 +50,7 @@ public class AnimationCanvasView extends View {
         long diff = System.currentTimeMillis() - startTime;
         float scale = 1f + ((float) (diff % duration) / (float) duration);
         calculateRect(scale);
+        Log.d("Sample-Canvas#" + getTag(), "onDraw : scale = " + scale);
 
         canvas.drawBitmap(bitmap, null, rect, paint);
 
