@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
             holder.icon.setTag(position);
             holder.canvasIcon.setTag(position);
             holder.canvasIcon.setStartTime(startTime);
-            holder.animationIcon.setTag(position);
-            holder.animationIcon.setAnimationTimer(animationTimer);
 
             holder.startAnimation();
         }
@@ -121,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder implements ValueAnimator.AnimatorUpdateListener {
 
             ImageView icon;
-            AnimationImageView animationIcon;
             AnimationCanvasView canvasIcon;
             TextView text;
             private ObjectAnimator animator;
@@ -130,8 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 super(itemView);
 
                 icon = itemView.findViewById(R.id.icon);
-                animationIcon = itemView.findViewById(R.id.icon2);
-                canvasIcon = itemView.findViewById(R.id.icon3);
+                canvasIcon = itemView.findViewById(R.id.icon2);
                 text = itemView.findViewById(R.id.text);
                 animator = AnimationHelper.createAnimator(icon, true);
             }
