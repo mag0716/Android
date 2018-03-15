@@ -33,26 +33,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new Adapter(this, 100));
-        recyclerView.setLayoutManager(new PreCacheLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         recyclerView.setAdapter(null);
-    }
-
-    private class PreCacheLayoutManager extends LinearLayoutManager {
-
-        public PreCacheLayoutManager(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected int getExtraLayoutSpace(RecyclerView.State state) {
-            return super.getExtraLayoutSpace(state);
-            //return 1000;
-        }
     }
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
