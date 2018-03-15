@@ -62,7 +62,7 @@ public class AnimationCanvasView extends View {
     }
 
     private void init(@NonNull Context context) {
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.sample);
         bitmapSize = bitmap.getWidth();
 
         duration = AnimationHelper.DURATION;
