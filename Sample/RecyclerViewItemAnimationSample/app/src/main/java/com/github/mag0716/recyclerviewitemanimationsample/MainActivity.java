@@ -25,6 +25,7 @@ import io.reactivex.subjects.PublishSubject;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private Adapter adapter;
     private long startTime = System.currentTimeMillis();
 
     @Override
@@ -32,8 +33,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(new Adapter(this, 100));
+        adapter = new Adapter(this, 100);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.startAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.stopAnimation();
     }
 
     @Override
@@ -48,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         private final LayoutInflater inflater;
         private final int size;
+        private final ValueAnimator valueAnimator = ValueAnimator.ofFloat(1f, 2f).setDuration(AnimationHelper.DURATION);
         private PublishSubject<Long> animationTimer = PublishSubject.create();
         private Disposable disposable;
 
@@ -58,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             disposable = Observable.interval(0, AnimationHelper.DURATION, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aLong -> animationTimer.onNext(aLong));
+            valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         }
 
         @Override
@@ -71,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
             if (disposable != null) {
                 disposable.dispose();
             }
+            valueAnimator.cancel();
+            valueAnimator.removeAllUpdateListeners();
         }
 
         @Override
@@ -80,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             holder.icon.setTag(position);
             holder.canvasIcon.setTag(position);
             holder.canvasIcon.setStartTime(startTime);
+            holder.shareValueAnimatorIcon.setTag(position);
+            holder.shareValueAnimatorIcon.attachValueAnimator(valueAnimator);
 
             holder.startAnimation();
         }
@@ -103,10 +123,19 @@ public class MainActivity extends AppCompatActivity {
             return size;
         }
 
+        public void startAnimation() {
+            valueAnimator.start();
+        }
+
+        public void stopAnimation() {
+            valueAnimator.cancel();
+        }
+
         class ViewHolder extends RecyclerView.ViewHolder implements ValueAnimator.AnimatorUpdateListener {
 
             ImageView icon;
             AnimationCanvasView canvasIcon;
+            ShareValueAnimatorImageView shareValueAnimatorIcon;
             TextView text;
             private ObjectAnimator animator;
 
@@ -115,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
                 icon = itemView.findViewById(R.id.icon);
                 canvasIcon = itemView.findViewById(R.id.icon2);
+                shareValueAnimatorIcon = itemView.findViewById(R.id.icon3);
                 text = itemView.findViewById(R.id.text);
                 animator = AnimationHelper.createAnimator(icon, true);
             }
