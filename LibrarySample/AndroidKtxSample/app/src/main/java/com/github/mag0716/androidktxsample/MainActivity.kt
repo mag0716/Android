@@ -57,6 +57,12 @@ class MainActivity : AppCompatActivity() {
             inSpans(TextAppearanceSpan(this@MainActivity, R.style.CustomTextAppearance)) {
                 append("custom text appearance\n")
             }
+            strikeThrough {
+                append("strike through text\n")
+            }
+            scale(2f) {
+                append("scale text\n")
+            }
         }
     }
 
