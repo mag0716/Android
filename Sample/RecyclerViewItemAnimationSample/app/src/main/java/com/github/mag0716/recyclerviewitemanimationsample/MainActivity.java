@@ -134,48 +134,59 @@ public class MainActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder implements ValueAnimator.AnimatorUpdateListener {
 
             ImageView icon;
+            ImageView valueAnimatorWithCurrentPlayTimeIcon;
             AnimationCanvasView canvasIcon;
             ShareValueAnimatorImageView shareValueAnimatorIcon;
             TextView text;
             private ObjectAnimator animator;
+            private ObjectAnimator animatorWithCurrentPlayztime;
 
             public ViewHolder(View itemView) {
                 super(itemView);
 
                 icon = itemView.findViewById(R.id.icon);
+                valueAnimatorWithCurrentPlayTimeIcon = itemView.findViewById(R.id.icon1);
                 canvasIcon = itemView.findViewById(R.id.icon2);
                 shareValueAnimatorIcon = itemView.findViewById(R.id.icon3);
                 text = itemView.findViewById(R.id.text);
                 animator = AnimationHelper.createAnimator(icon, true);
+                animatorWithCurrentPlayztime = AnimationHelper.createAnimator(valueAnimatorWithCurrentPlayTimeIcon, true);
             }
 
             public void startAnimation() {
-                Log.d("Sample-ValueAnimator#" + icon.getTag(), "startAnimation");
+                Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "startAnimation");
                 stopAnimation();
                 if (animator != null && !animator.isRunning()) {
-                    long diff = System.currentTimeMillis() - baseTime;
-                    long startTime = diff % animator.getDuration();
-                    animator.addUpdateListener(this);
                     animator.start();
-                    animator.setCurrentPlayTime(startTime);
+                }
+                if (animatorWithCurrentPlayztime != null && !animatorWithCurrentPlayztime.isRunning()) {
+                    long diff = System.currentTimeMillis() - baseTime;
+                    long startTime = diff % animatorWithCurrentPlayztime.getDuration();
+                    animatorWithCurrentPlayztime.addUpdateListener(this);
+                    animatorWithCurrentPlayztime.start();
+                    animatorWithCurrentPlayztime.setCurrentPlayTime(startTime);
                 }
             }
 
             public void stopAnimation() {
-                Log.d("Sample-ValueAnimator#" + icon.getTag(), "stopAnimation");
+                Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "stopAnimation");
                 if (animator != null && animator.isRunning()) {
-                    animator.removeUpdateListener(this);
                     animator.cancel();
-                    icon.setAnimation(null);
                 }
                 AnimationHelper.clearAnimation(icon);
+                if (animatorWithCurrentPlayztime != null && animatorWithCurrentPlayztime.isRunning()) {
+                    animatorWithCurrentPlayztime.removeUpdateListener(this);
+                    animatorWithCurrentPlayztime.cancel();
+                    valueAnimatorWithCurrentPlayTimeIcon.setAnimation(null);
+                }
+                AnimationHelper.clearAnimation(valueAnimatorWithCurrentPlayTimeIcon);
             }
 
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 // 調査用のログ
                 // 画面を終了しても、removeUpdateListener がされてない
-                Log.d("Sample-ValueAnimator#" + icon.getTag(), "value = " + (float) animation.getAnimatedValue());
+                Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "value = " + (float) animation.getAnimatedValue());
             }
         }
     }
