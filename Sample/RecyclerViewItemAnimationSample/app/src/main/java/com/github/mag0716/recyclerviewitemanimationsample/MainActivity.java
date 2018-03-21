@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Sample", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
             holder.icon.setTag(position);
-            holder.animatorWithCurrentPlayTime.setTarget(position);
+            holder.valueAnimatorWithCurrentPlayTimeIcon.setTag(position);
             holder.canvasIcon.setTag(position);
             holder.canvasIcon.setStartTime(startTime);
             holder.shareValueAnimatorIcon.setTag(position);
@@ -157,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void startAnimation() {
-                Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "startAnimation");
                 stopAnimation();
                 if (animator != null && !animator.isRunning()) {
                     animator.start();
@@ -167,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                     long startTime = diff % animatorWithCurrentPlayTime.getDuration();
                     animatorWithCurrentPlayTime.addUpdateListener(this);
                     animatorWithCurrentPlayTime.start();
+                    Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "startAnimation : baseTime = " + baseTime + " diff = " + diff + ", " + startTime);
                     animatorWithCurrentPlayTime.setCurrentPlayTime(startTime);
                 }
             }
