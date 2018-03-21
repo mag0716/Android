@@ -9,27 +9,36 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/sample"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.mag0716.recyclerviewitemanimationsample.AnimationImageView
-        android:id="@+id/icon2"
+    <ImageView
+        android:id="@+id/icon1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/sample"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.mag0716.recyclerviewitemanimationsample.AnimationCanvasView
-        android:id="@+id/icon3"
+        android:id="@+id/icon2"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginStart="-8dp"
         android:layout_marginTop="-24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.github.mag0716.recyclerviewitemanimationsample.ShareValueAnimatorImageView
+        android:id="@+id/icon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sample"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon2"
         app:layout_constraintTop_toTopOf="parent" />

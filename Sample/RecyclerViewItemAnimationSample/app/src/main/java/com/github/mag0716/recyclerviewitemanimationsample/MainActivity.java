@@ -1,10 +1,12 @@
 package com.github.mag0716.recyclerviewitemanimationsample;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +26,7 @@ import io.reactivex.subjects.PublishSubject;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private Adapter adapter;
     private long startTime = System.currentTimeMillis();
 
     @Override
@@ -31,21 +34,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(new Adapter(this, 100));
-        recyclerView.setLayoutManager(new PreCacheLayoutManager(this));
+        adapter = new Adapter(this, 100);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
-    private class PreCacheLayoutManager extends LinearLayoutManager {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.startAnimation();
+    }
 
-        public PreCacheLayoutManager(Context context) {
-            super(context);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.stopAnimation();
+    }
 
-        @Override
-        protected int getExtraLayoutSpace(RecyclerView.State state) {
-            return super.getExtraLayoutSpace(state);
-            //return 1000;
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        recyclerView.setAdapter(null);
     }
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
@@ -54,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         private final LayoutInflater inflater;
         private final int size;
+        private final ValueAnimator valueAnimator = ValueAnimator.ofFloat(1f, 2f).setDuration(AnimationHelper.DURATION);
         private PublishSubject<Long> animationTimer = PublishSubject.create();
         private Disposable disposable;
 
@@ -64,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             disposable = Observable.interval(0, AnimationHelper.DURATION, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aLong -> animationTimer.onNext(aLong));
+            valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         }
 
         @Override
@@ -77,16 +89,20 @@ public class MainActivity extends AppCompatActivity {
             if (disposable != null) {
                 disposable.dispose();
             }
+            valueAnimator.cancel();
+            valueAnimator.removeAllUpdateListeners();
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Log.d("xxx", "onBindViewHolder : " + position);
+            Log.d("Sample", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
             holder.icon.setTag(position);
+            holder.valueAnimatorWithCurrentPlayTimeIcon.setTag(position);
             holder.canvasIcon.setTag(position);
-            holder.animationIcon.setAnimationTimer(animationTimer);
             holder.canvasIcon.setStartTime(startTime);
+            holder.shareValueAnimatorIcon.setTag(position);
+            holder.shareValueAnimatorIcon.attachValueAnimator(valueAnimator);
 
             holder.startAnimation();
         }
@@ -94,14 +110,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onViewAttachedToWindow(ViewHolder holder) {
             super.onViewAttachedToWindow(holder);
-            Log.d("xxx", "onViewAttachedToWindow : " + holder.icon.getTag());
+            Log.d("Sample", "onViewAttachedToWindow : " + holder.text.getText());
             holder.startAnimation();
         }
 
         @Override
         public void onViewDetachedFromWindow(ViewHolder holder) {
             super.onViewDetachedFromWindow(holder);
-            Log.d("xxx", "onViewDetachedFromWindow : " + holder.icon.getTag());
+            Log.d("Sample", "onViewDetachedFromWindow : " + holder.text.getText());
             holder.stopAnimation();
         }
 
@@ -110,40 +126,70 @@ public class MainActivity extends AppCompatActivity {
             return size;
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder {
+        public void startAnimation() {
+            valueAnimator.start();
+        }
+
+        public void stopAnimation() {
+            valueAnimator.cancel();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder implements ValueAnimator.AnimatorUpdateListener {
 
             ImageView icon;
-            AnimationImageView animationIcon;
+            ImageView valueAnimatorWithCurrentPlayTimeIcon;
             AnimationCanvasView canvasIcon;
+            ShareValueAnimatorImageView shareValueAnimatorIcon;
             TextView text;
             private ObjectAnimator animator;
+            private ObjectAnimator animatorWithCurrentPlayTime;
 
             public ViewHolder(View itemView) {
                 super(itemView);
 
                 icon = itemView.findViewById(R.id.icon);
-                animationIcon = itemView.findViewById(R.id.icon2);
-                canvasIcon = itemView.findViewById(R.id.icon3);
+                valueAnimatorWithCurrentPlayTimeIcon = itemView.findViewById(R.id.icon1);
+                canvasIcon = itemView.findViewById(R.id.icon2);
+                shareValueAnimatorIcon = itemView.findViewById(R.id.icon3);
                 text = itemView.findViewById(R.id.text);
                 animator = AnimationHelper.createAnimator(icon, true);
+                animatorWithCurrentPlayTime = AnimationHelper.createAnimator(valueAnimatorWithCurrentPlayTimeIcon, true);
             }
 
             public void startAnimation() {
                 stopAnimation();
                 if (animator != null && !animator.isRunning()) {
-                    long diff = System.currentTimeMillis() - baseTime;
-                    long startTime = diff % animator.getDuration();
                     animator.start();
-                    animator.setCurrentPlayTime(startTime);
+                }
+                if (animatorWithCurrentPlayTime != null && !animatorWithCurrentPlayTime.isRunning()) {
+                    long diff = System.currentTimeMillis() - baseTime;
+                    long startTime = diff % animatorWithCurrentPlayTime.getDuration();
+                    animatorWithCurrentPlayTime.addUpdateListener(this);
+                    animatorWithCurrentPlayTime.start();
+                    Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "startAnimation : baseTime = " + baseTime + " diff = " + diff + ", " + startTime);
+                    animatorWithCurrentPlayTime.setCurrentPlayTime(startTime);
                 }
             }
 
             public void stopAnimation() {
+                Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "stopAnimation");
                 if (animator != null && animator.isRunning()) {
                     animator.cancel();
-                    icon.setAnimation(null);
                 }
                 AnimationHelper.clearAnimation(icon);
+                if (animatorWithCurrentPlayTime != null && animatorWithCurrentPlayTime.isRunning()) {
+                    animatorWithCurrentPlayTime.removeUpdateListener(this);
+                    animatorWithCurrentPlayTime.cancel();
+                    valueAnimatorWithCurrentPlayTimeIcon.setAnimation(null);
+                }
+                AnimationHelper.clearAnimation(valueAnimatorWithCurrentPlayTimeIcon);
+            }
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // 調査用のログ
+                // 画面を終了しても、removeUpdateListener がされてない
+                Log.d("Sample-ValueAnimator#" + valueAnimatorWithCurrentPlayTimeIcon.getTag(), "value = " + (float) animation.getAnimatedValue());
             }
         }
     }
