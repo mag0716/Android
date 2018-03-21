@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Sample", "onBindViewHolder : " + position);
             holder.text.setText("Text" + position);
             holder.icon.setTag(position);
+            holder.animatorWithCurrentPlayTime.setTarget(position);
             holder.canvasIcon.setTag(position);
             holder.canvasIcon.setStartTime(startTime);
             holder.shareValueAnimatorIcon.setTag(position);
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             ShareValueAnimatorImageView shareValueAnimatorIcon;
             TextView text;
             private ObjectAnimator animator;
-            private ObjectAnimator animatorWithCurrentPlayztime;
+            private ObjectAnimator animatorWithCurrentPlayTime;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 shareValueAnimatorIcon = itemView.findViewById(R.id.icon3);
                 text = itemView.findViewById(R.id.text);
                 animator = AnimationHelper.createAnimator(icon, true);
-                animatorWithCurrentPlayztime = AnimationHelper.createAnimator(valueAnimatorWithCurrentPlayTimeIcon, true);
+                animatorWithCurrentPlayTime = AnimationHelper.createAnimator(valueAnimatorWithCurrentPlayTimeIcon, true);
             }
 
             public void startAnimation() {
@@ -161,12 +162,12 @@ public class MainActivity extends AppCompatActivity {
                 if (animator != null && !animator.isRunning()) {
                     animator.start();
                 }
-                if (animatorWithCurrentPlayztime != null && !animatorWithCurrentPlayztime.isRunning()) {
+                if (animatorWithCurrentPlayTime != null && !animatorWithCurrentPlayTime.isRunning()) {
                     long diff = System.currentTimeMillis() - baseTime;
-                    long startTime = diff % animatorWithCurrentPlayztime.getDuration();
-                    animatorWithCurrentPlayztime.addUpdateListener(this);
-                    animatorWithCurrentPlayztime.start();
-                    animatorWithCurrentPlayztime.setCurrentPlayTime(startTime);
+                    long startTime = diff % animatorWithCurrentPlayTime.getDuration();
+                    animatorWithCurrentPlayTime.addUpdateListener(this);
+                    animatorWithCurrentPlayTime.start();
+                    animatorWithCurrentPlayTime.setCurrentPlayTime(startTime);
                 }
             }
 
@@ -176,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
                     animator.cancel();
                 }
                 AnimationHelper.clearAnimation(icon);
-                if (animatorWithCurrentPlayztime != null && animatorWithCurrentPlayztime.isRunning()) {
-                    animatorWithCurrentPlayztime.removeUpdateListener(this);
-                    animatorWithCurrentPlayztime.cancel();
+                if (animatorWithCurrentPlayTime != null && animatorWithCurrentPlayTime.isRunning()) {
+                    animatorWithCurrentPlayTime.removeUpdateListener(this);
+                    animatorWithCurrentPlayTime.cancel();
                     valueAnimatorWithCurrentPlayTimeIcon.setAnimation(null);
                 }
                 AnimationHelper.clearAnimation(valueAnimatorWithCurrentPlayTimeIcon);
