@@ -16,4 +16,9 @@ public class SampleTest {
         assertThat(Sample.getApplicationName(RuntimeEnvironment.application), is("TestSample"));
     }
 
+    @Test
+    public void assetsにあるリソースを取得できること() {
+        assertThat(Sample.getAssetsFile(RuntimeEnvironment.application), is("sample"));
+    }
+
 }
