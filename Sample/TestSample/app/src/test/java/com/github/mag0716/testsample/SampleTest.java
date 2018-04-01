@@ -5,8 +5,11 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.io.IOException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 @RunWith(RobolectricTestRunner.class)
 public class SampleTest {
@@ -18,7 +21,10 @@ public class SampleTest {
 
     @Test
     public void assetsにあるリソースを取得できること() {
-        assertThat(Sample.getAssetsFile(RuntimeEnvironment.application), is("sample"));
+        try {
+            assertThat(Sample.getAssetsFile(RuntimeEnvironment.application), is("sample"));
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
-
 }

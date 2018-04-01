@@ -10,6 +10,15 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "env"
+    productFlavors {
+        mock {
+            dimension "env"
+        }
+        prod {
+            dimension "env"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

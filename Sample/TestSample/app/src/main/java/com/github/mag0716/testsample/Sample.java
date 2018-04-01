@@ -15,11 +15,13 @@ public class Sample {
         return context.getString(R.string.app_name);
     }
 
-    public static String getAssetsFile(@NonNull Context context) {
+    public static String getAssetsFile(@NonNull Context context) throws IOException {
         final AssetManager assetManager = context.getResources().getAssets();
-        InputStream is = null;
+        return inputStreamToString(assetManager.open("sample.txt"));
+    }
+
+    public static String inputStreamToString(@NonNull InputStream is) throws IOException {
         try {
-            is = assetManager.open("sample.txt");
             final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
             String str = null;
@@ -27,8 +29,8 @@ public class Sample {
                 sb.append(str);
             }
             return sb.toString();
-        } catch (IOException e) {
+        } finally {
+            is.close();
         }
-        return null;
     }
 }
