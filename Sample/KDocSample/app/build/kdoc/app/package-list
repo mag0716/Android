@@ -1,0 +1,4 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.github.mag0716.kdocsample$extensions(kotlin.String)com.github.mag0716.kdocsample/kotlin.-string/extensions.html
+com.github.mag0716.kdocsample
