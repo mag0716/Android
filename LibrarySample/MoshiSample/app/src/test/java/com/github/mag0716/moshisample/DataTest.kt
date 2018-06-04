@@ -24,6 +24,19 @@ class DataTest {
         }
     }
 
+    @Test
+    fun DataWithDelegate() {
+        val adapter = moshi.adapter(DataWithDelegate::class.java)
+        val data = adapter.fromJson(generateTestString())
+
+        if (data != null) {
+            assertThat(data.name, `is`("dummy"))
+            assertThat(data.id, `is`(1))
+        } else {
+            fail("data is null")
+        }
+    }
+
     private fun generateTestString() = """
         {
             "id":1,
