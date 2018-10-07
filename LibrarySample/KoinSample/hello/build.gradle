@@ -33,10 +33,8 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    // Koin for Kotlin
-    implementation "org.koin:koin-core:$koin_version"
-    // Koin extended & experimental features
-    implementation "org.koin:koin-core-ext:$koin_version"
+    // Koin
+    implementation "org.koin:koin-android:$koin_version"
 
     // Test
     testImplementation 'junit:junit:4.12'

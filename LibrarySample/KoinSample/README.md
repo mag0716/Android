@@ -4,8 +4,8 @@
 
 * 1.0.1
 
-## flavor
+## サンプル
 
-| flavor | 概要 | 備考 |
+| module | 概要 | 備考 |
 | - | - | - |
-| | |
+| hello | はじめての Koin | Activity のプロパティへ inject |
