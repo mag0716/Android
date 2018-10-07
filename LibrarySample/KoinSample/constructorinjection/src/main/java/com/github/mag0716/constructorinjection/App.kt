@@ -1,4 +1,4 @@
-package com.github.mag0716.koinsample
+package com.github.mag0716.constructorinjection
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin
@@ -8,6 +8,8 @@ class App : Application() {
 
     private val appModule = module {
         single<HelloService> { ProductHelloService() }
+
+        factory<Presenter> { ProductPresenter(get()) }
     }
 
     override fun onCreate() {

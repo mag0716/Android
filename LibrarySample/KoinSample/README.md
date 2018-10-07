@@ -9,3 +9,9 @@
 | module | 概要 | 備考 |
 | - | - | - |
 | hello | はじめての Koin | Activity のプロパティへ inject |
+| constructorinjection | Constructor Injection | |
+
+## 疑問点
+
+* multi modules でどう利用するのか？
+  * 別モジュールにある interface を `module` で使用すると `Unresolved reference` となる
