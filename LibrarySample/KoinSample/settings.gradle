@@ -1,1 +1,1 @@
-include ':hello', ':constructorinjection', ':scope'
+include ':hello', ':constructorinjection', ':scope', ':viewmodel'
