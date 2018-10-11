@@ -11,6 +11,7 @@
 | hello | はじめての Koin | Activity のプロパティへ inject |
 | constructorinjection | Constructor Injection | ログで `single` と `factory` の生成タイミングの違いを確認 |
 | scope | `scope` の利用 | |
+| viewmodel | `viewmodel` の利用 | |
 
 ### constructorinjection
 
@@ -94,6 +95,39 @@
 2018-10-10 23:03:08.218 5212-5212/com.github.mag0716.scope D/KOIN: [Scope] get 'com.github.mag0716.scope.ProductPresenter@114c2a8' from Scope['Scope']
 2018-10-10 23:03:08.218 5212-5212/com.github.mag0716.scope D/Scope: com.github.mag0716.scope.ProductHelloService@29466b8
 2018-10-10 23:03:08.218 5212-5212/com.github.mag0716.scope D/Scope: hello(product)(com.github.mag0716.scope.ProductPresenter@114c2a8)
+```
+
+### viewmodel
+
+#### アプリ起動
+
+```
+2018-10-11 21:03:19.360 4132-4132/com.github.mag0716.viewmodel I/KOIN: [module] declare Factory [name='MainViewModel',class='com.github.mag0716.viewmodel.MainViewModel', binds~(androidx.lifecycle.ViewModel)]
+2018-10-11 21:03:19.671 4132-4132/com.github.mag0716.viewmodel I/KOIN: [ViewModel] ~ 'class com.github.mag0716.viewmodel.MainViewModel (Kotlin reflection is not available)'(name:'null' key:'null') - com.github.mag0716.viewmodel.MainActivity@2ffc7d6
+2018-10-11 21:03:19.674 4132-4132/com.github.mag0716.viewmodel I/KOIN: +-- 'com.github.mag0716.viewmodel.MainViewModel'
+2018-10-11 21:03:19.674 4132-4132/com.github.mag0716.viewmodel D/KOIN: |-- [Factory [name='MainViewModel',class='com.github.mag0716.viewmodel.MainViewModel', binds~(androidx.lifecycle.ViewModel)]]
+2018-10-11 21:03:19.683 4132-4132/com.github.mag0716.viewmodel D/KOIN: |-- com.github.mag0716.viewmodel.MainViewModel@4ee9112
+2018-10-11 21:03:19.683 4132-4132/com.github.mag0716.viewmodel D/KOIN: !-- [com.github.mag0716.viewmodel.MainViewModel] resolved in 9.267458 ms
+2018-10-11 21:03:19.684 4132-4132/com.github.mag0716.viewmodel D/KOIN: [ViewModel] instance ~ com.github.mag0716.viewmodel.MainViewModel@4ee9112
+2018-10-11 21:03:19.685 4132-4132/com.github.mag0716.viewmodel D/ViewModel: hello(product)(com.github.mag0716.viewmodel.MainViewModel@4ee9112)
+```
+
+#### 画面回転
+
+* `ViewModel` なので画面回転しても同じインスタンス
+
+```
+2018-10-11 21:05:08.712 5418-5418/com.github.mag0716.viewmodel I/KOIN: [module] declare Factory [name='MainViewModel',class='com.github.mag0716.viewmodel.MainViewModel', binds~(androidx.lifecycle.ViewModel)]
+2018-10-11 21:05:09.054 5418-5418/com.github.mag0716.viewmodel I/KOIN: [ViewModel] ~ 'class com.github.mag0716.viewmodel.MainViewModel (Kotlin reflection is not available)'(name:'null' key:'null') - com.github.mag0716.viewmodel.MainActivity@2ffc7d6
+2018-10-11 21:05:09.055 5418-5418/com.github.mag0716.viewmodel I/KOIN: +-- 'com.github.mag0716.viewmodel.MainViewModel'
+2018-10-11 21:05:09.056 5418-5418/com.github.mag0716.viewmodel D/KOIN: |-- [Factory [name='MainViewModel',class='com.github.mag0716.viewmodel.MainViewModel', binds~(androidx.lifecycle.ViewModel)]]
+2018-10-11 21:05:09.058 5418-5418/com.github.mag0716.viewmodel D/KOIN: |-- com.github.mag0716.viewmodel.MainViewModel@4ee9112
+2018-10-11 21:05:09.059 5418-5418/com.github.mag0716.viewmodel D/KOIN: !-- [com.github.mag0716.viewmodel.MainViewModel] resolved in 3.506463 ms
+2018-10-11 21:05:09.060 5418-5418/com.github.mag0716.viewmodel D/KOIN: [ViewModel] instance ~ com.github.mag0716.viewmodel.MainViewModel@4ee9112
+2018-10-11 21:05:09.061 5418-5418/com.github.mag0716.viewmodel D/ViewModel: hello(product)(com.github.mag0716.viewmodel.MainViewModel@4ee9112)
+2018-10-11 21:05:25.240 5418-5418/com.github.mag0716.viewmodel I/KOIN: [ViewModel] ~ 'class com.github.mag0716.viewmodel.MainViewModel (Kotlin reflection is not available)'(name:'null' key:'null') - com.github.mag0716.viewmodel.MainActivity@9c2b5f8
+2018-10-11 21:05:25.240 5418-5418/com.github.mag0716.viewmodel D/KOIN: [ViewModel] instance ~ com.github.mag0716.viewmodel.MainViewModel@4ee9112
+2018-10-11 21:05:25.240 5418-5418/com.github.mag0716.viewmodel D/ViewModel: hello(product)(com.github.mag0716.viewmodel.MainViewModel@4ee9112)
 ```
 
 ## 疑問点

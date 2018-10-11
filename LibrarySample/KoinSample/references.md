@@ -17,3 +17,10 @@
   * `Scope` は `getOrCreateScope` で生成、取得するのがよい
 * `Scope` を自前で管理すれば、複数 Activity でインスタンスを共有することができる
   * 使い終わったら、`Scope#close()` する
+
+## https://insert-koin.io/docs/1.0/getting-started/android-viewmodel/
+
+* `module` 内で `viewModel` を利用する
+* 利用時には `by viewModel()` を指定すれば、Inject され、現在のコンポーネントにバインドしてくれる
+  * `ViewModelFactory` にリンクされている
+* `getViewModel()` でも取得可能
