@@ -1,0 +1,1 @@
+include ':hello', ':constructorinjection', ':scope', ':viewmodel', ':test'
