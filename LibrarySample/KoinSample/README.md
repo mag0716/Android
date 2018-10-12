@@ -12,6 +12,7 @@
 | constructorinjection | Constructor Injection | ログで `single` と `factory` の生成タイミングの違いを確認 |
 | scope | `scope` の利用 | |
 | viewmodel | `viewmodel` の利用 | |
+| test | テストケースでの Koin の利用 | |
 
 ### constructorinjection
 
