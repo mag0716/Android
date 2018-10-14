@@ -1,8 +1,16 @@
 # memo
 
+## 自分の考えまとめ
+
+* どういう単位でモジュールを分けよう？
+
+## references memo
+
 * モジュールの分け方
   * コンテキスト毎
     * 別のコンテキストのコードが入り込まないようにする
+    * これはアプリによって変わるので、そのアプリの担当者が設計する必要がある
+      * どうしても担当者のレベル次第になってしまう
   * レイヤー毎
     * 依存の方向性を強制させる
 * common モジュール
@@ -55,12 +63,53 @@
   * ★拡張関数：標準機能がプラットフォームや言語にかけていると感じたときのみ
 * ★`internal` で他モジュールから参照できなくする
   * 必須
+* デメリット
+  * DataBinding と相性が悪いが Data Binding Compiler V2 で解消されてる？
+* レイヤー単位でモジュール化すると、認証機能が必要な場合に実装が困難になる
+* moduels dir
+  * コンテキスト単位 * レイヤー単位で分ける場合は、コンテキスト単位でディレクトリを作成した方がよさそう
+* 既存アプリでやる場合
+  * モジュールを作成し、全ての機能を移してしまう
+* ★依存定義を buildSrc + Kotlin で記述
+  * buildSrc ディレクトリにソースを置く
+  * モジュールが多数になると定義が面倒なので必須
+  * https://handstandsam.com/2018/02/11/kotlin-buildsrc-for-better-gradle-dependency-management/ が参考になりそう
+* `core` モジュール
+  * Retrofit や SharedPreferences などの共通の依存関係を提供する
+  * Utility、拡張関数
+  * グローバルクラスやコールバック
+  * Firebase, LeakCanary などの初期化
 
 ## references
 
 * https://developer.android.com/studio/projects/
+* https://github.com/googlesamples/android-instant-apps/tree/master/multi-feature-module
+  * Google の Instant Apps のサンプルプロジェクト
+
+### 確認済み
+
 * https://motida-japan.hatenablog.com/entry/2018/02/09/102628
   * https://www.youtube.com/watch?v=s1nd_GrA56s
-* https://speakerdeck.com/nein37/kutukupatudoapurifalsemarutimoziyuruhua-hefalsequ-rizu-mi https://proandroiddev.com/multi-module-android-project-codebase-ffc153cf7a1e
+    * DroidKaigi2018 での発表
+  * https://kgmyshin.booth.pm/items/837226
+* https://speakerdeck.com/nein37/kutukupatudoapurifalsemarutimoziyuruhua-hefalsequ-rizu-mi
+  * クックパッド社の事例
+* https://proandroiddev.com/multi-module-android-project-codebase-ffc153cf7a1e
+  * Dagger2 を使ったサンプル
+    * https://github.com/frogermcs/MultiModuleGithubClient
+  * コンテキスト毎に分割
 * https://medium.com/mindorks/writing-a-modular-project-on-android-304f3b09cb37
+  * https://github.com/karntrehan/Posts
+  * モジュールは core と posts(app) の2つのみ
+  * Room
+    * モジュール毎に DB を持つようにしている
+  * Dagger2 を使ったサンプル
 * https://medium.freecodecamp.org/how-modularisation-affects-build-time-of-an-android-application-43a984ce9968
+  * ビルド時間を減らすことが一番の目的
+  * マルチモジュールにすることでどれだけビルド時間が減らせるかを検証している
+  * `defaultConfig`
+
+### 未確認
+
+* https://engineeringblog.yelp.com/2018/06/how-yelp-modularized-the-android-app.html
+  * Yelp
