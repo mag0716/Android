@@ -3,6 +3,10 @@
 ## 自分の考えまとめ
 
 * どういう単位でモジュールを分けよう？
+  * api
+  * datasource(repository)
+  * usecase
+  * app
 
 ## references memo
 
@@ -113,3 +117,4 @@
 
 * https://engineeringblog.yelp.com/2018/06/how-yelp-modularized-the-android-app.html
   * Yelp
+* https://www.youtube.com/watch?v=Mg-DM5XAddk
