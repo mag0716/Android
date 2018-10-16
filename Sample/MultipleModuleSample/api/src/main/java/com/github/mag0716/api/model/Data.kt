@@ -1,4 +1,7 @@
 package com.github.mag0716.api.model
 
-class Repository {
-}
+data class Data(
+        val id: Int,
+        val title: String,
+        val thumbnail: String?
+)

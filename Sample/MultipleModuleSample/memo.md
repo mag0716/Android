@@ -4,9 +4,22 @@
 
 * どういう単位でモジュールを分けよう？
   * api
+    * API のリクエスト、レスポンス
+    * API の interface 定義(Retrofit)
+    * Retrofit はここに持たせた方がよい？
+      * URL は全て、このモジュールで定義したいので一旦ここで生成してみる
   * datasource(repository)
+    * Room 使いたいけど、Android に依存してしまう
+    * interface だけ用意して、Inject する？
   * usecase
+    * datasource 経由でデータを取得する
+    * View の interface 定義
+    * View の interface 経由で app の表示を更新する
   * app
+    * View(Activity, Fragment)
+    * Presenter
+      * usecase のメソッドを呼び出す
+* どれを `interal` で制限しよう？
 
 ## references memo
 

@@ -18,6 +18,7 @@ object Libraries {
     val material = "com.google.android.material:material:1.0.0"
 
     val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
+    val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:2.4.0"
 
     val junit = "junit:junit:4.12"
     val espresso = "androidx.test.espresso:espresso-core:3.1.0-beta01"
