@@ -3,7 +3,7 @@ apply plugin: 'java-library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation library.retrofit
+    implementation Libraries.retrofit
 }
 
 sourceCompatibility = "8"

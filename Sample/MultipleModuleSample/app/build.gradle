@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdkVersion Version.compileSdk
     defaultConfig {
         applicationId "com.github.mag0716.multiplemodulesample"
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
-        versionCode versions.versionCode
-        versionName versions.versionName
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
+        versionCode Version.code
+        versionName Version.name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,17 +23,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation library.kotlin
-    implementation library.androidx.appcompat
-    implementation library.material
-    implementation library.androidx.constraintLayout
+    implementation Libraries.kotlin
+    implementation Libraries.appcompat
+    implementation Libraries.material
+    implementation Libraries.constraintLayout
 
     // for multi module
     // TODO: 本当は app からは api モジュールは参照しない
     implementation project(":api")
 
     // for test
-    testImplementation library.test.junit
-    androidTestImplementation library.test.runner
-    androidTestImplementation library.test.espresso
+    testImplementation Libraries.junit
+    androidTestImplementation Libraries.runner
+    androidTestImplementation Libraries.espresso
 }
