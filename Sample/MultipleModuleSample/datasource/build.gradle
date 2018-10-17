@@ -1,17 +1,14 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion Version.compileSdk
     defaultConfig {
-        applicationId "com.github.mag0716.multiplemodulesample"
         minSdkVersion Version.minSdk
         targetSdkVersion Version.targetSdk
-        versionCode Version.code
-        versionName Version.name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,11 +22,9 @@ dependencies {
 
     implementation Libraries.kotlin
     implementation Libraries.appcompat
-    implementation Libraries.material
-    implementation Libraries.constraintLayout
 
     // for multi module
-    implementation project(":usecase")
+    implementation project(":api")
 
     // for test
     testImplementation Libraries.junit

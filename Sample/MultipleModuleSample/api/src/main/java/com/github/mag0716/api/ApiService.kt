@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-internal interface ApiService {
+interface ApiService {
     // TODO: coroutine で返す(最悪でも Rx で)
     @GET("/data")
     fun data(): Call<List<Data>>
