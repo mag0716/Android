@@ -125,7 +125,23 @@
   * ビルド時間を減らすことが一番の目的
   * マルチモジュールにすることでどれだけビルド時間が減らせるかを検証している
   * `defaultConfig`
-
+* https://medium.com/androiddevelopers/a-patchwork-plaid-monolith-to-modularized-app-60235d9f212e?_branch_match_id=572781899070256360
+  * [Plaid](https://github.com/nickbutcher/plaid) をマルチモジュール化する
+  * コンテキスト毎に分割
+    * Dynamic Module にも対応
+  * Android App Bundle にも対応
+  * 既存アプリをマルチモジュールにする手順
+    * すべてのコードとリソースを core モジュールに移す
+    * モジュール化する機能を見極める
+    * 関連するコードとリソースを feature module に移動
+  * `core` モジュールはドメインとデータ
+  * `feature` モジュールはドメインとUI
+  * `feature` モジュールで持っている Activity への遷移のために、`ActivityHelper` で Activity 名を管理している
+  * `feature` モジュールで利用する style は `core` モジュールで定義する必要がある
+  * なぜ Plaid でマルチモジュール化したのか？
+    * インストールサイズ
+    * ビルド時間
+    * メンテナンス性
 ### 未確認
 
 * https://engineeringblog.yelp.com/2018/06/how-yelp-modularized-the-android-app.html
