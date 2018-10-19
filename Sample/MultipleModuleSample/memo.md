@@ -141,9 +141,31 @@
   * なぜ Plaid でマルチモジュール化したのか？
     * インストールサイズ
     * ビルド時間
-    * メンテナンス性
+    * メンテナンス性    
+* https://engineeringblog.yelp.com/2018/06/how-yelp-modularized-the-android-app.html
+  * Yelp での事例
+  * なぜ？
+    * 影響を与える機能が少なくて済む
+    * テストもモジュール毎に分けられるから実行時間は少なくなる
+  * アプリ構成
+    * 基本は一方通行の依存グラフ(directed acyclic graph)
+    * Horizontal modules
+      * UI -> Repository -> Models -> Libraries, Strings
+      * レイヤーごと
+    * Feature modules
+      * コンテキスト x レイヤー
+      * feature 内でもレイヤー単位でモジュール化する
+    * Circular dependencies
+      * 循環して依存している場合は、interface を利用して一方通行の依存にする
+  * 何を？
+    * 機能やロジックによってサイズはさまざまなので、モジュールのサイズについて厳格なガイドラインは設定しない
+  * 次は？
+    * モジュール化したらあとは機能の実装に集中する
+  * なぜしないのか？
+    * 利点はあるが、コストがかかる
+    * 機能開発と並行しながらの作業は難しい
+    * 成長していなければしないほうがいい
+
 ### 未確認
 
-* https://engineeringblog.yelp.com/2018/06/how-yelp-modularized-the-android-app.html
-  * Yelp
 * https://www.youtube.com/watch?v=Mg-DM5XAddk
