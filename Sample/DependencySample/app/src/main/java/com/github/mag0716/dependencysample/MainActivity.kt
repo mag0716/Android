@@ -14,12 +14,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     // implementation
+    // implementation で指定した場合は、libraryc に依存することはない
     // :libraryc を修正したら、librarya のみ再ビルドが必要
     fun greetFromA() = ClassA().greeting()
     // cannot compile
     //fun greetFromC() = ClassC().hello()
 
-    // api
+    // api = compile
+    // api で指定した場合は、libraryb 以外に libraryd にも依存するようになる
     // :libraryd を修正したら、libraryb と app も再ビルドが必要
     fun greetFromB() = ClassB().greeting()
 
