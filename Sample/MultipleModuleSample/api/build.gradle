@@ -21,10 +21,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Libraries.kotlin
+    implementation Libraries.coroutineCore
+    implementation Libraries.coroutineAndroid
     implementation Libraries.appcompat
 
     implementation Libraries.retrofit
     implementation Libraries.retrofitMoshiConverter
+    implementation Libraries.retrofitCoroutinesAdapter
 
     // for test
     testImplementation Libraries.junit

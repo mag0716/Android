@@ -11,6 +11,8 @@ object Version {
 object Libraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
     val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
+    val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.0"
+    val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.0"
 
     val appcompat = "androidx.appcompat:appcompat:1.0.0"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
@@ -19,6 +21,7 @@ object Libraries {
 
     val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
     val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:2.4.0"
+    val retrofitCoroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0"
 
     val junit = "junit:junit:4.12"
     val espresso = "androidx.test.espresso:espresso-core:3.1.0-beta01"
