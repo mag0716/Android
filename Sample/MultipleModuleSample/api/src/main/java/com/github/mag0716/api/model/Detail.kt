@@ -4,6 +4,6 @@ data class Detail(
         val id: Int,
         val title: String,
         val description: String,
-        val image: String?,
+        val image: String? = null,
         val createdTime: Long
 )
