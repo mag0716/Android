@@ -35,9 +35,9 @@ class ApiClientFactory() {
 
     private suspend fun createData(): List<Data> {
         delay(1000)
-        return listOf(
-                Data(1, "title1")
-        )
+        return (0..10).map {
+            Data(it, "title$it")
+        }.toList()
     }
 
     private suspend fun createDetail(id: Int): Detail {
