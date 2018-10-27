@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion Version.compileSdk
+    defaultConfig {
+        applicationId "com.github.mag0716.multiplemodulesample"
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
+        versionCode Version.code
+        versionName Version.name
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation Libraries.kotlin
+    implementation Libraries.coroutineAndroid
+    implementation Libraries.appcompat
+    implementation Libraries.material
+    implementation Libraries.constraintLayout
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationFragmentKtx
+    implementation Libraries.navigationUi
+    implementation Libraries.navigationUiKtx
+
+    // for multi module
+    //implementation project(":usecase")
+    implementation project(":api")
+
+    // for test
+    testImplementation Libraries.junit
+    androidTestImplementation Libraries.runner
+    androidTestImplementation Libraries.espresso
+}
