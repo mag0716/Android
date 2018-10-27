@@ -24,12 +24,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Libraries.kotlin
+    implementation Libraries.coroutineAndroid
     implementation Libraries.appcompat
     implementation Libraries.material
     implementation Libraries.constraintLayout
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationFragmentKtx
+    implementation Libraries.navigationUi
+    implementation Libraries.navigationUiKtx
 
     // for multi module
-    implementation project(":usecase")
+    //implementation project(":usecase")
+    implementation project(":api")
 
     // for test
     testImplementation Libraries.junit

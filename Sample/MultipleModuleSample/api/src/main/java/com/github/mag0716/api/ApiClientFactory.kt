@@ -2,11 +2,11 @@ package com.github.mag0716.api
 
 import com.github.mag0716.api.model.Data
 import com.github.mag0716.api.model.Detail
-import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 
-class ApiClientFactory() {
+class ApiClientFactory(val coroutineScope: CoroutineScope) {
 
 //    fun create(): ApiService {
 //        return Retrofit.Builder()
@@ -21,13 +21,12 @@ class ApiClientFactory() {
 
     fun create(): ApiService {
         return object : ApiService {
-            // TODO: GlobalScope を使って本当に大丈夫なのか？
-            override fun data() = GlobalScope.async {
+            override fun data() = coroutineScope.async {
                 return@async createData()
             }
 
 
-            override fun detail(id: Int) = GlobalScope.async {
+            override fun detail(id: Int) = coroutineScope.async {
                 return@async createDetail(id)
             }
         }

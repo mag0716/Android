@@ -22,7 +22,6 @@ dependencies {
 
     implementation Libraries.kotlin
     implementation Libraries.coroutineCore
-    implementation Libraries.coroutineAndroid
     implementation Libraries.appcompat
 
     implementation Libraries.retrofit
