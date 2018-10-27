@@ -25,6 +25,7 @@ object Libraries {
     val navigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha06"
     val navigationUi = "android.arch.navigation:navigation-ui:1.0.0-alpha06"
     val navigationUiKtx = "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha06"
+    val navigationSafeArgsGradlePlugin = "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-alpha06"
 
     // Third Party
     val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"

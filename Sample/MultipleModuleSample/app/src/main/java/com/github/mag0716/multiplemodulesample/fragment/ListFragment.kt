@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.api.ApiClientFactory
 import com.github.mag0716.api.model.Data
@@ -40,9 +41,12 @@ class ListFragment : Fragment(), CoroutineScope {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        return inflater.inflate(R.layout.fragment_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         view.list.adapter = adapter
-        return view
     }
 
     override fun onDestroy() {
@@ -50,9 +54,11 @@ class ListFragment : Fragment(), CoroutineScope {
         job.cancel()
     }
 
-    private fun fetchData() = launch(Dispatchers.Unconfined) {
+    private fun fetchData() = launch {
         val dataList = apiService.data().await()
         adapter.addData(dataList)
+
+        // TODO: ProgressBar, エラー処理
     }
 
     private class Adapter(val context: Context) : RecyclerView.Adapter<ViewHolder>() {
@@ -67,7 +73,8 @@ class ListFragment : Fragment(), CoroutineScope {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.itemView.setOnClickListener {
-                // TODO: 画面遷移処理
+                val action = ListFragmentDirections.moveDetail(dataList[position].id)
+                it.findNavController().navigate(action)
             }
             holder.titleText.text = dataList[position].title
         }
