@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.mag0716.datasource.Repository
+import com.github.mag0716.datasource.DataRepository
 import com.github.mag0716.multiplemodulesample.R
 import com.github.mag0716.usercase.GetDataDetailUseCase
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -24,7 +24,7 @@ class DetailFragment : Fragment(), CoroutineScope {
 
     // TODO: app では :datasource には依存させずに、inject する
     private val getDataDetailUseCase = GetDataDetailUseCase(
-            Repository(this)
+            DataRepository(this)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

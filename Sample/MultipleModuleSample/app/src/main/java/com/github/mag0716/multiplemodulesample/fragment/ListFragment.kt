@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mag0716.datasource.Repository
+import com.github.mag0716.datasource.DataRepository
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.R
 import com.github.mag0716.usercase.GetDataListUseCase
@@ -26,7 +26,7 @@ class ListFragment : Fragment(), CoroutineScope {
 
     // TODO: app では :datasource には依存させずに、inject する
     private val getDataListUseCase = GetDataListUseCase(
-            Repository(this)
+            DataRepository(this)
     )
 
     private lateinit var adapter: Adapter

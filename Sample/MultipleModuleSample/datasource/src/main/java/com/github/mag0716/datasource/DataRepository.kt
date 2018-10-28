@@ -10,7 +10,8 @@ import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.datastore.model.Detail
 import kotlinx.coroutines.experimental.CoroutineScope
 
-class Repository(private val coroutineScope: CoroutineScope) {
+// TODO: internal にする
+class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
 
     private val apiService: ApiService = ApiClientFactory(coroutineScope).create()
 
@@ -21,14 +22,14 @@ class Repository(private val coroutineScope: CoroutineScope) {
 
     // TODO:リフレッシュ機構
 
-    suspend fun fetchDataListOrCache(): List<Data> {
+    override suspend fun fetchDataListOrCache(): List<Data> {
         if (dataListCached == null) {
             dataListCached = apiService.data().await()
         }
         return checkNotNull(dataListCached).toDataList()
     }
 
-    suspend fun fetchDataDetailOrCache(id: Int): Detail {
+    override suspend fun fetchDataDetailOrCache(id: Int): Detail {
         if (detailMap.contains(id).not()) {
             val detail = apiService.detail(id).await()
             detailMap[id] = detail
