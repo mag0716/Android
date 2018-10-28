@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.api.ApiClientFactory
 import com.github.mag0716.api.model.Data
+import com.github.mag0716.datasource.Repository
 import com.github.mag0716.multiplemodulesample.R
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
@@ -23,8 +24,12 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    // TODO: datasource でやる
-    private val apiService = ApiClientFactory(this).create()
+    // TODO: usecase でやる
+    // TODO: app では :api には依存させずに、inject する
+    private val repository = Repository(
+            ApiClientFactory(this).create()
+    )
+
     private lateinit var adapter: Adapter
 
     override val coroutineContext: CoroutineContext
@@ -35,9 +40,6 @@ class ListFragment : Fragment(), CoroutineScope {
         job = Job()
 
         adapter = Adapter(requireContext())
-        if (savedInstanceState == null) {
-            fetchData()
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,13 +51,18 @@ class ListFragment : Fragment(), CoroutineScope {
         view.list.adapter = adapter
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStart() {
+        super.onStart()
+        fetchData()
+    }
+
+    override fun onStop() {
+        super.onStop()
         job.cancel()
     }
 
     private fun fetchData() = launch {
-        val dataList = apiService.data().await()
+        val dataList = repository.loadDataList()
         adapter.addData(dataList)
 
         // TODO: ProgressBar, エラー処理

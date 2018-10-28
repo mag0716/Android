@@ -21,6 +21,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Libraries.kotlin
+    implementation Libraries.coroutineCore
     implementation Libraries.appcompat
 
     // for multi module
