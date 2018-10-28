@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.github.mag0716.api.ApiClientFactory
 import com.github.mag0716.datasource.Repository
 import com.github.mag0716.multiplemodulesample.R
+import com.github.mag0716.usercase.GetDataDetailUseCase
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
@@ -22,10 +23,11 @@ class DetailFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    // TODO: usecase でやる
-    // TODO: app では :api には依存させずに、inject する
-    private val repository = Repository(
-            ApiClientFactory(this).create()
+    // TODO: app では :datasource, :api には依存させずに、inject する
+    private val getDataDetailUseCase = GetDataDetailUseCase(
+            Repository(
+                    ApiClientFactory(this).create()
+            )
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +51,7 @@ class DetailFragment : Fragment(), CoroutineScope {
     }
 
     private fun fetchDataDetail(id: Int) = launch {
-        val detail = repository.loadDataDetail(id)
+        val detail = getDataDetailUseCase.execute(id)
         titleText.text = detail.title
 
         // TODO: ProgressBar, エラー処理

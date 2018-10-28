@@ -12,6 +12,7 @@ import com.github.mag0716.api.ApiClientFactory
 import com.github.mag0716.api.model.Data
 import com.github.mag0716.datasource.Repository
 import com.github.mag0716.multiplemodulesample.R
+import com.github.mag0716.usercase.GetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlinx.coroutines.experimental.CoroutineScope
@@ -24,15 +25,17 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    // TODO: usecase でやる
-    // TODO: app では :api には依存させずに、inject する
-    private val repository = Repository(
-            ApiClientFactory(this).create()
+    // TODO: app では :datasource, :api には依存させずに、inject する
+    private val getDataListUseCase = GetDataListUseCase(
+            Repository(
+                    ApiClientFactory(this).create()
+            )
     )
 
     private lateinit var adapter: Adapter
 
-    override val coroutineContext: CoroutineContext
+    override
+    val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +65,7 @@ class ListFragment : Fragment(), CoroutineScope {
     }
 
     private fun fetchData() = launch {
-        val dataList = repository.loadDataList()
+        val dataList = getDataListUseCase.execute()
         adapter.addData(dataList)
 
         // TODO: ProgressBar, エラー処理
