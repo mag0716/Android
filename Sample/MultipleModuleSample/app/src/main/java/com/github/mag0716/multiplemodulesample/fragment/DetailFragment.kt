@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.mag0716.api.ApiClientFactory
 import com.github.mag0716.datasource.Repository
 import com.github.mag0716.multiplemodulesample.R
 import com.github.mag0716.usercase.GetDataDetailUseCase
@@ -23,11 +22,9 @@ class DetailFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    // TODO: app では :datasource, :api には依存させずに、inject する
+    // TODO: app では :datasource には依存させずに、inject する
     private val getDataDetailUseCase = GetDataDetailUseCase(
-            Repository(
-                    ApiClientFactory(this).create()
-            )
+            Repository(this)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

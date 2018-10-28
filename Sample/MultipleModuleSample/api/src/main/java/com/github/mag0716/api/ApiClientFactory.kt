@@ -1,7 +1,7 @@
 package com.github.mag0716.api
 
-import com.github.mag0716.api.model.Data
-import com.github.mag0716.api.model.Detail
+import com.github.mag0716.api.response.DataResponse
+import com.github.mag0716.api.response.DetailResponse
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
@@ -32,16 +32,16 @@ class ApiClientFactory(val coroutineScope: CoroutineScope) {
         }
     }
 
-    private suspend fun createData(): List<Data> {
+    private suspend fun createData(): List<DataResponse> {
         delay(1000)
         return (0..10).map {
-            Data(it, "title$it")
+            DataResponse(it, "title$it")
         }.toList()
     }
 
-    private suspend fun createDetail(id: Int): Detail {
+    private suspend fun createDetail(id: Int): DetailResponse {
         delay(1000)
-        return Detail(
+        return DetailResponse(
                 id,
                 "title$id",
                 "description$id",

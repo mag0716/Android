@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mag0716.api.ApiClientFactory
-import com.github.mag0716.api.model.Data
 import com.github.mag0716.datasource.Repository
+import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.R
 import com.github.mag0716.usercase.GetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
@@ -25,11 +24,9 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    // TODO: app では :datasource, :api には依存させずに、inject する
+    // TODO: app では :datasource には依存させずに、inject する
     private val getDataListUseCase = GetDataListUseCase(
-            Repository(
-                    ApiClientFactory(this).create()
-            )
+            Repository(this)
     )
 
     private lateinit var adapter: Adapter

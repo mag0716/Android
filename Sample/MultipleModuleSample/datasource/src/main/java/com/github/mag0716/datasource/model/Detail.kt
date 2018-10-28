@@ -1,4 +1,4 @@
-package com.github.mag0716.api.model
+package com.github.mag0716.datastore.model
 
 data class Detail(
         val id: Int,

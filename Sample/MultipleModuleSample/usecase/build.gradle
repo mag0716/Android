@@ -24,7 +24,6 @@ dependencies {
     implementation Libraries.coroutineCore
     implementation Libraries.appcompat
 
-    implementation project(":api")
     implementation project(":datasource")
 
     // for test
