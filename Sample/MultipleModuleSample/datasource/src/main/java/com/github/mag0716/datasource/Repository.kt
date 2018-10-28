@@ -11,17 +11,18 @@ class Repository(private val apiService: ApiService) {
 
     // TODO:リフレッシュ機構
 
-    suspend fun loadDataList(): List<Data> {
+    suspend fun fetchDataListOrCache(): List<Data> {
         if (dataListCached == null) {
             dataListCached = apiService.data().await()
         }
         return checkNotNull(dataListCached)
     }
 
-    suspend fun loadDataDetail(id: Int): Detail {
-        if (detailMap.contains(id)) {
-            return checkNotNull(detailMap[id])
+    suspend fun fetchDataDetailOrCache(id: Int): Detail {
+        if (detailMap.contains(id).not()) {
+            val detail = apiService.detail(id).await()
+            detailMap[id] = detail
         }
-        return apiService.detail(id).await()
+        return checkNotNull(detailMap[id])
     }
 }
