@@ -1,7 +1,7 @@
 package com.github.mag0716.datasource;
 
-import com.github.mag0716.api.ApiClientFactory
 import com.github.mag0716.api.ApiService
+import com.github.mag0716.api.ApiServiceModule
 import com.github.mag0716.api.response.DataResponse
 import com.github.mag0716.api.response.DetailResponse
 import com.github.mag0716.datasource.converter.toDataList
@@ -10,10 +10,9 @@ import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.datastore.model.Detail
 import kotlinx.coroutines.experimental.CoroutineScope
 
-// TODO: internal にする
-class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
+internal class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
 
-    private val apiService: ApiService = ApiClientFactory(coroutineScope).create()
+    private val apiService: ApiService = ApiServiceModule.inject(coroutineScope)
 
     // TODO: キャッシュ機能
     // 変換したデータをキャッシュすべき？
@@ -23,6 +22,7 @@ class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
     // TODO:リフレッシュ機構
 
     override suspend fun fetchDataListOrCache(): List<Data> {
+        println("fetchDataListOrCache($this) : apiService = $apiService")
         if (dataListCached == null) {
             dataListCached = apiService.data().await()
         }
@@ -30,6 +30,7 @@ class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
     }
 
     override suspend fun fetchDataDetailOrCache(id: Int): Detail {
+        println("fetchDataDetailOrCache($this) : apiService = $apiService")
         if (detailMap.contains(id).not()) {
             val detail = apiService.detail(id).await()
             detailMap[id] = detail

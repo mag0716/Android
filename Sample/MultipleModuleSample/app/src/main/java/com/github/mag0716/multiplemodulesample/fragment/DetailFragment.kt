@@ -5,9 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.mag0716.datasource.DataRepository
 import com.github.mag0716.multiplemodulesample.R
-import com.github.mag0716.usercase.GetDataDetailUseCase
+import com.github.mag0716.usercase.injectGetDataDetailUseCase
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
@@ -22,10 +21,7 @@ class DetailFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    // TODO: app では :datasource には依存させずに、inject する
-    private val getDataDetailUseCase = GetDataDetailUseCase(
-            DataRepository(this)
-    )
+    private val getDataDetailUseCase = injectGetDataDetailUseCase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

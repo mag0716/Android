@@ -6,7 +6,7 @@ import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 
-class ApiClientFactory(val coroutineScope: CoroutineScope) {
+internal class ApiClientFactory(val coroutineScope: CoroutineScope) {
 
 //    fun create(): ApiService {
 //        return Retrofit.Builder()
