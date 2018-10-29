@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.R
-import com.github.mag0716.usercase.injectGetDataListUseCase
+import com.github.mag0716.usercase.provideGetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlinx.coroutines.experimental.CoroutineScope
@@ -23,7 +23,7 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    private val getDataListUseCase = injectGetDataListUseCase(this)
+    private val getDataListUseCase = provideGetDataListUseCase(this)
 
     private lateinit var adapter: Adapter
 

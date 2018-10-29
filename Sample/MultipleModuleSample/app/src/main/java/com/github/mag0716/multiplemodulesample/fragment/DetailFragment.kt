@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.mag0716.multiplemodulesample.R
-import com.github.mag0716.usercase.injectGetDataDetailUseCase
+import com.github.mag0716.usercase.provideGetDataDetailUseCase
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
@@ -21,7 +21,7 @@ class DetailFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private val getDataDetailUseCase = injectGetDataDetailUseCase(this)
+    private val getDataDetailUseCase = provideGetDataDetailUseCase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

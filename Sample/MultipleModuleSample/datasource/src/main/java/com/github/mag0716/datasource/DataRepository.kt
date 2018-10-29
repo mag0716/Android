@@ -12,7 +12,7 @@ import kotlinx.coroutines.experimental.CoroutineScope
 
 internal class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
 
-    private val apiService: ApiService = ApiServiceModule.inject(coroutineScope)
+    private val apiService: ApiService = ApiServiceModule.provide(coroutineScope)
 
     // TODO: キャッシュ機能
     // 変換したデータをキャッシュすべき？
