@@ -21,7 +21,7 @@ class DetailFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private val getDataDetailUseCase = provideGetDataDetailUseCase(this)
+    private val getDataDetailUseCase = provideGetDataDetailUseCase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

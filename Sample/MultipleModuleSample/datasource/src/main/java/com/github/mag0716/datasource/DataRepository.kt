@@ -8,11 +8,10 @@ import com.github.mag0716.datasource.converter.toDataList
 import com.github.mag0716.datasource.converter.toDetail
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.datastore.model.Detail
-import kotlinx.coroutines.experimental.CoroutineScope
 
-internal class DataRepository(coroutineScope: CoroutineScope) : IDataRepository {
+internal class DataRepository : IDataRepository {
 
-    private val apiService: ApiService = ApiServiceModule.provide(coroutineScope)
+    private val apiService: ApiService = ApiServiceModule.provide()
 
     // TODO: キャッシュ機能
     // 変換したデータをキャッシュすべき？

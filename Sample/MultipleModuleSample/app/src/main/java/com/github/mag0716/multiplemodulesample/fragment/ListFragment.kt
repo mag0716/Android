@@ -23,7 +23,7 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    private val getDataListUseCase = provideGetDataListUseCase(this)
+    private val getDataListUseCase = provideGetDataListUseCase()
 
     private lateinit var adapter: Adapter
 
