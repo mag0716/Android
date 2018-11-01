@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.datasource.model.Data
+import com.github.mag0716.multiplemodulesample.App
 import com.github.mag0716.multiplemodulesample.R
-import com.github.mag0716.usercase.provideGetDataListUseCase
+import com.github.mag0716.usercase.IGetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlinx.coroutines.experimental.CoroutineScope
@@ -23,7 +24,7 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    private val getDataListUseCase = provideGetDataListUseCase()
+    private lateinit var getDataListUseCase: IGetDataListUseCase
 
     private lateinit var adapter: Adapter
 
@@ -35,6 +36,7 @@ class ListFragment : Fragment(), CoroutineScope {
         super.onCreate(savedInstanceState)
         job = Job()
 
+        getDataListUseCase = (requireActivity().application as App).getDataListUseCase
         adapter = Adapter(requireContext())
     }
 

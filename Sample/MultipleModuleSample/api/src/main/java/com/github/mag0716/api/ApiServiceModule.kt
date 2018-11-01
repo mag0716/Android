@@ -8,8 +8,8 @@ import kotlinx.coroutines.experimental.delay
 
 object ApiServiceModule {
 
-    private val apiService: ApiService by lazy {
-        object : ApiService {
+    fun provide(): ApiService {
+        return object : ApiService {
             override fun data() = GlobalScope.async {
                 return@async createData()
             }
@@ -18,10 +18,6 @@ object ApiServiceModule {
                 return@async createDetail(id)
             }
         }
-    }
-
-    fun provide(): ApiService {
-        return apiService
     }
 
     private suspend fun createData(): List<DataResponse> {

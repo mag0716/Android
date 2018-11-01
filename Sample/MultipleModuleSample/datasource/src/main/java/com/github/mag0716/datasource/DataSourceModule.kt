@@ -1,12 +1,10 @@
 package com.github.mag0716.datasource
 
+import com.github.mag0716.api.ApiService
+
 object DataSourceModule {
 
-    private val dataRepository: IDataRepository by lazy {
-        DataRepository()
-    }
-
-    fun provide(): IDataRepository {
-        return dataRepository
+    fun provide(apiService: ApiService): IDataRepository {
+        return DataRepository(apiService)
     }
 }

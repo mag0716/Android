@@ -1,7 +1,6 @@
 package com.github.mag0716.datasource;
 
 import com.github.mag0716.api.ApiService
-import com.github.mag0716.api.ApiServiceModule
 import com.github.mag0716.api.response.DataResponse
 import com.github.mag0716.api.response.DetailResponse
 import com.github.mag0716.datasource.converter.toDataList
@@ -9,9 +8,7 @@ import com.github.mag0716.datasource.converter.toDetail
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.datastore.model.Detail
 
-internal class DataRepository : IDataRepository {
-
-    private val apiService: ApiService = ApiServiceModule.provide()
+internal class DataRepository(val apiService: ApiService) : IDataRepository {
 
     // TODO: キャッシュ機能
     // 変換したデータをキャッシュすべき？
