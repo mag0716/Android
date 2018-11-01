@@ -21,7 +21,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Libraries.kotlin
+    implementation Libraries.coroutineCore
     implementation Libraries.appcompat
+
+    implementation project(":datasource")
 
     // for test
     testImplementation Libraries.junit

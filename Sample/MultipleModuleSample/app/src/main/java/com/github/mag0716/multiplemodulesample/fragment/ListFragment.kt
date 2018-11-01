@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mag0716.api.ApiClientFactory
-import com.github.mag0716.api.model.Data
+import com.github.mag0716.datasource.model.Data
+import com.github.mag0716.multiplemodulesample.App
 import com.github.mag0716.multiplemodulesample.R
+import com.github.mag0716.usercase.IGetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlinx.coroutines.experimental.CoroutineScope
@@ -23,21 +24,20 @@ class ListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
 
-    // TODO: datasource でやる
-    private val apiService = ApiClientFactory(this).create()
+    private lateinit var getDataListUseCase: IGetDataListUseCase
+
     private lateinit var adapter: Adapter
 
-    override val coroutineContext: CoroutineContext
+    override
+    val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         job = Job()
 
+        getDataListUseCase = (requireActivity().application as App).getDataListUseCase
         adapter = Adapter(requireContext())
-        if (savedInstanceState == null) {
-            fetchData()
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,13 +49,18 @@ class ListFragment : Fragment(), CoroutineScope {
         view.list.adapter = adapter
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStart() {
+        super.onStart()
+        fetchData()
+    }
+
+    override fun onStop() {
+        super.onStop()
         job.cancel()
     }
 
     private fun fetchData() = launch {
-        val dataList = apiService.data().await()
+        val dataList = getDataListUseCase.execute()
         adapter.addData(dataList)
 
         // TODO: ProgressBar, エラー処理

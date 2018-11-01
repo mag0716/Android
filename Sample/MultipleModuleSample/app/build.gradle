@@ -35,7 +35,9 @@ dependencies {
     implementation Libraries.navigationUiKtx
 
     // for multi module
-    //implementation project(":usecase")
+    // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
+    implementation project(":usecase")
+    implementation project(":datasource")
     implementation project(":api")
 
     // for test
