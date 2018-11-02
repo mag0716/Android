@@ -2,7 +2,7 @@ package com.github.mag0716.api
 
 import com.github.mag0716.api.response.DataResponse
 import com.github.mag0716.api.response.DetailResponse
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 

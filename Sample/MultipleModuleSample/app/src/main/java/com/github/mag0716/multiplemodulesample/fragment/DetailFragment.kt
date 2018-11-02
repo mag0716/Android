@@ -9,11 +9,11 @@ import com.github.mag0716.multiplemodulesample.App
 import com.github.mag0716.multiplemodulesample.R
 import com.github.mag0716.usercase.IGetDataDetailUseCase
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.coroutines.experimental.CoroutineScope
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.launch
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class DetailFragment : Fragment(), CoroutineScope {
 

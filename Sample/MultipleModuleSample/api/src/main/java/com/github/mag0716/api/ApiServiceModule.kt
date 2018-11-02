@@ -2,9 +2,9 @@ package com.github.mag0716.api
 
 import com.github.mag0716.api.response.DataResponse
 import com.github.mag0716.api.response.DetailResponse
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 
 object ApiServiceModule {
 

@@ -3,7 +3,7 @@ object Version {
     val buildTools = "28.0.3"
     val minSdk = 21
     val targetSdk = 28
-    val kotlin = "1.2.71"
+    val kotlin = "1.3.0"
     val code = 1
     val name = "1.0"
 }
@@ -12,8 +12,8 @@ object Libraries {
     // Kotlin
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
     val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
-    val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
-    val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.2"
+    val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
+    val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
 
     // basic library
     val appcompat = "androidx.appcompat:appcompat:1.0.0"
