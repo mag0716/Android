@@ -34,6 +34,8 @@ dependencies {
     implementation Libraries.navigationUi
     implementation Libraries.navigationUiKtx
 
+    implementation Libraries.timber
+
     // for multi module
     // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
     implementation project(":usecase")

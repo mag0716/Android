@@ -26,6 +26,8 @@ dependencies {
 
     implementation project(":datasource")
 
+    implementation Libraries.timber
+
     // for test
     testImplementation Libraries.junit
     androidTestImplementation Libraries.runner

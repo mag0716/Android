@@ -24,6 +24,7 @@ dependencies {
     implementation Libraries.coroutineCore
     implementation Libraries.appcompat
 
+    implementation Libraries.timber
     implementation Libraries.retrofit
     implementation Libraries.retrofitMoshiConverter
     implementation Libraries.retrofitCoroutinesAdapter

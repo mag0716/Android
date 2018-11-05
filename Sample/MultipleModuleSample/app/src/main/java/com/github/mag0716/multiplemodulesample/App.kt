@@ -9,6 +9,7 @@ import com.github.mag0716.usercase.IGetDataDetailUseCase
 import com.github.mag0716.usercase.IGetDataListUseCase
 import com.github.mag0716.usercase.provideGetDataDetailUseCase
 import com.github.mag0716.usercase.provideGetDataListUseCase
+import timber.log.Timber
 
 class App : Application() {
 
@@ -25,4 +26,10 @@ class App : Application() {
 
     val getDataDetailUseCase: IGetDataDetailUseCase
         get() = provideGetDataDetailUseCase(dataSource)
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Timber.plant(Timber.DebugTree())
+    }
 }

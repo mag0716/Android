@@ -7,6 +7,7 @@ import com.github.mag0716.datasource.converter.toDataList
 import com.github.mag0716.datasource.converter.toDetail
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.datastore.model.Detail
+import timber.log.Timber
 
 internal class DataRepository(val apiService: ApiService) : IDataRepository {
 
@@ -18,7 +19,7 @@ internal class DataRepository(val apiService: ApiService) : IDataRepository {
     // TODO:リフレッシュ機構
 
     override suspend fun fetchDataListOrCache(): List<Data> {
-        println("fetchDataListOrCache($this) : apiService = $apiService")
+        Timber.d("fetchDataListOrCache($this) : apiService = $apiService")
         if (dataListCached == null) {
             dataListCached = apiService.data().await()
         }
@@ -26,7 +27,7 @@ internal class DataRepository(val apiService: ApiService) : IDataRepository {
     }
 
     override suspend fun fetchDataDetailOrCache(id: Int): Detail {
-        println("fetchDataDetailOrCache($this) : apiService = $apiService")
+        Timber.d("fetchDataDetailOrCache($this) : apiService = $apiService")
         if (detailMap.contains(id).not()) {
             val detail = apiService.detail(id).await()
             detailMap[id] = detail

@@ -24,6 +24,8 @@ dependencies {
     implementation Libraries.coroutineCore
     implementation Libraries.appcompat
 
+    implementation Libraries.timber
+
     // for multi module
     implementation project(":api")
 

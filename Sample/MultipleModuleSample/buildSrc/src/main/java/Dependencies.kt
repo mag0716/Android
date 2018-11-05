@@ -31,6 +31,7 @@ object Libraries {
     val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
     val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:2.4.0"
     val retrofitCoroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0"
+    val timber = "com.jakewharton.timber:timber:4.7.1"
 
     // test
     val junit = "junit:junit:4.12"
