@@ -11,10 +11,12 @@ object ApiServiceModule {
     fun provide(): ApiService {
         return object : ApiService {
             override fun data() = GlobalScope.async {
+                println("data")
                 return@async createData()
             }
 
             override fun detail(id: Int) = GlobalScope.async {
+                println("detail($id)")
                 return@async createDetail(id)
             }
         }
@@ -30,9 +32,10 @@ object ApiServiceModule {
     private suspend fun createDetail(id: Int): DetailResponse {
         delay(1000)
         return DetailResponse(
-                id,
-                "title$id",
-                "description$id",
-                createdTime = System.currentTimeMillis())
+            id,
+            "title$id",
+            "description$id",
+            createdTime = System.currentTimeMillis()
+        )
     }
 }

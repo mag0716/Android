@@ -1,35 +1,16 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-
-android {
-    compileSdkVersion Version.compileSdk
-    defaultConfig {
-        minSdkVersion Version.minSdk
-        targetSdkVersion Version.targetSdk
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-}
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Libraries.kotlin
     implementation Libraries.coroutineCore
-    implementation Libraries.appcompat
 
     implementation Libraries.retrofit
     implementation Libraries.retrofitMoshiConverter
     implementation Libraries.retrofitCoroutinesAdapter
-
-    // for test
-    testImplementation Libraries.junit
-    androidTestImplementation Libraries.runner
-    androidTestImplementation Libraries.espresso
 }
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

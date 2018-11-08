@@ -10,9 +10,13 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'coroutine_proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'coroutine_proguard-rules.pro'
         }
     }
 }
@@ -23,6 +27,8 @@ dependencies {
     implementation Libraries.kotlin
     implementation Libraries.coroutineCore
     implementation Libraries.appcompat
+
+    implementation Libraries.timber
 
     // for multi module
     implementation project(":api")
