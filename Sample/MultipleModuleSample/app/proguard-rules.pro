@@ -47,7 +47,8 @@
 -keep class com.github.mag0716.api.** { *; }
 -keepclassmembers class com.github.mag0716.api.** { *; }
 
-#-assumenosideeffects class java.io.PrintStream {
-#     public void println(%);
-#     public void println(**);
-#}
+### Logging
+-assumenosideeffects class kotlin.io {
+     public void println(%);
+     public void println(**);
+}
