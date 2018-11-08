@@ -5,19 +5,18 @@ import com.github.mag0716.api.response.DetailResponse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import timber.log.Timber
 
 object ApiServiceModule {
 
     fun provide(): ApiService {
         return object : ApiService {
             override fun data() = GlobalScope.async {
-                Timber.d("data")
+                println("data")
                 return@async createData()
             }
 
             override fun detail(id: Int) = GlobalScope.async {
-                Timber.d("detail($id)")
+                println("detail($id)")
                 return@async createDetail(id)
             }
         }
