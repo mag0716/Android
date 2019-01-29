@@ -10,6 +10,8 @@ dependencies {
     implementation Libraries.retrofit
     implementation Libraries.retrofitMoshiConverter
     implementation Libraries.retrofitCoroutinesAdapter
+
+    implementation Libraries.timberJdk
 }
 
 sourceCompatibility = "7"

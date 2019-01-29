@@ -30,7 +30,7 @@ dependencies {
 
     implementation project(":datasource")
 
-    implementation Libraries.timber
+    implementation Libraries.timberAndroid
 
     // for test
     testImplementation Libraries.junit

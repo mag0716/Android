@@ -9,6 +9,7 @@ import com.github.mag0716.usercase.IGetDataDetailUseCase
 import com.github.mag0716.usercase.IGetDataListUseCase
 import com.github.mag0716.usercase.provideGetDataDetailUseCase
 import com.github.mag0716.usercase.provideGetDataListUseCase
+import timber.log.LogcatTree
 import timber.log.Timber
 
 class App : Application() {
@@ -30,6 +31,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Timber.plant(Timber.DebugTree())
+        Timber.plant(LogcatTree("MultipleModuleSample"))
     }
 }
