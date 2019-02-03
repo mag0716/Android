@@ -13,6 +13,15 @@ android {
         versionName Version.name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "environment"
+    productFlavors {
+        prod {
+            dimension "environment"
+        }
+        dev {
+            dimension "environment"
+        }
+    }
     buildTypes {
         debug {
             minifyEnabled false
