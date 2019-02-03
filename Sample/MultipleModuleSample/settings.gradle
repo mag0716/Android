@@ -1,1 +1,1 @@
-include ':app', ':api', ':datasource', ':usecase'
+include ':app', ':api', ':datasource', ':usecase', ':apidev', ':apiprod'
