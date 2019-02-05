@@ -13,6 +13,15 @@ android {
         versionName Version.name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "environment"
+    productFlavors {
+        prod {
+            dimension "environment"
+        }
+        dev {
+            dimension "environment"
+        }
+    }
     buildTypes {
         debug {
             minifyEnabled false
@@ -50,7 +59,8 @@ dependencies {
     // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
     implementation project(":usecase")
     implementation project(":datasource")
-    implementation project(":api")
+    prodImplementation project(":apiprod")
+    devImplementation project(":apidev")
 
     // for test
     testImplementation Libraries.junit
