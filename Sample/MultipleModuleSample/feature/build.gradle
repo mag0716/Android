@@ -1,0 +1,26 @@
+apply plugin: 'com.android.dynamic-feature'
+
+android {
+    // TODO: 共通定義しておく
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+    }
+
+    // TODO: ここも app/build.gradle で重複しているのでなんとかしたい
+    flavorDimensions "environment"
+    productFlavors {
+        prod {
+            dimension "environment"
+        }
+        dev {
+            dimension "environment"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':app')
+}
