@@ -63,9 +63,11 @@ dependencies {
     // for multi module
     // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
     api project(":usecase")
-    api project(":datasource")
-    prodApi project(":apiprod")
-    devApi project(":apidev")
+    implementation project(":datasource")
+
+    // for di
+    prodImplementation project(":apiprod")
+    devImplementation project(":apidev")
 
     // for test
     testImplementation Libraries.junit
