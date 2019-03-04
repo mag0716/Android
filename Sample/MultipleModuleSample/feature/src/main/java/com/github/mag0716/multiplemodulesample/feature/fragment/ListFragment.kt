@@ -1,4 +1,4 @@
-package com.github.mag0716.multiplemodulesample.fragment
+package com.github.mag0716.multiplemodulesample.feature.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.App
-import com.github.mag0716.multiplemodulesample.R
+import com.github.mag0716.multiplemodulesample.feature.R
 import com.github.mag0716.usercase.IGetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
@@ -71,14 +71,21 @@ class ListFragment : Fragment(), CoroutineScope {
         val dataList: MutableList<Data> = mutableListOf()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_list, parent, false))
+            return ViewHolder(
+                LayoutInflater.from(context).inflate(
+                    R.layout.item_list,
+                    parent,
+                    false
+                )
+            )
         }
 
         override fun getItemCount() = dataList.size
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.itemView.setOnClickListener {
-                val action = ListFragmentDirections.moveDetail(dataList[position].id)
+                val action =
+                    ListFragmentDirections.moveDetail(dataList[position].id)
                 it.findNavController().navigate(action)
             }
             holder.titleText.text = dataList[position].title

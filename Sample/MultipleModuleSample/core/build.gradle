@@ -38,27 +38,34 @@ android {
                     '../api/proguard-rules.pro'
         }
     }
+    dynamicFeatures = [":feature"]
 }
 
 dependencies {
+    api 'androidx.appcompat:appcompat:1.0.0-beta01'
+    api 'androidx.constraintlayout:constraintlayout:1.1.2'
+    api 'com.google.android.material:material:1.0.0-beta01'
+    api 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation Libraries.kotlin
-    implementation Libraries.coroutineAndroid
-    implementation Libraries.appcompat
-    implementation Libraries.material
-    implementation Libraries.constraintLayout
-    implementation Libraries.navigationFragment
-    implementation Libraries.navigationFragmentKtx
-    implementation Libraries.navigationUi
-    implementation Libraries.navigationUiKtx
+    api Libraries.kotlin
+    api Libraries.coroutineAndroid
+    api Libraries.appcompat
+    api Libraries.material
+    api Libraries.constraintLayout
+    api Libraries.navigationFragment
+    api Libraries.navigationFragmentKtx
+    api Libraries.navigationUi
+    api Libraries.navigationUiKtx
 
-    implementation Libraries.timberAndroid
+    api Libraries.timberAndroid
 
     // for multi module
     // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
-    implementation project(":usecase")
+    api project(":usecase")
     implementation project(":datasource")
+
+    // for di
     prodImplementation project(":apiprod")
     devImplementation project(":apidev")
 
