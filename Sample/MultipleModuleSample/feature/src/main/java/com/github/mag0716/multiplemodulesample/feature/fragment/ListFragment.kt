@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.App
@@ -83,9 +84,9 @@ class ListFragment : Fragment(), CoroutineScope {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.itemView.setOnClickListener {
-                //                val action =
-//                    ListFragmentDirections.moveDetail(dataList[position].id)
-//                it.findNavController().navigate(action)
+                val action =
+                    ListFragmentDirections.moveDetail(dataList[position].id)
+                it.findNavController().navigate(action)
             }
             holder.titleText.text = dataList[position].title
         }

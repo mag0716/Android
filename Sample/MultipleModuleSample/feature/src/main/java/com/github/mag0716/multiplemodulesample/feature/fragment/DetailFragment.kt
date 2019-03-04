@@ -37,8 +37,7 @@ class DetailFragment : Fragment(), CoroutineScope {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val id = DetailFragmentArgs.fromBundle(arguments).id
-        val id = 0
+        val id = DetailFragmentArgs.fromBundle(arguments).id
         fetchDataDetail(id)
     }
 
