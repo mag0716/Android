@@ -3,11 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    // TODO: 共通定義しておく
-    compileSdkVersion 28
+    compileSdkVersion Version.compileSdk
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
     }
 
     // TODO: ここも app/build.gradle で重複しているのでなんとかしたい
