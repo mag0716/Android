@@ -38,7 +38,9 @@ android {
                     '../api/proguard-rules.pro'
         }
     }
-    dynamicFeatures = [":feature"]
+    dynamicFeatures = [":list", ":detail"]
+
+
 }
 
 dependencies {

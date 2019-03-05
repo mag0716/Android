@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/listFragment"
-            android:name="com.github.mag0716.multiplemodulesample.feature.fragment.ListFragment"
+            android:name="com.github.mag0716.multiplemodulesample.list.fragment.ListFragment"
             android:label="ListFragment"
             tools:layout="@layout/fragment_list">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
             android:id="@+id/detailFragment"
-            android:name="com.github.mag0716.multiplemodulesample.feature.fragment.DetailFragment"
+            android:name="com.github.mag0716.multiplemodulesample.detail.fragment.DetailFragment"
             android:label="DetailFragment"
             tools:layout="@layout/fragment_detail">
         <argument

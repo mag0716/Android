@@ -1,4 +1,4 @@
-package com.github.mag0716.multiplemodulesample.feature.fragment
+package com.github.mag0716.multiplemodulesample.detail.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.mag0716.multiplemodulesample.App
-import com.github.mag0716.multiplemodulesample.feature.R
+import com.github.mag0716.multiplemodulesample.detail.R
 import com.github.mag0716.usercase.IGetDataDetailUseCase
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.coroutines.CoroutineScope

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
         xmlns:dist="http://schemas.android.com/apk/distribution"
-        package="com.github.mag0716.multiplemodulesample.feature">
+        package="com.github.mag0716.multiplemodulesample.list">
 
     <dist:module
             dist:instant="false"
             dist:onDemand="false"
-            dist:title="@string/title_feature">
+            dist:title="@string/title_list">
         <dist:fusing dist:include="true"/>
     </dist:module>
 </manifest>
