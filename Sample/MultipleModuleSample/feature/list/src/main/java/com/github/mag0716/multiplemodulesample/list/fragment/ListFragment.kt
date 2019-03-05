@@ -1,4 +1,4 @@
-package com.github.mag0716.multiplemodulesample.feature.fragment
+package com.github.mag0716.multiplemodulesample.list.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.App
-import com.github.mag0716.multiplemodulesample.feature.R
+import com.github.mag0716.multiplemodulesample.list.R
 import com.github.mag0716.usercase.IGetDataListUseCase
 import kotlinx.android.synthetic.main.fragment_list.view.*
 import kotlinx.android.synthetic.main.item_list.view.*

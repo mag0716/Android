@@ -1,0 +1,27 @@
+apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Version.compileSdk
+    defaultConfig {
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
+    }
+
+    // TODO: ここも app/build.gradle で重複しているのでなんとかしたい
+    flavorDimensions "environment"
+    productFlavors {
+        prod {
+            dimension "environment"
+        }
+        dev {
+            dimension "environment"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
+}

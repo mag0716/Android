@@ -38,7 +38,9 @@ android {
                     '../api/proguard-rules.pro'
         }
     }
-    dynamicFeatures = [":feature"]
+    dynamicFeatures = [":feature:list", ":feature:detail"]
+
+
 }
 
 dependencies {
@@ -66,8 +68,8 @@ dependencies {
     implementation project(":datasource")
 
     // for di
-    prodImplementation project(":apiprod")
-    devImplementation project(":apidev")
+    prodImplementation project(":api:apiprod")
+    devImplementation project(":api:apidev")
 
     // for test
     testImplementation Libraries.junit
