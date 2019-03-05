@@ -3,5 +3,5 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(":api")
+    api project(":api:api")
 }
