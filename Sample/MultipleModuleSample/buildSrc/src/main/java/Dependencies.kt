@@ -3,7 +3,7 @@ object Version {
     val buildTools = "28.0.3"
     val minSdk = 21
     val targetSdk = 28
-    val kotlin = "1.3.0"
+    val kotlin = "1.3.11"
     val code = 1
     val name = "1.0"
 }
