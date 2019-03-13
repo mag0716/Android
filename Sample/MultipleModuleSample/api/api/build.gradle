@@ -4,12 +4,12 @@ apply plugin: 'kotlin'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation Libraries.kotlin
-    implementation Libraries.coroutineCore
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutine}"
 
-    implementation Libraries.retrofit
-    implementation Libraries.retrofitMoshiConverter
-    implementation Libraries.retrofitCoroutinesAdapter
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
-    implementation Libraries.timberJdk
+    implementation "com.jakewharton.timber:timber-jdk:${versions.timber}"
 }

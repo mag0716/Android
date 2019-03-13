@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion Version.compileSdk
+    compileSdkVersion buildConfig.compileSdk
     defaultConfig {
         applicationId "com.github.mag0716.multiplemodulesample"
-        minSdkVersion Version.minSdk
-        targetSdkVersion Version.targetSdk
-        versionCode Version.code
-        versionName Version.name
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        versionCode buildConfig.versioncode
+        versionName buildConfig.versionname
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions "environment"
@@ -46,17 +46,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api Libraries.kotlin
-    api Libraries.coroutineAndroid
-    api Libraries.appcompat
-    api Libraries.material
-    api Libraries.constraintLayout
-    api Libraries.navigationFragment
-    api Libraries.navigationFragmentKtx
-    api Libraries.navigationUi
-    api Libraries.navigationUiKtx
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutine}"
+    api "androidx.appcompat:appcompat:${versions.appcompat}"
+    api "com.google.android.material:material:${versions.material}"
+    api "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
+    api "android.arch.navigation:navigation-fragment:${versions.navigation}"
+    api "android.arch.navigation:navigation-fragment-ktx:${versions.navigation}"
+    api "android.arch.navigation:navigation-ui:${versions.navigation}"
+    api "android.arch.navigation:navigation-ui-ktx:${versions.navigation}"
 
-    api Libraries.timberAndroid
+    api "com.jakewharton.timber:timber-android:${versions.timber}"
 
     // for multi module
     // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
@@ -68,7 +68,7 @@ dependencies {
     devImplementation project(":api:apidev")
 
     // for test
-    testImplementation Libraries.junit
-    androidTestImplementation Libraries.runner
-    androidTestImplementation Libraries.espresso
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "androidx.test:runner:${versions.runner}"
 }
