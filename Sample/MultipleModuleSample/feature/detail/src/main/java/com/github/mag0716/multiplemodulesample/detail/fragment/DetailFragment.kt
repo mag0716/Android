@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.github.mag0716.multiplemodulesample.App
 import com.github.mag0716.multiplemodulesample.detail.R
 import com.github.mag0716.usercase.IGetDataDetailUseCase
@@ -24,6 +25,8 @@ class DetailFragment : Fragment(), CoroutineScope {
 
     private lateinit var getDataDetailUseCase: IGetDataDetailUseCase
 
+    private val args by navArgs<DetailFragmentArgs>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         job = Job()
@@ -37,8 +40,7 @@ class DetailFragment : Fragment(), CoroutineScope {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = DetailFragmentArgs.fromBundle(arguments).id
-        fetchDataDetail(id)
+        fetchDataDetail(args.id)
     }
 
     override fun onDestroy() {

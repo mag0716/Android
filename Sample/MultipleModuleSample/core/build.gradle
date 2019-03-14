@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion buildConfig.compileSdk
@@ -51,10 +51,8 @@ dependencies {
     api "androidx.appcompat:appcompat:${versions.appcompat}"
     api "com.google.android.material:material:${versions.material}"
     api "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
-    api "android.arch.navigation:navigation-fragment:${versions.navigation}"
-    api "android.arch.navigation:navigation-fragment-ktx:${versions.navigation}"
-    api "android.arch.navigation:navigation-ui:${versions.navigation}"
-    api "android.arch.navigation:navigation-ui-ktx:${versions.navigation}"
+    api "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
+    api "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
 
     api "com.jakewharton.timber:timber-android:${versions.timber}"
 
