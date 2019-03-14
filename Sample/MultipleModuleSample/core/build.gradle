@@ -60,11 +60,11 @@ dependencies {
 
     // for multi module
     api project(":usecase")
-    // TODO: data は別モジュールにする
-    api project(":datasource")
-    implementation project(":api:api")
+    api project(":datasource:data")
 
     // for di
+    implementation project(':datasource:repository')
+    implementation project(":api:api")
     prodImplementation project(":api:apiprod")
     devImplementation project(":api:apidev")
 

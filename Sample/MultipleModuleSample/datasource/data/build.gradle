@@ -8,10 +8,4 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutine}"
 
     implementation "com.jakewharton.timber:timber-jdk:${versions.timber}"
-
-    // for multi module
-    implementation project(":api:api")
-
-    // for test
-    testImplementation "junit:junit:${versions.junit}"
 }
