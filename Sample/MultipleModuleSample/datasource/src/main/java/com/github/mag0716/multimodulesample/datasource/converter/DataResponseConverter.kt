@@ -1,13 +1,13 @@
-package com.github.mag0716.datasource.converter
+package com.github.mag0716.multimodulesample.datasource.converter
 
 import com.github.mag0716.api.response.DataResponse
-import com.github.mag0716.datasource.model.Data
+import com.github.mag0716.multimodulesample.datasource.model.Data
 
 internal fun DataResponse.toData(): Data {
     return Data(
-            this.id,
-            this.title,
-            this.thumbnail
+        this.id,
+        this.title,
+        this.thumbnail
     )
 }
 

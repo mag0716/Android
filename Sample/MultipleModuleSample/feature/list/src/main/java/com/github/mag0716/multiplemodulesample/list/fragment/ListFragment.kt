@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mag0716.datasource.model.Data
+import com.github.mag0716.multimodulesample.datasource.model.Data
 import com.github.mag0716.multiplemodulesample.App
 import com.github.mag0716.multiplemodulesample.list.R
 import com.github.mag0716.usercase.IGetDataListUseCase
