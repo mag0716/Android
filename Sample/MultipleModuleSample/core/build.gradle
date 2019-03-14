@@ -59,9 +59,10 @@ dependencies {
     api "com.jakewharton.timber:timber-android:${versions.timber}"
 
     // for multi module
-    // TODO: 依存する module はなるべく少なくする。それが無理な場合は app から触れるクラスを制限する
     api project(":usecase")
-    implementation project(":datasource")
+    // TODO: data は別モジュールにする
+    api project(":datasource")
+    implementation project(":api:api")
 
     // for di
     prodImplementation project(":api:apiprod")
