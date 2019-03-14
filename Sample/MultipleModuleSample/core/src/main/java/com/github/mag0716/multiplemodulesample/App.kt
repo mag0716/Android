@@ -3,8 +3,8 @@ package com.github.mag0716.multiplemodulesample
 import android.app.Application
 import com.github.mag0716.api.ApiService
 import com.github.mag0716.api.ApiServiceModule
-import com.github.mag0716.datasource.DataSourceModule
-import com.github.mag0716.datasource.IDataRepository
+import com.github.mag0716.multimodulesample.datasource.DataSourceModule
+import com.github.mag0716.multimodulesample.datasource.IDataRepository
 import com.github.mag0716.usercase.IGetDataDetailUseCase
 import com.github.mag0716.usercase.IGetDataListUseCase
 import com.github.mag0716.usercase.provideGetDataDetailUseCase

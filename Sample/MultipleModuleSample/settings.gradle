@@ -1,1 +1,5 @@
-include ':core', ':api:api', ':datasource', ':usecase', ':api:apidev', ':api:apiprod', ':feature:list', ':feature:detail'
+include ':core',
+        ':feature:list', ':feature:detail',
+        ':usecase',
+        ':datasource:repository', ':datasource:data',
+        ':api:api', ':api:apidev', ':api:apiprod'

@@ -1,12 +1,12 @@
-package com.github.mag0716.datasource;
+package com.github.mag0716.multimodulesample.datasource;
 
 import com.github.mag0716.api.ApiService
 import com.github.mag0716.api.response.DataResponse
 import com.github.mag0716.api.response.DetailResponse
-import com.github.mag0716.datasource.converter.toDataList
-import com.github.mag0716.datasource.converter.toDetail
-import com.github.mag0716.datasource.model.Data
-import com.github.mag0716.datastore.model.Detail
+import com.github.mag0716.multimodulesample.datasource.converter.toDataList
+import com.github.mag0716.multimodulesample.datasource.converter.toDetail
+import com.github.mag0716.multimodulesample.datasource.model.Data
+import com.github.mag0716.multimodulesample.datastore.model.Detail
 import timber.log.Timber
 import timber.log.debug
 

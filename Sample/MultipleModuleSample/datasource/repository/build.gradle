@@ -7,9 +7,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutine}"
 
-    implementation project(':datasource:repository')
-
     implementation "com.jakewharton.timber:timber-jdk:${versions.timber}"
+
+    // for multi module
+    implementation project(":api:api")
+    api project(":datasource:data")
 
     // for test
     testImplementation "junit:junit:${versions.junit}"

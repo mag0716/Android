@@ -1,7 +1,7 @@
 package com.github.mag0716.usercase
 
-import com.github.mag0716.datasource.IDataRepository
-import com.github.mag0716.datastore.model.Detail
+import com.github.mag0716.multimodulesample.datasource.IDataRepository
+import com.github.mag0716.multimodulesample.datastore.model.Detail
 import timber.log.Timber
 import timber.log.debug
 
