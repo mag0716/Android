@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.DefaultRenderersFactory
+import com.google.android.exoplayer2.ExoPlayerFactory
+import com.google.android.exoplayer2.PlaybackPreparer
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.offline.DownloaderConstructorHelper
 import com.google.android.exoplayer2.offline.ProgressiveDownloader
 import com.google.android.exoplayer2.source.ExtractorMediaSource
@@ -20,16 +23,12 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
 import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor
 import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.google.android.exoplayer2.util.Util
-import java.net.CookieManager
-import java.net.CookiePolicy
 
 
 class MainActivity : AppCompatActivity(), PlaybackPreparer {
 
     companion object {
         val BANDWIDTH_METER = DefaultBandwidthMeter()
-        val DEFAULT_COOKIE_MANAGER = CookieManager().apply { setCookiePolicy(CookiePolicy.ACCEPT_ORIGINAL_SERVER) }
-
         val TEST_URL = "https://html5demos.com/assets/dizzy.mp4"
     }
 
@@ -71,31 +70,30 @@ class MainActivity : AppCompatActivity(), PlaybackPreparer {
     }
 
     private fun initializePlayer() {
-        val adaptiveTrackSelectionFactory = AdaptiveTrackSelection.Factory(BANDWIDTH_METER)
+        val adaptiveTrackSelectionFactory = AdaptiveTrackSelection.Factory()
         trackSelector = DefaultTrackSelector(adaptiveTrackSelectionFactory)
-        val renderersFactory = DefaultRenderersFactory(this,
-                null,
-                DefaultRenderersFactory.EXTENSION_RENDERER_MODE_OFF)
+        val renderersFactory = DefaultRenderersFactory(this)
 
-        val player = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector)
+        val player = ExoPlayerFactory.newSimpleInstance(this, renderersFactory, trackSelector)
         this.player = player
-        player.addListener(PlayerEventListener())
         player.playWhenReady = true
 
         playerView.player = player
         playerView.setPlaybackPreparer(this)
         Log.d("xxx", "cache dir = $externalCacheDir")
+        val uri = Uri.parse(TEST_URL)
         val cache = SimpleCache(externalCacheDir, NoOpCacheEvictor())
         val dataSourceFactory = CacheDataSourceFactory(cache, mediaDataSourceFactory)
-        val mediaSource = ExtractorMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(Uri.parse(TEST_URL), mainHandler, null)
+        val mediaSource = ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(uri)
         player.prepare(mediaSource)
 
-        // NetowrkOnMainThread
-        val downloader = ProgressiveDownloader(TEST_URL,
-                TEST_URL,
-                DownloaderConstructorHelper(cache, mediaDataSourceFactory))
-        downloader.download(null)
+        // main Thread だと NetworkOnMainThreadException になる
+        Thread(Runnable {
+            val downloader = ProgressiveDownloader(uri,
+                    TEST_URL,
+                    DownloaderConstructorHelper(cache, mediaDataSourceFactory))
+            downloader.download()
+        }).start()
     }
 
     private fun releasePlayer() {
@@ -103,13 +101,6 @@ class MainActivity : AppCompatActivity(), PlaybackPreparer {
         if (player != null) {
             player.release()
             this.player = null
-        }
-    }
-
-
-    private class PlayerEventListener : Player.DefaultEventListener() {
-        override fun onPlayerError(error: ExoPlaybackException?) {
-            super.onPlayerError(error)
         }
     }
 }
