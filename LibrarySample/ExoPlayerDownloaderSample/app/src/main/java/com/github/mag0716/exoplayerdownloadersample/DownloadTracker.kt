@@ -68,11 +68,11 @@ class DownloadTracker(
 
         if (helper != null) {
             // TODO: 具体的に何をやっているのかが不明
-            for (i in 0..helper.periodCount) {
+            for (i in 0 until helper.periodCount) {
                 val trackGroups = helper.getTrackGroups(i)
-                for (j in 0..trackGroups.length) {
+                for (j in 0 until trackGroups.length) {
                     val trackGroup = trackGroups[j]
-                    for (k in 0..trackGroup.length) {
+                    for (k in 0 until trackGroup.length) {
                         trackKeyList.add(TrackKey(i, j, k))
                     }
                 }
