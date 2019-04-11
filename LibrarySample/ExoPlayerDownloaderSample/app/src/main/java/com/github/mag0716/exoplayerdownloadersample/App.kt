@@ -11,10 +11,11 @@ import java.io.File
 class App : Application() {
 
     companion object {
+        const val TAG = "ExoPlayerDownloader"
         const val USER_AGENT = "ExoPlayerDownloaderSample"
     }
 
-    private lateinit var downloadManager: DownloadManager
+    lateinit var downloadManager: DownloadManager
 
     override fun onCreate() {
         super.onCreate()

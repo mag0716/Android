@@ -19,10 +19,6 @@ class DownloadTracker(
         actionFile: File)
     : DownloadManager.Listener, DownloadHelper.Callback {
 
-    companion object {
-        const val TAG = "DownloadTracker"
-    }
-
     private val appContext: Context = context.applicationContext
     private val trackNameProvider = DefaultTrackNameProvider(context.resources)
     private val trackedDownloadStateMap = mutableMapOf<Uri, DownloadAction>()
@@ -39,15 +35,15 @@ class DownloadTracker(
     // region DownloadManager.Listener
 
     override fun onIdle(downloadManager: DownloadManager?) {
-        Log.d(TAG, "onIdle")
+        Log.d(App.TAG, "onIdle")
     }
 
     override fun onInitialized(downloadManager: DownloadManager?) {
-        Log.d(TAG, "onInitialized")
+        Log.d(App.TAG, "onInitialized")
     }
 
     override fun onTaskStateChanged(downloadManager: DownloadManager?, taskState: DownloadManager.TaskState?) {
-        Log.d(TAG, "onTaskStateChanged : $taskState")
+        Log.d(App.TAG, "onTaskStateChanged : $taskState")
         val action = taskState?.action
         val state = taskState?.state
 
@@ -67,7 +63,7 @@ class DownloadTracker(
     // region DownloadHelper.Callback
 
     override fun onPrepared(helper: DownloadHelper?) {
-        Log.d(TAG, "onPrepared")
+        Log.d(App.TAG, "onPrepared")
         val trackKeyList = mutableListOf<TrackKey>()
 
         if (helper != null) {
@@ -89,9 +85,9 @@ class DownloadTracker(
 
     override fun onPrepareError(helper: DownloadHelper?, e: IOException?) {
         if (e != null) {
-            Log.w(TAG, "onPrepareError", e)
+            Log.w(App.TAG, "onPrepareError", e)
         } else {
-            Log.d(TAG, "onPrepareError")
+            Log.d(App.TAG, "onPrepareError")
         }
     }
 
