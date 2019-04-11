@@ -4,25 +4,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.PlaybackPreparer
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.offline.DownloaderConstructorHelper
-import com.google.android.exoplayer2.offline.ProgressiveDownloader
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
-import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
-import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor
-import com.google.android.exoplayer2.upstream.cache.SimpleCache
-import com.google.android.exoplayer2.util.Util
 
 
 class MainActivity : AppCompatActivity(), PlaybackPreparer {
@@ -45,15 +36,6 @@ class MainActivity : AppCompatActivity(), PlaybackPreparer {
 
         mainHandler = Handler()
         playerView = findViewById(R.id.player_view)
-        mediaDataSourceFactory = DefaultDataSourceFactory(this,
-                BANDWIDTH_METER,
-                DefaultHttpDataSourceFactory(
-                        Util.getUserAgent(
-                                this,
-                                "ExoPlayerSample"
-                        ),
-                        BANDWIDTH_METER)
-        )
     }
 
     override fun onResume() {
@@ -80,20 +62,17 @@ class MainActivity : AppCompatActivity(), PlaybackPreparer {
 
         playerView.player = player
         playerView.setPlaybackPreparer(this)
-        Log.d("xxx", "cache dir = $externalCacheDir")
         val uri = Uri.parse(TEST_URL)
-        val cache = SimpleCache(externalCacheDir, NoOpCacheEvictor())
-        val dataSourceFactory = CacheDataSourceFactory(cache, mediaDataSourceFactory)
-        val mediaSource = ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(uri)
+        val mediaSource = ExtractorMediaSource.Factory(((applicationContext as App).dataSourceFactory)).createMediaSource(uri)
         player.prepare(mediaSource)
 
-        // main Thread だと NetworkOnMainThreadException になる
-        Thread(Runnable {
-            val downloader = ProgressiveDownloader(uri,
-                    TEST_URL,
-                    DownloaderConstructorHelper(cache, mediaDataSourceFactory))
-            downloader.download()
-        }).start()
+//        // main Thread だと NetworkOnMainThreadException になる
+//        Thread(Runnable {
+//            val downloader = ProgressiveDownloader(uri,
+//                    TEST_URL,
+//                    DownloaderConstructorHelper(cache, mediaDataSourceFactory))
+//            downloader.download()
+//        }).start()
     }
 
     private fun releasePlayer() {
