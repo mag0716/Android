@@ -79,6 +79,7 @@ class DownloadTracker(
             }
 
             val downloadAction = helper.getDownloadAction(Util.getUtf8Bytes("download"), trackKeyList)
+            trackedDownloadStateMap[downloadAction.uri] = downloadAction
             startServiceWithAction(downloadAction)
         }
     }
@@ -107,14 +108,6 @@ class DownloadTracker(
     }
 
     fun isDownloaded(uri: Uri) = trackedDownloadStateMap.containsKey(uri)
-
-    private fun download(uri: Uri, trackKeyList: List<TrackKey>) {
-        val downloadAction = getDownloadHelper(uri).getDownloadAction(Util.getUtf8Bytes("download"), trackKeyList)
-        downloadAction?.let {
-            trackedDownloadStateMap[uri] = downloadAction
-            startServiceWithAction(it)
-        }
-    }
 
     private fun startServiceWithAction(action: DownloadAction) {
         DownloadService.startWithAction(appContext,
