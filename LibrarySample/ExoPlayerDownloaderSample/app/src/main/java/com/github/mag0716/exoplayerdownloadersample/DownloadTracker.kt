@@ -43,17 +43,17 @@ class DownloadTracker(
     }
 
     override fun onTaskStateChanged(downloadManager: DownloadManager?, taskState: DownloadManager.TaskState?) {
-        Log.d(App.TAG, "onTaskStateChanged : $taskState")
         val action = taskState?.action
         val state = taskState?.state
+        Log.d(App.TAG, "DownloadTracker#onTaskStateChanged : $action(${action?.isRemoveAction} : $state")
 
         if (action != null && state != null) {
             val uri = action.uri
-            if (action.isRemoveAction && state == DownloadManager.TaskState.STATE_COMPLETED ||
-                    action.isRemoveAction.not() && state == DownloadManager.TaskState.STATE_FAILED) {
-                if (trackedDownloadStateMap.remove(uri) != null) {
-                    saveTrackedActions()
-                }
+            val isRemoveCompleted = action.isRemoveAction && state == DownloadManager.TaskState.STATE_COMPLETED
+            val isDownloadFailed = action.isRemoveAction.not() && state == DownloadManager.TaskState.STATE_FAILED
+            if (isDownloadFailed || isRemoveCompleted) {
+                trackedDownloadStateMap.remove(uri)
+                saveTrackedActions()
             }
         }
     }
@@ -80,6 +80,7 @@ class DownloadTracker(
 
             val downloadAction = helper.getDownloadAction(Util.getUtf8Bytes("download"), trackKeyList)
             trackedDownloadStateMap[downloadAction.uri] = downloadAction
+            saveTrackedActions()
             startServiceWithAction(downloadAction)
         }
     }
@@ -129,9 +130,11 @@ class DownloadTracker(
         for (action in allActions) {
             trackedDownloadStateMap[action.uri] = action
         }
+        Log.d(App.TAG, "loadTrackedActions : $trackedDownloadStateMap")
     }
 
     private fun saveTrackedActions() {
+        Log.d(App.TAG, "saveTrackedActions : $trackedDownloadStateMap")
         val actions = trackedDownloadStateMap.values.toTypedArray()
         actionFileWriteHandler.post {
             actionFile.store(*actions)

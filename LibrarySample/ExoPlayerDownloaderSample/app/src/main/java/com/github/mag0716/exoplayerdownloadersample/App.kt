@@ -70,5 +70,6 @@ class App : Application() {
         downloadTracker = DownloadTracker(this,
                 dataSourceFactory,
                 File(downloadDirectory, "trackedActions"))
+        downloadManager.addListener(downloadTracker)
     }
 }

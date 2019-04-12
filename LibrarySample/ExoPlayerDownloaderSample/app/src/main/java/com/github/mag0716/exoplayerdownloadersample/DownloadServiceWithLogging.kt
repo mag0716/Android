@@ -43,7 +43,7 @@ class DownloadServiceWithLogging : DownloadService(FOREGROUND_NOTIFICATION_ID,
     }
 
     override fun onTaskStateChanged(taskState: DownloadManager.TaskState?) {
-        Log.d(App.TAG, "onTaskStateChanged : ${taskState?.action} : ${taskState?.state}")
+        Log.d(App.TAG, "DownloadService#onTaskStateChanged : ${taskState?.action} : ${taskState?.state}")
         super.onTaskStateChanged(taskState)
 
         if (taskState == null) {

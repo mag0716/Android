@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), PlaybackPreparer {
         super.onResume()
         initializePlayer()
 
+        // TODO: ダウンロード、削除完了後の更新は未対応
         textView.text = if (downloadTracker.isDownloaded(Uri.parse(TEST_URL))) "Downloaded" else "No Download"
     }
 
