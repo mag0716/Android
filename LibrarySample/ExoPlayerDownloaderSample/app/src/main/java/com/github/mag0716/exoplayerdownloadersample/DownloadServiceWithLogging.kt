@@ -31,8 +31,19 @@ class DownloadServiceWithLogging : DownloadService(FOREGROUND_NOTIFICATION_ID,
         return (application as App).downloadManager
     }
 
+    override fun getForegroundNotification(taskStates: Array<out DownloadManager.TaskState>?): Notification {
+        return DownloadNotificationUtil.buildProgressNotification(
+                this,
+                R.drawable.exo_controls_play,
+                CHANNEL_ID,
+                null,
+                null,
+                taskStates
+        )
+    }
+
     override fun onTaskStateChanged(taskState: DownloadManager.TaskState?) {
-        Log.d(App.TAG, "onTaskStateChanged : $taskState")
+        Log.d(App.TAG, "onTaskStateChanged : ${taskState?.action} : ${taskState?.state}")
         super.onTaskStateChanged(taskState)
 
         if (taskState == null) {
