@@ -71,7 +71,6 @@ class App : Application() {
 
         // MP4DownloadTracker
         downloadTracker = MP4DownloadTracker(this,
-                dataSourceFactory,
                 File(downloadDirectory, "trackedActions"))
         downloadManager.addListener(downloadTracker)
     }
