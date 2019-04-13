@@ -14,14 +14,12 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 
 
 class MainActivity : AppCompatActivity(), PlaybackPreparer {
 
     companion object {
-        val BANDWIDTH_METER = DefaultBandwidthMeter()
-        val TEST_URL = "https://html5demos.com/assets/dizzy.mp4"
+        private const val TEST_URL = "https://html5demos.com/assets/dizzy.mp4"
     }
 
     private lateinit var mainHandler: Handler

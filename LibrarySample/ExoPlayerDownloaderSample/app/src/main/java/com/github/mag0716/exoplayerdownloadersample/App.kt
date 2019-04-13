@@ -4,6 +4,7 @@ import android.app.Application
 import com.google.android.exoplayer2.offline.DownloadManager
 import com.google.android.exoplayer2.offline.DownloaderConstructorHelper
 import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.upstream.cache.Cache
@@ -17,7 +18,7 @@ class App : Application() {
 
     companion object {
         const val TAG = "ExoPlayerDownloader"
-        const val USER_AGENT = "ExoPlayerDownloaderSample"
+        private val BANDWIDTH_METER = DefaultBandwidthMeter()
     }
 
     lateinit var dataSourceFactory: DataSource.Factory
@@ -33,6 +34,11 @@ class App : Application() {
     }
 
     private fun initialize() {
+        val userAgent = Util.getUserAgent(
+                this,
+                "ExoPlayerSample"
+        )
+
         // Cache
         var downloadDirectory = getExternalFilesDir(null)
         if (downloadDirectory == null) {
@@ -45,20 +51,17 @@ class App : Application() {
 
         // DataSource.Factory
         val mediaDataSourceFactory = DefaultDataSourceFactory(this,
-                MainActivity.BANDWIDTH_METER,
+                BANDWIDTH_METER,
                 DefaultHttpDataSourceFactory(
-                        Util.getUserAgent(
-                                this,
-                                "ExoPlayerSample"
-                        ),
-                        MainActivity.BANDWIDTH_METER)
+                        userAgent,
+                        BANDWIDTH_METER)
         )
         dataSourceFactory = CacheDataSourceFactory(downloadCache, mediaDataSourceFactory)
 
         // DownloadManager
         val downloaderConstructorHelper = DownloaderConstructorHelper(
                 downloadCache,
-                DefaultHttpDataSourceFactory(USER_AGENT))
+                DefaultHttpDataSourceFactory(userAgent))
         downloadManager = DownloadManager(
                 downloaderConstructorHelper,
                 1,
