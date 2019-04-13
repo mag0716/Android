@@ -26,7 +26,7 @@ class App : Application() {
     lateinit var downloadManager: DownloadManager
     lateinit var downloadDirectory: File
     lateinit var downloadCache: Cache
-    lateinit var downloadTracker: DownloadTracker
+    lateinit var downloadTracker: MP4DownloadTracker
 
     override fun onCreate() {
         super.onCreate()
@@ -69,8 +69,8 @@ class App : Application() {
                 File(downloadDirectory, "downloadActions")
         )
 
-        // DownloadTracker
-        downloadTracker = DownloadTracker(this,
+        // MP4DownloadTracker
+        downloadTracker = MP4DownloadTracker(this,
                 dataSourceFactory,
                 File(downloadDirectory, "trackedActions"))
         downloadManager.addListener(downloadTracker)

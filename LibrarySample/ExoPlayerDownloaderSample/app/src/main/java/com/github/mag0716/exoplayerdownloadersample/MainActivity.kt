@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), PlaybackPreparer {
     private var player: SimpleExoPlayer? = null
     private var trackSelector: DefaultTrackSelector? = null
 
-    private lateinit var downloadTracker: DownloadTracker
+    private lateinit var downloadTracker: MP4DownloadTracker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

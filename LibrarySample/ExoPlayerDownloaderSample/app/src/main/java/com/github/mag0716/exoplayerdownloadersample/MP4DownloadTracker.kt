@@ -7,20 +7,21 @@ import android.os.HandlerThread
 import android.util.Log
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.offline.*
-import com.google.android.exoplayer2.ui.DefaultTrackNameProvider
-import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.util.Util
 import java.io.File
 import java.io.IOException
 
-class DownloadTracker(
+/**
+ * ダウンロードイベントをハンドリングしてダウンロード状態を管理する
+ *
+ * mp4 のダウンロードのみをサポート
+ */
+class MP4DownloadTracker(
         context: Context,
-        private val dataSourceFactory: DataSource.Factory,
         actionFile: File)
     : DownloadManager.Listener, DownloadHelper.Callback {
 
     private val appContext: Context = context.applicationContext
-    private val trackNameProvider = DefaultTrackNameProvider(context.resources)
     private val trackedDownloadStateMap = mutableMapOf<Uri, DownloadAction>()
     private val actionFile = ActionFile(actionFile)
     private val actionFileWriteHandler: Handler
@@ -45,7 +46,7 @@ class DownloadTracker(
     override fun onTaskStateChanged(downloadManager: DownloadManager?, taskState: DownloadManager.TaskState?) {
         val action = taskState?.action
         val state = taskState?.state
-        Log.d(App.TAG, "DownloadTracker#onTaskStateChanged : $action(${action?.isRemoveAction} : $state")
+        Log.d(App.TAG, "MP4DownloadTracker#onTaskStateChanged : $action(${action?.isRemoveAction} : $state")
 
         if (action != null && state != null) {
             val uri = action.uri
@@ -64,21 +65,8 @@ class DownloadTracker(
 
     override fun onPrepared(helper: DownloadHelper?) {
         Log.d(App.TAG, "onPrepared")
-        val trackKeyList = mutableListOf<TrackKey>()
-
         if (helper != null) {
-            // TODO: 具体的に何をやっているのかが不明
-            for (i in 0 until helper.periodCount) {
-                val trackGroups = helper.getTrackGroups(i)
-                for (j in 0 until trackGroups.length) {
-                    val trackGroup = trackGroups[j]
-                    for (k in 0 until trackGroup.length) {
-                        trackKeyList.add(TrackKey(i, j, k))
-                    }
-                }
-            }
-
-            val downloadAction = helper.getDownloadAction(Util.getUtf8Bytes("download"), trackKeyList)
+            val downloadAction = helper.getDownloadAction(Util.getUtf8Bytes("download"), listOf())
             trackedDownloadStateMap[downloadAction.uri] = downloadAction
             saveTrackedActions()
             startServiceWithAction(downloadAction)
@@ -110,6 +98,8 @@ class DownloadTracker(
 
     fun isDownloaded(uri: Uri) = trackedDownloadStateMap.containsKey(uri)
 
+    // region private
+
     private fun startServiceWithAction(action: DownloadAction) {
         DownloadService.startWithAction(appContext,
                 DownloadServiceWithLogging::class.java,
@@ -140,4 +130,6 @@ class DownloadTracker(
             actionFile.store(*actions)
         }
     }
+
+    // endregion
 }
