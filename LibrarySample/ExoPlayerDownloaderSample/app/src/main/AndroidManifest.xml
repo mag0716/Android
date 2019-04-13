@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.github.mag0716.exoplayerdownloadersample.DownloadServiceWithLogging"
+        <service android:name="com.github.mag0716.exoplayerdownloadersample.NotifiableDownloadService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.exoplayer.downloadService.action.RESTART"/>

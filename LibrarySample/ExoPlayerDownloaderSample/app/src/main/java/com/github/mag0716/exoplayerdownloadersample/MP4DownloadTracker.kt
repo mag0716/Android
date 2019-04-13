@@ -102,7 +102,7 @@ class MP4DownloadTracker(
 
     private fun startServiceWithAction(action: DownloadAction) {
         DownloadService.startWithAction(appContext,
-                DownloadServiceWithLogging::class.java,
+                NotifiableDownloadService::class.java,
                 action,
                 true)
     }
