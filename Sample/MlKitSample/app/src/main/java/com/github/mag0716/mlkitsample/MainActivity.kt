@@ -1,6 +1,7 @@
 package com.github.mag0716.mlkitsample
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.mlkit.vision.common.InputImage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -17,7 +19,7 @@ import java.util.concurrent.Executors
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private const val TAG = "CameraXBasic"
+        private const val TAG = "MLKitSample"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
@@ -25,10 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
 
     private var preview: Preview? = null
-    private var imageCapture: ImageCapture? = null
-    private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +75,10 @@ class MainActivity : AppCompatActivity() {
                 cameraProvider.unbindAll()
 
                 camera = cameraProvider.bindToLifecycle(
-                        this, cameraSelector, preview
+                        this,
+                        cameraSelector,
+                        preview,
+                        CreditCardAnalyzer.generateImageAnalysisUseCase(cameraExecutor)
                 )
                 preview?.setSurfaceProvider(viewFinder.createSurfaceProvider(camera?.cameraInfo))
             } catch (exception: Exception) {
@@ -90,5 +92,32 @@ class MainActivity : AppCompatActivity() {
                 baseContext,
                 it
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private class CreditCardAnalyzer : ImageAnalysis.Analyzer {
+
+        companion object {
+            fun generateImageAnalysisUseCase(cameraExecutor: ExecutorService): ImageAnalysis {
+                return ImageAnalysis
+                        .Builder()
+                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                        .build()
+                        .also {
+                            it.setAnalyzer(cameraExecutor, CreditCardAnalyzer())
+                        }
+            }
+        }
+
+        @SuppressLint("UnsafeExperimentalUsageError")
+        override fun analyze(imageProxy: ImageProxy) {
+            val mediaImage = imageProxy.image
+            if (mediaImage != null) {
+                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                // TODO: ML Kit の API に渡す
+
+                Log.d(TAG, "analyze!!")
+            }
+            imageProxy.close()
+        }
     }
 }
