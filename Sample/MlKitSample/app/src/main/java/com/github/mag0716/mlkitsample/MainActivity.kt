@@ -12,9 +12,15 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
+import com.google.mlkit.vision.text.TextRecognition
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class MainActivity : AppCompatActivity() {
 
@@ -108,16 +114,31 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        private val recognizer = TextRecognition.getClient()
+
         @SuppressLint("UnsafeExperimentalUsageError")
         override fun analyze(imageProxy: ImageProxy) {
+            Log.d(TAG, "analyze!!")
             val mediaImage = imageProxy.image
-            if (mediaImage != null) {
-                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-                // TODO: ML Kit の API に渡す
-
-                Log.d(TAG, "analyze!!")
+            runBlocking {
+                if (mediaImage != null) {
+                    val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                    recognizeCreditCard(image)
+                }
+                imageProxy.close()
             }
-            imageProxy.close()
+        }
+
+        private suspend fun recognizeCreditCard(input: InputImage): Text = suspendCoroutine { continuation ->
+            recognizer.process(input)
+                    .addOnSuccessListener { visionText ->
+                        Log.d(TAG, "success : $visionText")
+                        continuation.resume(visionText)
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w(TAG, "failed", exception)
+                        continuation.resumeWithException(exception)
+                    }
         }
     }
 }
