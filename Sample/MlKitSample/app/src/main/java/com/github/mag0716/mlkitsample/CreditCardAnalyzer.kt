@@ -74,6 +74,7 @@ class CreditCardAnalyzer(private val recognizedCreditCard: IRecognizedCreditCard
         var number: String? = null
         var expiredDate: String? = null
         for (block in textBlocks) {
+            Log.i(MainActivity.TAG, "detectCreditCardInfo : ${block.text}($number, $expiredDate)")
             if (number == null) {
                 number = detectCreditCardNumber(block.text)
             }
@@ -98,8 +99,9 @@ class CreditCardAnalyzer(private val recognizedCreditCard: IRecognizedCreditCard
 
     private fun detectCreditCardExpiredDate(text: String): String? {
         //if(text.matches(Regex("[01][0-9]/[0-9]{2}"))) {
-        if (text.matches(Regex("[0-9]{2}/[0-9]{2}"))) {
-            return text
+        val nonSpaceText = text.replace(" ", "")
+        if (nonSpaceText.matches(Regex("[0-9]{2}/[0-9]{2}"))) {
+            return nonSpaceText
         }
         return null
     }
