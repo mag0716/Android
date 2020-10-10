@@ -1,8 +1,10 @@
 package com.github.mag0716.appwidgetsample
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.content.edit
@@ -71,10 +73,24 @@ internal fun updateAppWidget(
         )
     )
 
+    // update button
+    val intentUpdate = Intent(context, NewAppWidget::class.java).apply {
+        action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    }
+    val idArray = arrayOf(appWidgetId).toIntArray()
+    intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray)
+    val pendingUpdate = PendingIntent.getBroadcast(
+        context,
+        appWidgetId,
+        intentUpdate,
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
+    views.setOnClickPendingIntent(R.id.button_update, pendingUpdate)
+
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
 
     prefs.edit {
-        putInt(COUNT_KEY + appWidgetId, count)
+        putInt(COUNT_KEY + appWidgetId, newCount)
     }
 }
