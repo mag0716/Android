@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.mag0716.multipledevicesupportsample.R
+import com.google.android.material.textfield.TextInputLayout
 
 class LoginFragment : Fragment() {
 
@@ -28,8 +28,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usernameEditText = view.findViewById<EditText>(R.id.username)
-        val passwordEditText = view.findViewById<EditText>(R.id.password)
+        val usernameEditText = view.findViewById<TextInputLayout>(R.id.username)
+        val passwordEditText = view.findViewById<TextInputLayout>(R.id.password)
         val loginButton = view.findViewById<Button>(R.id.login)
         val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
@@ -40,11 +40,11 @@ class LoginFragment : Fragment() {
             //TODO: 画面遷移
         }
 
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        passwordEditText.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    usernameEditText.editText?.text.toString(),
+                    passwordEditText.editText?.text.toString()
                 )
             }
             false
@@ -53,8 +53,8 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
             loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
+                usernameEditText.editText?.text.toString(),
+                passwordEditText.editText?.text.toString()
             )
         }
     }
