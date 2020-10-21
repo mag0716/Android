@@ -9,5 +9,18 @@
         android:id="@+id/login"
         android:name="com.github.mag0716.multipledevicesupportsample.ui.login.LoginFragment"
         android:label="ログイン"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/navigateToList"
+            app:destination="@id/list"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/list"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.list.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
+
 </navigation>

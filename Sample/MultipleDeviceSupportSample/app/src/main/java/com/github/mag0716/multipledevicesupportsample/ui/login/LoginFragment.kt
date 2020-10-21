@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.github.mag0716.multipledevicesupportsample.R
 import com.google.android.material.textfield.TextInputLayout
 
@@ -37,7 +38,7 @@ class LoginFragment : Fragment() {
             loadingProgressBar.isVisible = it
         }
         loginViewModel.loginResult.observe(viewLifecycleOwner) {
-            //TODO: 画面遷移
+            findNavController().navigate(R.id.navigateToList)
         }
 
         passwordEditText.editText?.setOnEditorActionListener { _, actionId, _ ->
