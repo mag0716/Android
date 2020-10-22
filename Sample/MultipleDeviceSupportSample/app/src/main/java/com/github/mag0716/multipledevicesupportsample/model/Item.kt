@@ -1,10 +1,14 @@
 package com.github.mag0716.multipledevicesupportsample.model
 
+import androidx.annotation.Keep
+import java.io.Serializable
+
+@Keep
 data class Item(
     val id: String,
     val content: String,
     val details: String
-) {
+) : Serializable {
     companion object {
         fun createItems(count: Int): List<Item> {
             val list = mutableListOf<Item>()

@@ -21,6 +21,20 @@
         android:id="@+id/list"
         android:name="com.github.mag0716.multipledevicesupportsample.ui.list.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/navigateToDetail"
+            app:destination="@id/detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="item"
+            app:argType="com.github.mag0716.multipledevicesupportsample.model.Item" />
+    </fragment>
 
 </navigation>

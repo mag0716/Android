@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mag0716.multipledevicesupportsample.R
@@ -22,7 +23,9 @@ class ListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         if (view is RecyclerView) {
-            adapter = ItemAdapter(emptyList())
+            adapter = ItemAdapter(emptyList()) {
+                findNavController().navigate(ListFragmentDirections.navigateToDetail(it))
+            }
             with(view) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = this@ListFragment.adapter

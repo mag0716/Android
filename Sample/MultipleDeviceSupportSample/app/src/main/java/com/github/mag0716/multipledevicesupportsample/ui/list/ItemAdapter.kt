@@ -9,7 +9,8 @@ import com.github.mag0716.multipledevicesupportsample.R
 import com.github.mag0716.multipledevicesupportsample.model.Item
 
 class ItemAdapter(
-    private var values: List<Item>
+    private var values: List<Item>,
+    private val onClickItem: (Item) -> Unit
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,6 +23,9 @@ class ItemAdapter(
         val item = values[position]
         holder.idView.text = item.id
         holder.contentView.text = item.content
+        holder.view.setOnClickListener {
+            onClickItem(item)
+        }
     }
 
     override fun getItemCount(): Int = values.size
@@ -31,7 +35,7 @@ class ItemAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.item_number)
         val contentView: TextView = view.findViewById(R.id.content)
 
