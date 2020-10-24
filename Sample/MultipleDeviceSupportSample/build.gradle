@@ -2,6 +2,7 @@
 buildscript {
     ext.kotlin_version = "1.4.10"
     ext.nav_version = "2.3.1"
+    ext.camerax_version = "1.0.0-beta11"
 
     repositories {
         google()
