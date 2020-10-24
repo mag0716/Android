@@ -35,6 +35,14 @@
         <argument
             android:name="item"
             app:argType="com.github.mag0716.multipledevicesupportsample.model.Item" />
+        <action
+            android:id="@+id/navigateToCamera"
+            app:destination="@id/camera" />
     </fragment>
 
+    <fragment
+        android:id="@+id/camera"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>
