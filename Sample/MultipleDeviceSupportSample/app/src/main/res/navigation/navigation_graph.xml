@@ -58,5 +58,8 @@
         <argument
             android:name="filePath"
             app:argType="android.net.Uri" />
+        <action
+            android:id="@+id/popToDetail"
+            app:popUpTo="@id/detail" />
     </fragment>
 </navigation>
