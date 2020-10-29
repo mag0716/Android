@@ -44,5 +44,19 @@
         android:id="@+id/camera"
         android:name="com.github.mag0716.multipledevicesupportsample.ui.camera.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/navigateToPreview"
+            app:destination="@id/preview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/preview"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.camera.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview">
+        <argument
+            android:name="filePath"
+            app:argType="android.net.Uri" />
+    </fragment>
 </navigation>

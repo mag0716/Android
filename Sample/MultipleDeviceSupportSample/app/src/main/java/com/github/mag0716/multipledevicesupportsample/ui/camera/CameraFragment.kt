@@ -12,7 +12,9 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.github.mag0716.multipledevicesupportsample.R
 import com.google.common.util.concurrent.ListenableFuture
 import java.io.File
@@ -136,10 +138,8 @@ class CameraFragment : Fragment() {
             executor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    val msg = "Photo capture succeeded: ${file.absolutePath}"
                     previewView.post {
-                        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-                        // TODO: 画面遷移
+                        findNavController().navigate(CameraFragmentDirections.navigateToPreview(file.toUri()))
                     }
                 }
 
