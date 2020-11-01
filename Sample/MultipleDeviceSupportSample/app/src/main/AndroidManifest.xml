@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MultipleDeviceSupportSample">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:resizeableActivity="false"
             android:screenOrientation="portrait">
             <intent-filter>
