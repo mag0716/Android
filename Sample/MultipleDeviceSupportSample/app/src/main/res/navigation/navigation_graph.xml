@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.login.LoginFragment"
+        android:label="ログイン"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/navigateToList"
+            app:destination="@id/list"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/list"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.list.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/navigateToDetail"
+            app:destination="@id/detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="item"
+            app:argType="com.github.mag0716.multipledevicesupportsample.model.Item" />
+        <action
+            android:id="@+id/navigateToCamera"
+            app:destination="@id/camera" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/camera"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/navigateToPreview"
+            app:destination="@id/preview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/preview"
+        android:name="com.github.mag0716.multipledevicesupportsample.ui.camera.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview">
+        <argument
+            android:name="filePath"
+            app:argType="android.net.Uri" />
+        <action
+            android:id="@+id/popToDetail"
+            app:popUpTo="@id/detail" />
+    </fragment>
+</navigation>
