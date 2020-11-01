@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.github.mag0716.multipledevicesupportsample.ui.license.LicenseActivity
 import com.github.mag0716.multipledevicesupportsample.ui.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
+            }
+            R.id.license -> {
+                startActivity(Intent(this, LicenseActivity::class.java))
             }
         }
         return false
