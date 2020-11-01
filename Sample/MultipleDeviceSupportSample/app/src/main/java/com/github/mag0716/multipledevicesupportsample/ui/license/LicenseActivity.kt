@@ -2,10 +2,10 @@ package com.github.mag0716.multipledevicesupportsample.ui.license
 
 import android.os.Bundle
 import android.webkit.WebView
-import androidx.appcompat.app.AppCompatActivity
 import com.github.mag0716.multipledevicesupportsample.R
+import com.github.mag0716.multipledevicesupportsample.ui.base.LoggingActivity
 
-class LicenseActivity : AppCompatActivity() {
+class LicenseActivity : LoggingActivity() {
 
     private lateinit var webView: WebView
 

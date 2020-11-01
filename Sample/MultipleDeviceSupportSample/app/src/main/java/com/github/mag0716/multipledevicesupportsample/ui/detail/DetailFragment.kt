@@ -3,12 +3,12 @@ package com.github.mag0716.multipledevicesupportsample.ui.detail
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.mag0716.multipledevicesupportsample.R
+import com.github.mag0716.multipledevicesupportsample.ui.base.LoggingFragment
 
-class DetailFragment : Fragment() {
+class DetailFragment : LoggingFragment() {
 
     val args: DetailFragmentArgs by navArgs()
 

@@ -13,14 +13,14 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.github.mag0716.multipledevicesupportsample.R
+import com.github.mag0716.multipledevicesupportsample.ui.base.LoggingFragment
 import com.google.common.util.concurrent.ListenableFuture
 import java.io.File
 import java.util.concurrent.Executors
 
-class CameraFragment : Fragment() {
+class CameraFragment : LoggingFragment() {
 
     companion object {
         private const val REQUEST_CAMERA_PERMISSION = 10

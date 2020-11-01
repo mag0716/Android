@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import com.github.mag0716.multipledevicesupportsample.R
+import com.github.mag0716.multipledevicesupportsample.ui.base.LoggingActivity
 import com.github.mag0716.multipledevicesupportsample.ui.license.LicenseActivity
 import com.github.mag0716.multipledevicesupportsample.ui.settings.SettingsActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : LoggingActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

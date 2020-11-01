@@ -11,8 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.github.mag0716.multipledevicesupportsample.R
+import com.github.mag0716.multipledevicesupportsample.ui.base.LoggingFragment
 
-class PreviewFragment : Fragment() {
+class PreviewFragment : LoggingFragment() {
 
     val args: PreviewFragmentArgs by navArgs()
 
