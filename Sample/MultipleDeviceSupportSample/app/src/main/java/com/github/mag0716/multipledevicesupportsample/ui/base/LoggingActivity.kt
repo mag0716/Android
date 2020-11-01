@@ -14,7 +14,7 @@ open class LoggingActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Timber.d("${this::class.java}#onResume")
+        Timber.d("${this::class.java}#onStart")
     }
 
     override fun onResume() {
