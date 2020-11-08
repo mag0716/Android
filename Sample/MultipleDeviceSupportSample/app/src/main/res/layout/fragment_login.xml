@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:selectAllOnFocus="true" />
@@ -39,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeActionLabel="@string/action_sign_in_short"
