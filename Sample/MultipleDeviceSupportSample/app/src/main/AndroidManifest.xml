@@ -5,7 +5,7 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-    
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -18,7 +18,7 @@
         android:theme="@style/Theme.MultipleDeviceSupportSample">
         <activity
             android:name=".ui.MainActivity"
-            android:resizeableActivity="false"
+            android:resizeableActivity="true"
             android:screenOrientation="unspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,11 +29,11 @@
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:resizeableActivity="false"
+            android:resizeableActivity="true"
             android:screenOrientation="unspecified" />
         <activity
             android:name=".ui.license.LicenseActivity"
-            android:resizeableActivity="false"
+            android:resizeableActivity="true"
             android:screenOrientation="unspecified" />
     </application>
 
