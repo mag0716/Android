@@ -22,6 +22,11 @@ open class LoggingActivity : AppCompatActivity() {
         Timber.d("${this::class.java}#onResume")
     }
 
+    override fun onTopResumedActivityChanged(isTopResumedActivity: Boolean) {
+        super.onTopResumedActivityChanged(isTopResumedActivity)
+        Timber.d("${this::class.java}#onTopResumedActivityChanged $isTopResumedActivity")
+    }
+
     override fun onPause() {
         super.onPause()
         Timber.d("${this::class.java}#onPause")
