@@ -18,6 +18,7 @@
         android:theme="@style/Theme.MultipleDeviceSupportSample">
         <activity
             android:name=".ui.MainActivity"
+            android:configChanges="screenSize|smallestScreenSize|orientation|screenLayout"
             android:resizeableActivity="true"
             android:screenOrientation="unspecified">
             <intent-filter>
@@ -28,11 +29,13 @@
         </activity>
         <activity
             android:name=".ui.settings.SettingsActivity"
+            android:configChanges="screenSize|smallestScreenSize|orientation|screenLayout"
             android:label="@string/title_activity_settings"
             android:resizeableActivity="true"
             android:screenOrientation="unspecified" />
         <activity
             android:name=".ui.license.LicenseActivity"
+            android:configChanges="screenSize|smallestScreenSize|orientation|screenLayout"
             android:resizeableActivity="true"
             android:screenOrientation="unspecified" />
     </application>
