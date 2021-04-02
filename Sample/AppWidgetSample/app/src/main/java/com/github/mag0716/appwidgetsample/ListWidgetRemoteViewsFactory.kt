@@ -7,7 +7,7 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 
 class ListWidgetRemoteViewsFactory(
-    val context: Context,
+    private val context: Context,
     val intent: Intent
 ) : RemoteViewsService.RemoteViewsFactory {
 
