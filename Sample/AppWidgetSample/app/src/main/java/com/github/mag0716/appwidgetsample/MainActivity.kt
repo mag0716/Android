@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         checkBox = findViewById(R.id.checkBox)
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            (application as App).repository.isEnabled = isChecked
+        }
         button = findViewById(R.id.button)
         button.setOnClickListener {
             updateWidgets()

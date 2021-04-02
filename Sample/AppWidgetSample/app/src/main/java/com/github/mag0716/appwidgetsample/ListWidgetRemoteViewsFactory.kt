@@ -1,14 +1,13 @@
 package com.github.mag0716.appwidgetsample
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import kotlinx.coroutines.runBlocking
 
 class ListWidgetRemoteViewsFactory(
-    private val context: Context,
-    val intent: Intent
+    private val context: Context
 ) : RemoteViewsService.RemoteViewsFactory {
 
     companion object {
@@ -16,16 +15,21 @@ class ListWidgetRemoteViewsFactory(
     }
 
     private val titleList = mutableListOf<String>()
+    private lateinit var repository: Repository
 
     override fun onCreate() {
         Log.d(TAG, "onCreate")
+        val application = context.applicationContext as App
+        repository = application.repository
     }
 
     override fun onDataSetChanged() {
         Log.d(TAG, "onDataSetChanged")
-        val list = fetchData()
-        titleList.clear()
-        titleList.addAll(list)
+        runBlocking {
+            val list = repository.fetchTitleList()
+            titleList.clear()
+            titleList.addAll(list)
+        }
     }
 
     override fun onDestroy() {
@@ -50,16 +54,4 @@ class ListWidgetRemoteViewsFactory(
     override fun getItemId(position: Int) = position.toLong()
 
     override fun hasStableIds() = true
-
-    private fun fetchData(): List<String> {
-        Thread.sleep(5000)
-
-        val currentTimeMillis = System.currentTimeMillis()
-
-        val list = mutableListOf<String>()
-        for (i in 0..10) {
-            list.add("Title$i($currentTimeMillis)")
-        }
-        return list
-    }
 }

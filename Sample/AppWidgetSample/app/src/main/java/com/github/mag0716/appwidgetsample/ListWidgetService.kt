@@ -12,6 +12,6 @@ class ListWidgetService : RemoteViewsService() {
 
     override fun onGetViewFactory(intent: Intent): RemoteViewsFactory {
         Log.d(TAG, "onGetViewFactory")
-        return ListWidgetRemoteViewsFactory(applicationContext, intent)
+        return ListWidgetRemoteViewsFactory(applicationContext)
     }
 }
