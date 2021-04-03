@@ -14,9 +14,15 @@
         android:text="データ取得可能" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ウィジェット更新" />
+        android:text="ウィジェット更新\n(notifyAppWidgetViewDataChanged)" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ウィジェット更新\n(sendBroadcast)" />
 
 </LinearLayout>
