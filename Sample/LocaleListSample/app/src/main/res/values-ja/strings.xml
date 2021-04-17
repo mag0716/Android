@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LocaleListサンプル</string>
+    <string name="first_fragment_title">1番目のFragment</string>
+    <string name="second_fragment_title">2番目のFragment</string>
+
+    <string name="move_button_text">遷移</string>
+    <string name="message">メッセージ</string>
+    <string name="custom_view_text">カスタムView</string>
+</resources>
