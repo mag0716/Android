@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        debugLocaleList()
+
         navigationController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
                 ?: throw IllegalStateException("failed findNavController()")
         appBarConfiguration = AppBarConfiguration(navigationController.graph)
