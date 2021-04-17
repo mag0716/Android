@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LocaleListSample</string>
+    <string name="first_fragment_title">FirstFragment</string>
+    <string name="second_fragment_title">SecondFragment</string>
+
+    <string name="move_button_text">Move</string>
+    <string name="message">Message</string>
+    <string name="custom_view_text">CustomView</string>
+</resources>

@@ -1,0 +1,4 @@
+include ':customview'
+include ':resources'
+include ':app'
+rootProject.name = "LocaleListSample"
