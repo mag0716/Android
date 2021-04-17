@@ -6,7 +6,7 @@
     tools:context=".SecondFragment">
 
 
-    <com.github.mag0716.localelistsample.CustomView
+    <com.github.mag0716.localelistsample.customview.CustomView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

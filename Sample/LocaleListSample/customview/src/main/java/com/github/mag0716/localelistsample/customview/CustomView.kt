@@ -1,4 +1,4 @@
-package com.github.mag0716.localelistsample
+package com.github.mag0716.localelistsample.customview
 
 import android.content.Context
 import android.util.AttributeSet
