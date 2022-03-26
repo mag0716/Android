@@ -5,7 +5,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.github.mag0716.ktorsample.api.ApiClient
+import com.github.mag0716.ktorsample.api.response.ApiClient
 
 class MainActivity : AppCompatActivity() {
 

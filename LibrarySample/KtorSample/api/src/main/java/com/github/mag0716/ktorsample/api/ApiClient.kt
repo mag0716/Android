@@ -1,6 +1,5 @@
-package com.github.mag0716.ktorsample.api
+package com.github.mag0716.ktorsample.api.response
 
-import com.github.mag0716.ktorsample.api.response.Repository
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
