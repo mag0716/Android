@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.button).setOnClickListener {
             lifecycleScope.launchWhenStarted {
-                val apiClient = ApiClient()
+                val apiClient = ApiClient.provideApiClient()
                 val repositoryList = apiClient.repos("mag0716")
                 textView.text = repositoryList.toString()
             }
