@@ -10,7 +10,7 @@ import io.ktor.client.request.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ApiClient(
+open class ApiClient(
     private val httpClientEngine: HttpClientEngine
 ) {
     suspend fun repos(userName: String): List<Repository> = withContext(Dispatchers.IO) {
